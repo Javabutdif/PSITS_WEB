@@ -26,14 +26,22 @@ if(isset($_POST['submitRegister'])){
     $course = $_POST['course'];
     $year = $_POST['year'];
 
+    if($id_number == "" || $first_name == ""||$middle_name == ""||$last_name == ""||$email == ""||$course == ""||$year == ""){
+         echo '<script>alert("You need to fill up the form");</script>';
+    }else{
+
     $sql = "INSERT INTO `students` (`id_number`, `first_name`, `middle_name`, `last_name`, `email`,`course`,`year`)
     VALUES('$id_number','$first_name','$middle_name','$last_name','$email','$course','$year')";
 
     if(mysqli_query($conn, $sql)){
-        echo 'Register Successfull';
+        echo '<script>alert("Register Successfull");</script>';
         $conn->close();  
     }
-  
+    else{
+        echo '<script>alert("Duplicate Id Number");</script>';
+        $conn->close();  
+    }
+}
 }
 
 ?>

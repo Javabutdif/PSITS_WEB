@@ -67,7 +67,7 @@
               <div class="col-md-4">
                 <div class="mb-3">
                   <label for="middle_name" class="form-label">Middle Name</label>
-                  <input type="text" class="form-control" id="middle_name" name="middle_name">
+                  <input type="text" class="form-control" id="middle_name" name="middle_name" required>
                 </div>
               </div>
               <div class="col-md-4">
