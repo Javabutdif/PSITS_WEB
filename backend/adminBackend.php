@@ -37,7 +37,7 @@
           <a class="nav-link" href="../Admin/Dashboard.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../view/Admin/Students.php">Students</a>
+          <a class="nav-link" href="../Admin/Students.php">Students</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Merchs</a>
@@ -78,7 +78,7 @@ if ($_SESSION['adminId'] == 1 && !isset($_SESSION['success_toast_displayed'])) {
   
     $_SESSION['success_toast_displayed'] = true;
 }
-else{
+else if($_SESSION['adminId'] != 1 ){
     header('Location: ../Login.php');
 }
 ?>

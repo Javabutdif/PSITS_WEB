@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
     }
 }
 
-if($_SESSION['adminId'] = 1){
+if(isset($_SESSION['adminId']) && $_SESSION['adminId'] == 1){
     session_destroy();
 }
 
