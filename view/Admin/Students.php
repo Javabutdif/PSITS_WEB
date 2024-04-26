@@ -46,12 +46,12 @@
                
                 <td class="align-middle">
     <div  class="d-flex justify-content-center align-items-center gap-3">
-    <form action="Admin.php" method="POST">
+    <form action="Students.php" method="POST">
         <button type="submit" name="edit" class="btn btn-primary">Edit</button>
-        <input type="hidden" name="idNum" value="<?php echo $person['id_number']; ?>"/>
+        <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>"/>
         </form>
         <form action="Students.php" method="POST" class="delete-form">
-                            <input type="hidden" name="idNum" value="<?php echo $person['id_number']; ?>" />
+                            <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
                             <button type="submit" name="delete" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this Student?')">Delete</button>
                         </form>
         </div>

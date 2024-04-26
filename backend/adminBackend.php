@@ -89,4 +89,47 @@ if ($_SESSION['adminId'] == 1 && !isset($_SESSION['success_toast_displayed'])) {
 else if($_SESSION['adminId'] != 1 ){
     header('Location: ../Login.php');
 }
+
+if(isset($_POST['edit'])){
+    $id_number = $_POST['id_number'];
+    $sqlEdit = "SELECT * FROM students WHERE id_number = '$id_number'";
+
+    $result = mysqli_query($conn,$sqlEdit);
+    $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+    if($user['id_number'] != null){
+        $_SESSION['id_number'] = $user['id_number'];
+        $_SESSION['first_name'] = $user['first_name'];
+        $_SESSION['middle_name'] = $user['middle_name'];
+        $_SESSION['last_name'] = $user['last_name'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['course'] = $user['course'];
+        $_SESSION['year'] = $user['year'];
+
+        header('Location: ../Admin/Edit.php ');
+    }
+}
+
+if(isset($_POST['submitEdit'])){
+    $id_number = $_POST['id_number'];
+    $first_name = $_POST['first_name'];
+    $middle_name = $_POST['middle_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $course = $_POST['course'];
+    $year = $_POST['year'];
+
+    $sqlUpdate = "UPDATE `students` SET `first_name` = '$first_name',`middle_name` = '$middle_name',`last_name` = '$last_name',`email` = '$email',`course` = '$course',`year` = '$year' WHERE `id_number` = '$id_number'";
+
+    if(mysqli_query($conn,$sqlUpdate)){
+        echo '<script>alert("Edit Successful");</script>';
+
+
+        $conn->close();
+
+       
+        echo '<script>window.location.href = "../Admin/Students.php";</script>';
+    }
+
+}
 ?>
