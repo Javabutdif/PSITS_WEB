@@ -64,7 +64,10 @@ if ($_SESSION['adminId'] == 1 && !isset($_SESSION['success_toast_displayed'])) {
             });
           </script>';
 
-    // Set flag to indicate that the success toast has been displayed
+  
     $_SESSION['success_toast_displayed'] = true;
+}
+else{
+    header('Location: ../Login.php');
 }
 ?>
