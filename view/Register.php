@@ -77,27 +77,37 @@
               <label for="email" class="form-label">Email</label>
               <input type="email" class="form-control" id="email" name="email" required>
             </div>
-            <div class="row">
+           <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="course" class="form-label">Course</label>
-                  <input type="text" class="form-control" id="course" name="course" required>
+                  <select class="form-control" id="course" name="course" required>
+                    <option value="">Select Course</option>
+                    <option value="BSIT">BSIT</option>
+                    <option value="BSCS">BSCS</option>
+                    <option value="ACT">ACT</option>
+                  </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="year" class="form-label">Year</label>
-                  <input type="number" class="form-control" id="year" name="year" required>
+                  <select class="form-control" id="year" name="year" required>
+                    <option value="">Select Year</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
                 </div>
               </div>
             </div>
             <div class="row justify-content-between align-items-center">
               <div class="col-md-6">
                 <button type="submit" class="btn btn-primary">Register</button>
+                 <a href="Login.php" class="btn btn-danger">Back</a>
               </div>
-              <div class="col-md-6 text-md-end">
-                <a href="Login.php" class="btn btn-danger">Back</a>
-              </div>
+             
             </div>
           </form>
         </div>
