@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="Dashboard.php">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Students</a>
@@ -43,22 +43,28 @@
 </html>
 
 <?php
-    if($_SESSION['adminId'] == 1){
-         echo '<script>const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
-            }
-          });
-          Toast.fire({
-            icon: "success",
-            title: "Logged In!"
-          });</script>';
 
-    }
+
+if ($_SESSION['adminId'] == 1 && !isset($_SESSION['success_toast_displayed'])) {
+    echo '<script>
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              }
+            });
+            Toast.fire({
+              icon: "success",
+              title: "Logged In!"
+            });
+          </script>';
+
+    // Set flag to indicate that the success toast has been displayed
+    $_SESSION['success_toast_displayed'] = true;
+}
 ?>

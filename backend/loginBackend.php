@@ -7,7 +7,13 @@ if(isset($_POST['submit'])){
     if($id_number == 'admin' && $password == 'admin'){
         header('Location: ../view/Admin/Dashboard.php');
         $_SESSION['adminId'] = 1;
+        exit;
     }
 }
+
+if($_SESSION['adminId'] = 1){
+    session_destroy();
+}
+
 
 ?>
