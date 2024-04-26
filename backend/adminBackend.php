@@ -1,9 +1,10 @@
 <?php
     session_start();
+ 
     include 'connection.php';
 
     //Retrieve students in table
-    $sqlStudents = "SELECT * FROM students";
+    $sqlStudents = "SELECT * FROM students WHERE status = 'TRUE'";
     $result = mysqli_query($conn, $sqlStudents);
     if(mysqli_num_rows($result) > 0)
         {
@@ -158,6 +159,22 @@ if(isset($_POST['submitAdd'])){
     else{
         echo '<script>alert("Duplicate Id Number");</script>';
         $conn->close();  
+    }
+}
+
+if(isset($_POST['delete'])){
+    $id_number = $_POST['id_number'];
+
+    $sqlDelete = "UPDATE `students` SET `status` = 'FALSE' WHERE `id_number` = '$id_number'";
+
+    if(mysqli_query($conn,$sqlDelete)){
+        echo '<script>alert("Delete Successful");</script>';
+
+
+        $conn->close();
+
+       
+        echo '<script>window.location.href = "../Admin/Students.php";</script>';
     }
 }
 
