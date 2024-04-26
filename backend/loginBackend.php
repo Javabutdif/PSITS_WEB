@@ -25,6 +25,13 @@ if(isset($_POST['submitRegister'])){
     $email = $_POST['email'];
     $course = $_POST['course'];
     $year = $_POST['year'];
+
+    $sql = "INSERT INTO `students` (`id_number`, `first_name`, `middle_name`, `last_name`, `email`,`course`,`year`)
+    VALUES('$id_number','$first_name','$middle_name','$last_name','$email','$course','$year')";
+
+    if(mysqli_query($conn, $sql)){
+        echo 'Register Successfull';
+    }   
 }
 
 ?>
