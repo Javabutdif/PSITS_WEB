@@ -13,6 +13,12 @@
               $listPerson[] = $row;
           }
         }
+    $sqlCount = "SELECT COUNT(*) AS total FROM students WHERE status = 'TRUE'";
+    $count = mysqli_query($conn,$sqlCount);
+    $numbers = mysqli_fetch_array($count, MYSQLI_ASSOC);
+    if($numbers['total']!= null){
+        $totalStudents = $numbers['total'];
+    }
 
 ?>
 <!DOCTYPE html>
