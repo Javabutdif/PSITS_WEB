@@ -19,6 +19,7 @@ if(isset($_SESSION['adminId']) && $_SESSION['adminId'] == 1){
 
 if(isset($_POST['submitRegister'])){
     $id_number = $_POST['id_number'];
+    $password = $_POST['password'];
     $first_name = $_POST['first_name'];
     $middle_name = $_POST['middle_name'];
     $last_name = $_POST['last_name'];
@@ -26,12 +27,10 @@ if(isset($_POST['submitRegister'])){
     $course = $_POST['course'];
     $year = $_POST['year'];
 
-    if($id_number == "" || $first_name == ""||$middle_name == ""||$last_name == ""||$email == ""||$course == ""||$year == ""){
-         echo '<script>alert("You need to fill up the form");</script>';
-    }else{
+  
 
-    $sql = "INSERT INTO `students` (`id_number`, `first_name`, `middle_name`, `last_name`, `email`,`course`,`year`)
-    VALUES('$id_number','$first_name','$middle_name','$last_name','$email','$course','$year')";
+    $sql = "INSERT INTO `students` (`id_number`, `first_name`, `middle_name`, `last_name`, `email`,`course`,`year`,`password`)
+    VALUES('$id_number','$first_name','$middle_name','$last_name','$email','$course','$year','$password')";
 
     if(mysqli_query($conn, $sql)){
         echo '<script>alert("Register Successfull");</script>';
@@ -42,6 +41,6 @@ if(isset($_POST['submitRegister'])){
         $conn->close();  
     }
 }
-}
+
 
 ?>

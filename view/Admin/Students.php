@@ -39,7 +39,7 @@
         <?php foreach ($listPerson as $person): ?>
             <tr>
                 <td><?php echo $person['id_number']; ?></td>
-                <td><?php echo $person['firstName']." ".$person['middleName'].". ".$person['lastName']; ?></td>
+                <td><?php echo $person['first_name']." ".$person['middle_name'].". ".$person['last_name']; ?></td>
                 <td><?php echo $person['yearLevel']; ?></td>
                 <td><?php echo $person['course']; ?></td>
                 <td><?php echo $person['session']; ?></td>
