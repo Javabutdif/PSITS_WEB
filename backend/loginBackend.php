@@ -31,7 +31,9 @@ if(isset($_POST['submitRegister'])){
 
     if(mysqli_query($conn, $sql)){
         echo 'Register Successfull';
-    }   
+        $conn->close();  
+    }
+  
 }
 
 ?>

@@ -6,13 +6,8 @@ $db_password = "";
 $db_name = "psits"; 
 
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+$conn = mysqli_connect($db_host, $db_username , $db_password, $db_name);
 
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
 
-
-$conn->close();
 ?>
