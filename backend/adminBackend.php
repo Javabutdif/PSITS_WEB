@@ -1,7 +1,17 @@
 <?php
     session_start();
     include 'connection.php';
-    
+
+    //Retrieve students in table
+    $sqlStudents = "SELECT * FROM students";
+    $result = mysqli_query($conn, $sqlStudents);
+    if(mysqli_num_rows($result) > 0)
+        {
+          $listPerson = [];   
+          while($row = mysqli_fetch_array($result)) {
+              $listPerson[] = $row;
+          }
+        }
 
 ?>
 <!DOCTYPE html>
@@ -24,10 +34,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="Dashboard.php">Home</a>
+          <a class="nav-link" href="../Admin/Dashboard.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Students</a>
+          <a class="nav-link" href="../view/Admin/Students.php">Students</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Merchs</a>
