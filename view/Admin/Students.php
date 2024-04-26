@@ -30,7 +30,7 @@
             <th class="text-white">Name</th>
             <th class="text-white">Year Level</th>
             <th class="text-white">Course</th>
-            <th class="text-white">Remaining Session</th>
+            <th class="text-white">Email</th>
             <th class="text-white">Actions</th>
         </tr>
     </thead>
@@ -40,9 +40,9 @@
             <tr>
                 <td><?php echo $person['id_number']; ?></td>
                 <td><?php echo $person['first_name']." ".$person['middle_name'].". ".$person['last_name']; ?></td>
-                <td><?php echo $person['yearLevel']; ?></td>
+                <td><?php echo $person['year']; ?></td>
                 <td><?php echo $person['course']; ?></td>
-                <td><?php echo $person['session']; ?></td>
+                <td><?php echo $person['email']; ?></td>
                
                 <td class="align-middle">
     <div  class="d-flex justify-content-center align-items-center gap-3">
