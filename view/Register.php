@@ -108,7 +108,7 @@
             </div>
             <div class="row justify-content-between align-items-center">
               <div class="col-md-6">
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" name="submitRegister" class="btn btn-primary">Register</button>
                  <a href="Login.php" class="btn btn-danger">Back</a>
               </div>
              
