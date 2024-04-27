@@ -54,9 +54,9 @@
             Merchs
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">View</a>
-            <a class="dropdown-item" href="#">Orders</a>
-            <a class="dropdown-item" href="#">Reports</a>
+            <a class="dropdown-item" href="../Admin/ViewMerch.php">View</a>
+            <a class="dropdown-item" href="../Admin/OrderMerch.php">Orders</a>
+            <a class="dropdown-item" href="../Admin/ReportMerch.php">Reports</a>
         </div>
         </li>
         <li class="nav-item">

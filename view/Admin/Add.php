@@ -48,7 +48,7 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header text-center">
-          Edit Student
+          Add Student
         </div>
         <div class="card-body">
           <form action="Add.php" method="POST">
