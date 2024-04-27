@@ -21,35 +21,35 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Product</button>
         <br>
         <br>
-      <table class="table">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Product Type</th>
-                    <th>Product Price</th>
-                    <th>Product Stocks</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($listProducts as $product): ?>
-                <tr>
-                    <td><img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size"></td>
-                    <td><?php echo $product['product_id']; ?></td>
-                    <td><?php echo $product['product_name']; ?></td>
-                    <td><?php echo $product['product_type']; ?></td>
-                    <td><?php echo $product['product_price']; ?></td>
-                    <td><?php echo $product['product_stocks']; ?></td>
-                    <td>
-                        <button type="button" name="edit" class="btn btn-primary ">Edit</button>
-                        <button type="button" name="edit" class="btn btn-danger ">Delete</button>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+   <table class="table">
+    <tbody>
+        <?php
+        $products_count = count($listProducts);
+        for ($i = 0; $i < $products_count; $i += 3) {
+            echo "<tr>";
+            for ($j = $i; $j < min($i + 3, $products_count); $j++) {
+                $product = $listProducts[$j];
+        ?>
+                <td>
+                    <img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size">
+                    <p><?php echo $product['product_id']; ?></p> 
+                    <p><?php echo $product['product_name']; ?></p> 
+                    <p><?php echo $product['product_type']; ?></p>
+                    <p><?php echo $product['product_price']; ?></p>
+                    <p><?php echo $product['product_stocks']; ?></p>
+                    <div class="d-flex flex-row gap-2">
+                        <button type="button" name="edit" class="btn btn-primary">Edit</button>
+                        <button type="button" name="edit" class="btn btn-danger">Delete</button>
+                    </div>
+                </td>
+        <?php
+            }
+            echo "</tr>";
+        }
+        ?>
+    </tbody>
+</table>
+
 
     </div>
 
