@@ -191,4 +191,17 @@ if(isset($_POST['delete'])){
     }
 }
 
+  if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+      $name = $_FILES['image']['name'];
+      $type = $_FILES['image']['type'];
+      $data = file_get_contents($_FILES['image']['tmp_name']);
+   
+      $sqlImage = "INSERT INTO image (`name`,`type`,`data`,`product_id`)
+        VALUES('$name','$type','data','23')";
+      if(mysqli_query($conn,$sqlImage)){
+        echo '<script>alert("Upload Image Successfull");</script>';
+        $conn->close();  
+      }
+   }
+
 ?>
