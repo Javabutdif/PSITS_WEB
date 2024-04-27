@@ -243,7 +243,7 @@ if(isset($_POST['submit'])) {
         // Execute statements
         if($stmtImage->execute() && $stmtProduct->execute()) {
             echo '<script>alert("Upload Image Successful");</script>';
-            header('Location: ../Admin/ViewMerch.php  ');
+            echo '<script>window.location.href = "../Admin/ViewMerch.php";</script>';
         } else {
             echo '<script>alert("Error: ' . $conn->error . '");</script>';
         }
