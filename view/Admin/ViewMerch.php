@@ -32,11 +32,11 @@
         ?>
                 <td>
                     <img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size">
-                    <p><?php echo $product['product_id']; ?></p> 
-                    <p><?php echo $product['product_name']; ?></p> 
-                    <p><?php echo $product['product_type']; ?></p>
-                    <p><?php echo $product['product_price']; ?></p>
-                    <p><?php echo $product['product_stocks']; ?></p>
+                    <p>Product Id: <?php echo $product['product_id']; ?></p> 
+                    <p>Product Name: <?php echo $product['product_name']; ?></p> 
+                    <p>Product Type: <?php echo $product['product_type']; ?></p>
+                    <p>Product Price: <?php echo $product['product_price']; ?></p>
+                    <p>Product Stocks: <?php echo $product['product_stocks']; ?></p>
                     <div class="d-flex flex-row gap-2">
                         <button type="button" name="edit" class="btn btn-primary">Edit</button>
                         <button type="button" name="edit" class="btn btn-danger">Delete</button>
