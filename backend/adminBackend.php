@@ -13,12 +13,27 @@
               $listPerson[] = $row;
           }
         }
+
     $sqlCount = "SELECT COUNT(*) AS total FROM students WHERE status = 'TRUE'";
     $count = mysqli_query($conn,$sqlCount);
     $numbers = mysqli_fetch_array($count, MYSQLI_ASSOC);
     if($numbers['total']!= null){
         $totalStudents = $numbers['total'];
     }
+    $listProducts = []; 
+    $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,product.product_id, product.product_name , product.product_type , product.product_price, product.product_stocks FROM image INNER JOIN product on image.product_id = product.product_id;";
+    $products = mysqli_query($conn, $sqlTableProduct);
+    if(mysqli_num_rows($products) > 0)
+        {
+          
+          while($carts = mysqli_fetch_array($products)) {
+              $listProducts[] = $carts;
+   
+        }
+      }
+
+    
+
 
 ?>
 <!DOCTYPE html>
@@ -67,6 +82,8 @@
   </div>
 </nav>
 
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -74,13 +91,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.bootstrap5.js"></script>
+
+
     
 </body>
 </html>
 
 <?php
 
-
+//Login admin
 if ($_SESSION['adminId'] != null && !isset($_SESSION['success_toast_displayed'])) {
     echo '<script>
             const Toast = Swal.mixin({
@@ -107,6 +126,7 @@ else if($_SESSION['adminId'] == null ){
     header('Location: ../Login.php');
 }
 
+//Retrive Edit student
 if(isset($_POST['edit'])){
     $id_number = $_POST['id_number'];
     $sqlEdit = "SELECT * FROM students WHERE id_number = '$id_number'";
@@ -127,6 +147,7 @@ if(isset($_POST['edit'])){
     }
 }
 
+//Edit Student
 if(isset($_POST['submitEdit'])){
     $id_number = $_POST['id_number'];
     $first_name = $_POST['first_name'];
@@ -150,6 +171,7 @@ if(isset($_POST['submitEdit'])){
 
 }
 
+//Register Student in admin side
 if(isset($_POST['submitAdd'])){
     $id_number = $_POST['id_number'];
     $password = $_POST['password'];
@@ -174,7 +196,7 @@ if(isset($_POST['submitAdd'])){
         $conn->close();  
     }
 }
-
+//Delete Students
 if(isset($_POST['delete'])){
     $id_number = $_POST['id_number'];
 
@@ -190,27 +212,51 @@ if(isset($_POST['delete'])){
         echo '<script>window.location.href = "../Admin/Students.php";</script>';
     }
 }
+  //Upload Product and Data
+if(isset($_POST['submit'])) {
+    if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $name = $_FILES['image']['name'];
+        $type = $_FILES['image']['type'];
+        $data = file_get_contents($_FILES['image']['tmp_name']);
 
-  if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-      $name = $_FILES['image']['name'];
-      $type = $_FILES['image']['type'];
-      $data = file_get_contents($_FILES['image']['tmp_name']);
+        // Data
+        $product_id = rand(111111,999999);
+        $product_name = $_POST['name'];
+        $product_type = $_POST['type'];
+        $product_price = $_POST['price'];
+        $product_stocks = $_POST['stocks'];
 
-      //Data
-      $product_id = rand(111111,999999);
-      $product_name = $_POST['name'];
-      $product_type = $_POST['type'];
-      $product_price = $_POST['price'];
-      $product_stocks = $_POST['stocks'];
+        // SQL queries with prepared statements
+        $sqlProduct = "INSERT INTO product (`product_id`,`product_name`,`product_type`,`product_price`,`product_stocks`)
+                       VALUES (?,?,?,?,?)";
+        $sqlImage = "INSERT INTO image (`name`,`type`,`data`,`product_id`)
+                     VALUES (?,?,?,?)";
 
-      $sqlProduct = "INSERT INTO product (`product_id`,`product_name`,`product_type`,`product_price`,`product_stocks`)
-      VALUES ('$product_id','$product_name','$product_type','$product_price','$product_stocks')";
-      $sqlImage = "INSERT INTO image (`name`,`type`,`data`,`product_id`)
-        VALUES('$name','$type','data','$product_id')";
-      if(mysqli_query($conn,$sqlImage) && mysqli_query($conn,$sqlProduct)){
-        echo '<script>alert("Upload Image Successfull");</script>';
-        $conn->close();  
-      }
-   }
+        // Prepare statements
+        $stmtProduct = $conn->prepare($sqlProduct);
+        $stmtImage = $conn->prepare($sqlImage);
 
+        // Bind parameters and execute statements
+        $stmtProduct->bind_param("issss", $product_id, $product_name, $product_type, $product_price, $product_stocks);
+        $stmtImage->bind_param("sssi", $name, $type, $data, $product_id);
+
+        // Execute statements
+        if($stmtImage->execute() && $stmtProduct->execute()) {
+            echo '<script>alert("Upload Image Successful");</script>';
+            header('Location: ../Admin/ViewMerch.php  ');
+        } else {
+            echo '<script>alert("Error: ' . $conn->error . '");</script>';
+        }
+
+        // Close statements and connection
+        $stmtProduct->close();
+        $stmtImage->close();
+        $conn->close();
+    } else {
+        echo '<script>alert("Error uploading image");</script>';
+    }
+}
+
+
+  
 ?>

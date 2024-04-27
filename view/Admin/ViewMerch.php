@@ -16,56 +16,41 @@
 </head>
 <body>
     <h1>This is the View Merchandise Page</h1>
+    
     <div class="container ">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Product</button>
         <br>
         <br>
-        <table class="table table-borderless">
-            <tbody>
+      <table class="table">
+            <thead>
                 <tr>
-                <td>
-                    <img src="../../img/who.webp" class="same-size">
-                    <p>Meme Hutao</p>
-                    <p>Price: P 50</p>
-                    <p>Stocks: 50</p>
-                    <div class="d-flex flex-row gap-2 ">
-                    <button class="btn btn-primary ">Edit</button>
-                    <button class="btn btn-danger ">Delete</button>
-                    </div>
-                </td>
-                  <td>
-                    <img src="../../img/rey1.jpg" class="same-size">
-                    <p>Rey Cutie Plushie</p>
-                    <p>Price: P 100</p>
-                    <p>Stocks: 50</p>
-                    <div class="d-flex flex-row gap-2 ">
-                    <button class="btn btn-primary ">Edit</button>
-                    <button class="btn btn-danger ">Delete</button>
-                    </div>
-                </td>
-                  <td>
-                    <img src="../../img/rey2.jpg" class="same-size">
-                    <p>Rey Adorable Eating</p>
-                    <p>Price: P 90</p>
-                    <p>Stocks: 50</p>
-                    <div class="d-flex flex-row gap-2 ">
-                    <button class="btn btn-primary ">Edit</button>
-                    <button class="btn btn-danger ">Delete</button>
-                    </div>
-                </td>
-                <td>
-                    <img src="../../img/rey2.jpg" class="same-size">
-                    <p>Rey Adorable Eating</p>
-                    <p>Price: P 90</p>
-                    <p>Stocks: 50</p>
-                    <div class="d-flex flex-row gap-2 ">
-                    <button class="btn btn-primary ">Edit</button>
-                    <button class="btn btn-danger ">Delete</button>
-                    </div>
-                </td>
+                    <th>Image</th>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Product Type</th>
+                    <th>Product Price</th>
+                    <th>Product Stocks</th>
+                    <th>Actions</th>
                 </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($listProducts as $product): ?>
+                <tr>
+                    <td><img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size"></td>
+                    <td><?php echo $product['product_id']; ?></td>
+                    <td><?php echo $product['product_name']; ?></td>
+                    <td><?php echo $product['product_type']; ?></td>
+                    <td><?php echo $product['product_price']; ?></td>
+                    <td><?php echo $product['product_stocks']; ?></td>
+                    <td>
+                        <button type="button" name="edit" class="btn btn-primary ">Edit</button>
+                        <button type="button" name="edit" class="btn btn-danger ">Delete</button>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
+
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -110,5 +95,7 @@
     </div>
   </div>
 </div>
+
+
 </body>
 </html>
