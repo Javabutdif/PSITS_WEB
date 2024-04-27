@@ -21,6 +21,7 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Product</button>
         <br>
         <br>
+    <h2>Products</h2>
    <table class="table">
     <tbody>
         <?php
@@ -30,14 +31,18 @@
             for ($j = $i; $j < min($i + 3, $products_count); $j++) {
                 $product = $listProducts[$j];
         ?>
-                <td>
-                    <img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size">
-                    <p>Product Id: <?php echo $product['product_id']; ?></p> 
-                    <p>Product Name: <?php echo $product['product_name']; ?></p> 
-                    <p>Product Type: <?php echo $product['product_type']; ?></p>
-                    <p>Product Price: <?php echo $product['product_price']; ?></p>
-                    <p>Product Stocks: <?php echo $product['product_stocks']; ?></p>
-                    <div class="d-flex flex-row gap-2">
+                <td class="product-cell">
+                    <div class="product-info">
+                        <img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size">
+                        <div class="product-details">
+                            <p><strong>Product Id:</strong> <?php echo $product['product_id']; ?></p> 
+                            <p><strong>Product Name:</strong> <?php echo $product['product_name']; ?></p> 
+                            <p><strong>Product Type:</strong> <?php echo $product['product_type']; ?></p>
+                            <p><strong>Product Price:</strong> <?php echo $product['product_price']; ?></p>
+                            <p><strong>Product Stocks:</strong> <?php echo $product['product_stocks']; ?></p>
+                        </div>
+                    </div>
+                    <div class="product-actions">
                         <button type="button" name="edit" class="btn btn-primary">Edit</button>
                         <button type="button" name="edit" class="btn btn-danger">Delete</button>
                     </div>
@@ -49,6 +54,7 @@
         ?>
     </tbody>
 </table>
+
 
 
     </div>
