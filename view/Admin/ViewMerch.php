@@ -34,6 +34,8 @@
                 <td class="product-cell">
                     <div class="product-info">
                         <img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size">
+                         <br>
+                        <br>
                         <div class="product-details">
                             <p><strong>Product Id:</strong> <?php echo $product['product_id']; ?></p> 
                             <p><strong>Product Name:</strong> <?php echo $product['product_name']; ?></p> 
