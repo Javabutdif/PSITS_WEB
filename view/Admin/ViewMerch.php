@@ -44,7 +44,11 @@
                     </div>
                     <div class="d-flex flex-row  gap-3">
                           <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>">Edit</button>
-                        <button type="button" name="edit" class="btn btn-danger">Delete</button>
+
+                        <form action="ViewMerch.php" method="POST" class="delete-form">
+                            <input type="hidden" name="id_number" value="<?php echo $product['product_id']; ?>" />
+                            <button type="submit" name="deleteProduct" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this Product?')">Delete</button>
+                        </form>
                     </div>
                 </td>
         <?php
@@ -175,6 +179,14 @@
          
         });
     });
+</script>
+    
+<script>
+document.getElementById("deleteBtn").addEventListener("click", function() {
+    if (confirm("Are you sure you want to delete this Product?")) {
+        document.getElementById("deleteForm").submit();
+    }
+});
 </script>
 
 </body>

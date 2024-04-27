@@ -288,6 +288,22 @@ if(isset($_POST['editSubmit'])){
     }
 }
 
+if(isset($_POST['deleteProduct'])){
+    $id_number = $_POST['id_number'];
+
+    $sqlDelete = "DELETE FROM `product` WHERE product_id = '$id_number';";
+    $sqlDeleteImg = "DELETE FROM `image` WHERE product_id = '$id_number';";
+
+    if(mysqli_query($conn,$sqlDelete) && mysqli_query($conn,$sqlDeleteImg)){
+        echo '<script>alert("Delete Successful");</script>';
+
+
+        $conn->close();
+
+       
+        echo '<script>window.location.href = "../Admin/ViewMerch.php";</script>';
+    }
+}
 
 
   
