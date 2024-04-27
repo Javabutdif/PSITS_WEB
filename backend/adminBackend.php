@@ -49,8 +49,15 @@
         <li class="nav-item">
           <a class="nav-link" href="../Admin/Students.php">Students</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Merchs</a>
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Merchs
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">View</a>
+            <a class="dropdown-item" href="#">Orders</a>
+            <a class="dropdown-item" href="#">Reports</a>
+        </div>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="../Login.php">Logout</a>
