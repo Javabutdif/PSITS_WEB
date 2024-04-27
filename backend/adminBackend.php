@@ -256,6 +256,37 @@ if(isset($_POST['submit'])) {
         echo '<script>alert("Error uploading image");</script>';
     }
 }
+if(isset($_POST['editSubmit'])){
+    if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $name = $_FILES['image']['name'];
+        $type = $_FILES['image']['type'];
+        $data = file_get_contents($_FILES['image']['tmp_name']);
+
+        $product_id = $_POST['editProductId'];
+        $product_name = $_POST['editName'];
+        $product_type = $_POST['editType'];
+        $product_price = $_POST['editPrice'];
+        $product_stocks = $_POST['editStocks'];
+
+        // SQL query to update product details
+        $sqlUpdateProducts = "UPDATE `product` SET `product_name` = ?, `product_type` = ?, `product_price` = ?, `product_stocks` = ? WHERE `product_id` = ?";
+        $stmtProducts = $conn->prepare($sqlUpdateProducts);
+        $stmtProducts->bind_param("ssdii", $product_name, $product_type, $product_price, $product_stocks, $product_id);
+
+        // SQL query to update image details
+        $sqlUpdateImage = "UPDATE `image` SET `name` = ?, `type` = ?, `data` = ? WHERE `product_id` = ?";
+        $stmtImage = $conn->prepare($sqlUpdateImage);
+        $stmtImage->bind_param("sssi", $name, $type, $data, $product_id);
+
+        if($stmtProducts->execute() && $stmtImage->execute()) {
+            echo '<script>alert("Edit Product Successful");</script>';
+            $conn->close();
+            echo '<script>window.location.href = "../Admin/Students.php";</script>';
+        } else {
+            echo '<script>alert("Error: Edit Product Failed");</script>';
+        }
+    }
+}
 
 
 

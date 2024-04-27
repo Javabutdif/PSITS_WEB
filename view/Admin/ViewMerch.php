@@ -113,7 +113,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="EditProduct.php" enctype="multipart/form-data">
+        
+
+      <form method="POST" action="ViewMerch.php" enctype="multipart/form-data">
         <div class="modal-body">
           <input type="hidden" id="editProductId" name="editProductId">
           <div class="form-group">
