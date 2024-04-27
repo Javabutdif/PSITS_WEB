@@ -20,12 +20,12 @@
     if($numbers['total']!= null){
         $totalStudents = $numbers['total'];
     }
-    $listProducts = []; 
+    
     $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,product.product_id, product.product_name , product.product_type , product.product_price, product.product_stocks FROM image INNER JOIN product on image.product_id = product.product_id;";
     $products = mysqli_query($conn, $sqlTableProduct);
     if(mysqli_num_rows($products) > 0)
         {
-          
+          $listProducts = []; 
           while($carts = mysqli_fetch_array($products)) {
               $listProducts[] = $carts;
    
@@ -256,6 +256,7 @@ if(isset($_POST['submit'])) {
         echo '<script>alert("Error uploading image");</script>';
     }
 }
+
 
 
   

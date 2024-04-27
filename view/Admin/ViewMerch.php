@@ -42,8 +42,8 @@
                             <p><strong>Product Stocks:</strong> <?php echo $product['product_stocks']; ?></p>
                         </div>
                     </div>
-                    <div class="product-actions">
-                        <button type="button" name="edit" class="btn btn-primary">Edit</button>
+                    <div class="d-flex flex-row  gap-3">
+                          <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>">Edit</button>
                         <button type="button" name="edit" class="btn btn-danger">Delete</button>
                     </div>
                 </td>
@@ -102,6 +102,78 @@
   </div>
 </div>
 
+
+<!-- Modal for Editing Product -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="POST" action="EditProduct.php" enctype="multipart/form-data">
+        <div class="modal-body">
+          <input type="hidden" id="editProductId" name="editProductId">
+          <div class="form-group">
+            <label for="editImage">Upload Image:</label>
+            <input type="file" id="editImage" name="editImage" class="form-control-file">
+          </div>
+           <div class="form-group">
+            <label for="productId">Product Id:</label>
+            <input type="text"  id="productId" name="productId"   class="form-control" readonly>
+          </div>
+          <div class="form-group">
+            <label for="editName">Product Name:</label>
+            <input type="text"  id="editName" name="editName" placeholder="Enter product name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="editType">Product Type:</label>
+            <input type="text"  id="editType" name="editType" placeholder="Enter product type" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="editPrice">Product Price:</label>
+            <input type="text"  id="editPrice" name="editPrice" placeholder="Enter product price" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="editStocks">Product Stocks:</label>
+            <input type="text"  id="editStocks" name="editStocks" placeholder="Enter product stocks" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" name="editSubmit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+    // JavaScript to handle click event of edit button
+    document.querySelectorAll('.edit-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Get product details from data attributes
+            var productId = this.getAttribute('data-product-id');
+            var productName = this.getAttribute('data-product-name');
+            var productType = this.getAttribute('data-product-type');
+            var productPrice = this.getAttribute('data-product-price');
+            var productStocks = this.getAttribute('data-product-stocks');
+
+            // Populate form fields of edit modal with product details
+            document.getElementById('editProductId').value = productId;
+             document.getElementById('productId').value = productId;
+            document.getElementById('editName').value = productName;
+            document.getElementById('editType').value = productType;
+            document.getElementById('editPrice').value = productPrice;
+            document.getElementById('editStocks').value = productStocks;
+
+            // Trigger the edit modal
+         
+        });
+    });
+</script>
 
 </body>
 </html>
