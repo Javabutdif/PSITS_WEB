@@ -6,14 +6,19 @@ if(isset($_POST['submit'])){
     $id_number = $_POST['id_number'];
     $password = $_POST['password'];
 
-    if($id_number == 'admin' && $password == 'admin'){
+    $sqlAdmin = "SELECT * FROM `admin` WHERE id_number = '$id_number' AND password = '$password'";
+    $resultAdmin = mysqli_query($conn,$sqlAdmin);
+    $adminGet = mysqli_fetch_array($resultAdmin, MYSQLI_ASSOC);
+
+    if($adminGet['id_number'] != null){
         header('Location: ../view/Admin/Dashboard.php');
-        $_SESSION['adminId'] = 1;
+        $_SESSION['adminId'] = $adminGet['id_number'];
+        $_SESSION['adminName'] = $adminGet['name'];
         exit;
     }
 }
 
-if(isset($_SESSION['adminId']) && $_SESSION['adminId'] == 1){
+if(isset($_SESSION['adminId']) && $_SESSION['adminId'] != null){
     session_destroy();
 }
 

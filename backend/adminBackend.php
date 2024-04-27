@@ -74,7 +74,7 @@
 <?php
 
 
-if ($_SESSION['adminId'] == 1 && !isset($_SESSION['success_toast_displayed'])) {
+if ($_SESSION['adminId'] != null && !isset($_SESSION['success_toast_displayed'])) {
     echo '<script>
             const Toast = Swal.mixin({
               toast: true,
@@ -96,7 +96,7 @@ if ($_SESSION['adminId'] == 1 && !isset($_SESSION['success_toast_displayed'])) {
   
     $_SESSION['success_toast_displayed'] = true;
 }
-else if($_SESSION['adminId'] != 1 ){
+else if($_SESSION['adminId'] == null ){
     header('Location: ../Login.php');
 }
 
