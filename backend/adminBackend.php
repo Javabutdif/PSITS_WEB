@@ -195,10 +195,19 @@ if(isset($_POST['delete'])){
       $name = $_FILES['image']['name'];
       $type = $_FILES['image']['type'];
       $data = file_get_contents($_FILES['image']['tmp_name']);
-   
+
+      //Data
+      $product_id = rand(111111,999999);
+      $product_name = $_POST['name'];
+      $product_type = $_POST['type'];
+      $product_price = $_POST['price'];
+      $product_stocks = $_POST['stocks'];
+
+      $sqlProduct = "INSERT INTO product (`product_id`,`product_name`,`product_type`,`product_price`,`product_stocks`)
+      VALUES ('$product_id','$product_name','$product_type','$product_price','$product_stocks')";
       $sqlImage = "INSERT INTO image (`name`,`type`,`data`,`product_id`)
-        VALUES('$name','$type','data','23')";
-      if(mysqli_query($conn,$sqlImage)){
+        VALUES('$name','$type','data','$product_id')";
+      if(mysqli_query($conn,$sqlImage) && mysqli_query($conn,$sqlProduct)){
         echo '<script>alert("Upload Image Successfull");</script>';
         $conn->close();  
       }

@@ -88,6 +88,10 @@
         <input type="text" id="name" name="name" placeholder="Enter product name" class="form-control">
     </div>
     <div class="form-group">
+        <label for="type">Product Type:</label>
+        <input type="text" id="type" name="type" placeholder="Enter product type" class="form-control">
+    </div>
+    <div class="form-group">
         <label for="price">Product Price:</label>
         <input type="text" id="price" name="price" placeholder="Enter product price" class="form-control">
     </div>
