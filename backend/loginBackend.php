@@ -68,15 +68,34 @@ if(isset($_POST['submit'])){
     $id_number = $_POST['id_number'];
     $password = $_POST['password'];
 
+    //Admin Login
     $sqlAdmin = "SELECT * FROM `admin` WHERE id_number = '$id_number' AND password = '$password'";
     $resultAdmin = mysqli_query($conn,$sqlAdmin);
     $adminGet = mysqli_fetch_array($resultAdmin, MYSQLI_ASSOC);
+    //User Login
+    $sqlUser = "SELECT * FROM `students` WHERE id_number = '$id_number' AND password = '$password'";
+    $resultUser = mysqli_query($conn,$sqlUser);
+    $userGet = mysqli_fetch_array($resultUser, MYSQLI_ASSOC);
 
     if($adminGet['id_number'] != null){
         header('Location: ../view/Admin/Dashboard.php');
         $_SESSION['adminId'] = $adminGet['id_number'];
         $_SESSION['adminName'] = $adminGet['name'];
         exit;
+    }
+    else if($userGet['id_number'] != null && $userGet['subscription'] == 'Approve'){
+        header('Location: ../view/User/Dashboard.php');
+        $_SESSION['userId'] = $userGet['id_number'];
+        $_SESSION['userName'] = $userGet['first_name']." ".$userGet['middle_name'].". ".$userGet['last_name'];
+        exit;
+    }
+    else if($userGet['id_number'] != null && $userGet['subscription'] == 'Pending'){
+        echo '<script>Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "You Need to Pay for the Subscription at the PSITS Office!",
+					
+				  });</script>';
     }
     else{
         echo '<script>Swal.fire({
