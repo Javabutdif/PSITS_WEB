@@ -2,22 +2,6 @@
 session_start();
 include 'connection.php';
 
-if(isset($_POST['submit'])){
-    $id_number = $_POST['id_number'];
-    $password = $_POST['password'];
-
-    $sqlAdmin = "SELECT * FROM `admin` WHERE id_number = '$id_number' AND password = '$password'";
-    $resultAdmin = mysqli_query($conn,$sqlAdmin);
-    $adminGet = mysqli_fetch_array($resultAdmin, MYSQLI_ASSOC);
-
-    if($adminGet['id_number'] != null){
-        header('Location: ../view/Admin/Dashboard.php');
-        $_SESSION['adminId'] = $adminGet['id_number'];
-        $_SESSION['adminName'] = $adminGet['name'];
-        exit;
-    }
-}
-
 if(isset($_SESSION['adminId']) && $_SESSION['adminId'] != null){
     session_destroy();
 }
@@ -77,3 +61,32 @@ if(isset($_POST['submitRegister'])){
     
 </body>
 </html>
+
+<?php 
+    
+if(isset($_POST['submit'])){
+    $id_number = $_POST['id_number'];
+    $password = $_POST['password'];
+
+    $sqlAdmin = "SELECT * FROM `admin` WHERE id_number = '$id_number' AND password = '$password'";
+    $resultAdmin = mysqli_query($conn,$sqlAdmin);
+    $adminGet = mysqli_fetch_array($resultAdmin, MYSQLI_ASSOC);
+
+    if($adminGet['id_number'] != null){
+        header('Location: ../view/Admin/Dashboard.php');
+        $_SESSION['adminId'] = $adminGet['id_number'];
+        $_SESSION['adminName'] = $adminGet['name'];
+        exit;
+    }
+    else{
+        echo '<script>Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "Incorret ID Number and Password!",
+					
+				  });</script>';
+    }
+}
+
+
+?>

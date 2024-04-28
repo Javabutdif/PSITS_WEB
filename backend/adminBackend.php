@@ -112,7 +112,7 @@
             Settings
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../Admin/ViewMerch.php">Change Password</a>
+            <a class="dropdown-item" href="../Admin/ChangePassword.php">Change Password</a>
             <a class="dropdown-item" href="../Login.php">Logout</a>
         
         </div>
@@ -193,6 +193,25 @@ if(isset($_POST['edit'])){
         header('Location: ../Admin/Edit.php ');
     }
 }
+//Change password
+if(isset($_POST['changePass'])){
+  $newPassword = $_POST['newPassword'];
+  $adminId =  $_SESSION['adminId'];
+
+  $sqlAdminPassword = "UPDATE `admin` SET `password` = '$newPassword' WHERE `id_number` = '$adminId' ";
+    if(mysqli_query($conn,$sqlAdminPassword)){
+        echo '<script>alert("Change Password Successful");</script>';
+
+
+        $conn->close();
+
+       
+        echo '<script>window.location.href = "../Admin/Dashboard.php";</script>';
+    }
+}
+
+
+
 
 //Edit Student
 if(isset($_POST['submitEdit'])){
