@@ -174,7 +174,7 @@ if ($_SESSION['adminId'] != null && !isset($_SESSION['success_toast_displayed'])
     echo '<script>
             const Toast = Swal.mixin({
               toast: true,
-              position: "top-end",
+              position: "top-start",
               showConfirmButton: false,
               timer: 3000,
               timerProgressBar: true,
@@ -197,25 +197,49 @@ else if($_SESSION['adminId'] == null ){
 }
 
 //Retrive Edit student
-if(isset($_POST['edit'])){
+if(isset($_POST['editStudent'])){
+    // Assuming $conn is your mysqli connection object
+
+    // Get the ID number from the form data
     $id_number = $_POST['id_number'];
-    $sqlEdit = "SELECT * FROM students WHERE id_number = '$id_number'";
+   
+    // Prepare the SQL statement with a placeholder for the ID number
+    $sqlEdit = "SELECT * FROM students WHERE id_number = ?";
 
-    $result = mysqli_query($conn,$sqlEdit);
-    $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($sqlEdit);
 
-    if($user['id_number'] != null){
-        $_SESSION['id_number'] = $user['id_number'];
-        $_SESSION['first_name'] = $user['first_name'];
-        $_SESSION['middle_name'] = $user['middle_name'];
-        $_SESSION['last_name'] = $user['last_name'];
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['course'] = $user['course'];
-        $_SESSION['year'] = $user['year'];
+    // Bind the ID number parameter
+    $stmt->bind_param('s', $id_number);
 
-        header('Location: ../Admin/Edit.php ');
+    // Execute the prepared statement
+    $stmt->execute();
+
+    // Get the result
+    $resultEdit = $stmt->get_result();
+
+    // Fetch the row
+    $userEdit = $resultEdit->fetch_assoc();
+
+    // Check if user with provided ID number exists
+    if($userEdit !== null){
+        // Store user details in session
+        $_SESSION['id_number'] = $userEdit['id_number'];
+        $_SESSION['first_name'] = $userEdit['first_name'];
+        $_SESSION['middle_name'] = $userEdit['middle_name'];
+        $_SESSION['last_name'] = $userEdit['last_name'];
+        $_SESSION['email'] = $userEdit['email'];
+        $_SESSION['course'] = $userEdit['course'];
+        $_SESSION['year'] = $userEdit['year'];
+
+        // Redirect to the edit page
+        echo '<script>window.location.href = "../Admin/Edit.php";</script>';
+    } else {
+        // Handle case where user with provided ID number does not exist
+        echo "User with provided ID number does not exist.";
     }
 }
+
 //Change password
 if(isset($_POST['changePass'])){
   $newPassword = $_POST['newPassword'];
