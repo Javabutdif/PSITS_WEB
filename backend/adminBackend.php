@@ -94,7 +94,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="../Admin/Subscription.php">View Pending</a>
-            <a class="dropdown-item" href="../Admin/SubscriptionReport.php">Reports</a>
+            <a class="dropdown-item" href="../Admin/SubscriptionReport.php">History and Report</a>
         </div>
         </li>
        <li class="nav-item dropdown">

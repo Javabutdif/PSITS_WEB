@@ -21,7 +21,8 @@
     <thead >
         <tr>
             <th >ID Number</th>
-            <th >Name</th>
+            <th >Student Name</th>
+            <th >Status</th>
             <th >Approve By</th>
             <th >Date</th>
             <th >Time</th>
@@ -34,6 +35,7 @@
             <tr>
                 <td><?php echo $person['id_number']; ?></td>
                 <td><?php echo $person['first_name']." ".$person['middle_name'].". ".$person['last_name']; ?></td>
+                <td style="color:green">Paid</td>
                 <td><?php echo $person['admin_name']; ?></td>
                 <td><?php echo $person['date']; ?></td>
                 <td><?php echo $person['time']; ?></td>
