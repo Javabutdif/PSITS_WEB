@@ -29,7 +29,7 @@
             echo "<tr>";
             for ($j = $i; $j < min($i + 3, $products_count); $j++) {
                 $product = $listProducts[$j];
-        ?>
+        ?>      
                 <td class="product-cell">
                     <div class="product-info">
                         <img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size">
@@ -53,6 +53,7 @@
                         </form>
                     </div>
                 </td>
+             
         <?php
             }
             echo "</tr>";

@@ -18,7 +18,7 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Total Students</h5>
+          <h5 class="card-title">Total Subscribe Students</h5>
           <p class="card-text"><?php echo $totalStudents?></p>
         </div>
       </div>
@@ -34,8 +34,8 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Revenue</h5>
-          <p class="card-text">This is some content for Php 900.</p>
+          <h5 class="card-title">Subscription Revenue</h5>
+          <p class="card-text"> Php <?php echo ($totalStudents*50) ?>.</p>
         </div>
       </div>
     </div>
