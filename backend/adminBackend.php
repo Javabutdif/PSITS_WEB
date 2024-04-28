@@ -25,7 +25,7 @@
 
 
     
-    $sqlCount = "SELECT COUNT(*) AS total FROM students WHERE status = 'TRUE' AND subscription = 'Paid'";
+    $sqlCount = "SELECT COUNT(*) AS total FROM students WHERE status = 'TRUE' AND subscription = 'Approve'";
     $count = mysqli_query($conn,$sqlCount);
     $numbers = mysqli_fetch_array($count, MYSQLI_ASSOC);
     if($numbers['total']!= null){
