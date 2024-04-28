@@ -273,8 +273,8 @@ if(isset($_POST['submitAdd'])){
 
   
 
-    $sql = "INSERT INTO `students` (`id_number`, `first_name`, `middle_name`, `last_name`, `email`,`course`,`year`,`password`)
-    VALUES('$id_number','$first_name','$middle_name','$last_name','$email','$course','$year','$password')";
+   $sql = "INSERT INTO `students` (`id_number`, `first_name`, `middle_name`, `last_name`, `email`,`course`,`year`,`password`, `status`,`subscription`)
+    VALUES('$id_number','$first_name','$middle_name','$last_name','$email','$course','$year','$password' , 'TRUE','Pending')";
 
     if(mysqli_query($conn, $sql)){
         echo '<script>alert("Register Successfull");</script>';
