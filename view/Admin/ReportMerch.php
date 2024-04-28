@@ -51,7 +51,16 @@
 
   
 <script>
-new DataTable('#example');
+ let myDataTable = new DataTable('#example', {
+    layout: {
+      topStart: {
+        buttons: ['csv', 'excel', 'pdf', 'print']
+      }
+      
+    }
+ 
+    
+  });
   </script>
 
 </body>

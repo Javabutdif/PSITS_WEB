@@ -56,9 +56,7 @@
       }
       
     }
-    ,"oLanguage": {
-   "sSearch": "Filter"
- }
+ 
     
   });
   </script>
