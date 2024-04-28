@@ -15,9 +15,8 @@
     </style>
 </head>
 <body>
-    <h1>This is the View Merchandise Page</h1>
-    
-    <div class="container ">
+
+    <div class="container p-5">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Product</button>
         <br>
         <br>
@@ -159,7 +158,7 @@
 </div>
 
 <script>
-    // JavaScript to handle click event of edit button
+
     document.querySelectorAll('.edit-btn').forEach(function(button) {
         button.addEventListener('click', function() {
             // Get product details from data attributes
