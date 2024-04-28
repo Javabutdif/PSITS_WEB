@@ -1,6 +1,8 @@
 <?php
     include 'connection.php';
 
+   
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +50,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../User/Merchandise.php">Merchandise</a>
                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="../User/Orders.php">Orders</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Settings</a>
                 </li>
@@ -94,4 +99,25 @@ $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,pro
       }
 
 
+      if(isset($_POST['orderConfirm'])){
+        $product_id = $_POST['productId'];
+        $product_name = $_POST['editName'];
+        $product_price = $_POST['editPrice'];
+        $product_qty = $_POST['qty'];
+        $product_total = $_POST['total'];
+        $id_number =   $_SESSION['userId'];
+
+        $sql = "INSERT INTO `orders` (`id_number`,`name`,`size`,`quantity`,`price`,`total`,`product_id`,`status`)
+        VALUES('$id_number','$product_name','None','$product_qty','$product_price','$product_total','$product_id','Pending');";
+        
+        if(mysqli_query($conn,$sql)){
+                echo '<script>alert("Ordered Successfull");</script>';
+
+
+                $conn->close();
+
+            
+                echo '<script>window.location.href = "../User/Merchandise.php";</script>';
+            }
+      }
 ?>

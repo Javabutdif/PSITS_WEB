@@ -58,6 +58,7 @@
     </div>
 
 
+
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -78,7 +79,10 @@
             <input type="hidden" id="productImgData" name="productImgData">
             <input type="hidden" id="productImgType" name="productImgType">
           </div>
-          
+           <div class="form-group">
+            <label for="productId">Product Id:</label>
+            <input type="text"  id="productId" name="productId"   class="form-control" readonly>
+          </div>
           <div class="form-group">
             <label for="editName">Product Name:</label>
             <input type="text"  id="editName" name="editName" placeholder="Enter product name" class="form-control" readonly>
@@ -95,36 +99,31 @@
             <label for="editStocks">Product Stocks:</label>
             <input type="text"  id="editStocks" name="editStocks" placeholder="Enter product stocks" class="form-control" readonly>
           </div>
-          <div class="form-group">
+           <div class="form-group">
             <label for="qty">Quantity:</label>
             <input type="number"  id="qty" name="qty" placeholder="Enter Quantity" class="form-control" >
             <small id="quantityHelp" class="text-danger"></small>
           </div>
+          <div class="form-group">
+            <label for="total">Total:</label>
+            <input type="text"  id="total" name="total" placeholder="Total" class="form-control" readonly>
+        </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" name="order" class="btn btn-primary">Order</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-     
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" name="orderConfirm" class="btn btn-primary" >Order</button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
+
 <script>
-   document.getElementById('qty').addEventListener('change', function() {
-        var stocks = parseInt(document.getElementById('editStocks').value);
-        var quantity = parseInt(this.value);
 
-        var quantityHelp = document.getElementById('quantityHelp');
+</script>
 
-        if (quantity > stocks) {
-            quantityHelp.innerHTML = '<strong>Quantity exceeds available stocks</strong>';
-            this.value = stocks; 
-        } else {
-            quantityHelp.textContent = '';
-        }
-    });
+<script>
 
     
 
@@ -155,7 +154,27 @@
          
         });
     });
+     
+    document.getElementById('qty').addEventListener('change', function() {
+        var stocks = parseInt(document.getElementById('editStocks').value);
+        var quantity = parseInt(this.value);
+        var productPrice = parseFloat(document.getElementById('editPrice').value); // Parse float for price
+        var totalInput = document.getElementById('total'); // Get the total input element
+
+        var quantityHelp = document.getElementById('quantityHelp');
+
+        if (quantity > stocks) {
+            quantityHelp.innerHTML = '<strong>Quantity exceeds available stocks</strong>';
+            this.value = stocks; 
+        } else {
+            quantityHelp.textContent = '';
+            var total = quantity * productPrice; // Calculate total price
+            totalInput.value = total.toFixed(2); // Update the total input field with the calculated total
+        }
+    });
+
 </script>
+
     
 </body>
 </html>
