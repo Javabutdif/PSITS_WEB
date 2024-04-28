@@ -48,7 +48,7 @@
                  <td><?php echo $person['total']; ?></td>
                 <td class="align-middle">
     <div  class="d-flex justify-content-center align-items-center gap-3">
-        <form action="Students.php" method="POST" class="delete-form">
+        <form action="Orders.php" method="POST" class="delete-form">
                             <input type="hidden" name="id_number" value="<?php echo $person['order_id']; ?>" />
                             <button type="submit" name="cancel" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
                         </form>
