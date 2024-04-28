@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2024 at 04:34 PM
+-- Generation Time: Apr 29, 2024 at 12:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -104,7 +104,9 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`order_id`, `id_number`, `name`, `size`, `quantity`, `price`, `total`, `product_id`, `status`) VALUES
 (1, '900', 'PSITS Condom', 'None', 2, 30, 60, 548371, 'Paid'),
-(3, '900', 'A Night to Remember (Limited Edition)', 'None', 1, 200, 200, 729213, 'Paid');
+(3, '900', 'A Night to Remember (Limited Edition)', 'None', 1, 200, 200, 729213, 'Paid'),
+(4, '9000', 'PSITS Condom', 'None', 5, 30, 150, 548371, 'Paid'),
+(9, '900', 'Rey and Jov', 'None', 1, 100, 100, 529906, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -131,7 +133,9 @@ CREATE TABLE `order_details` (
 
 INSERT INTO `order_details` (`order_details_id`, `id_number`, `order_name`, `size`, `quantity`, `money`, `changeCoins`, `profit`, `admin_name`, `date`) VALUES
 (1, 900, 'PSITS Condom', 'None', 2, 100, 40, 60, 'Anton James J. Genabio', '2024-04-28'),
-(2, 900, 'A Night to Remember (Limited Edition)', 'None', 1, 200, 0, 200, 'Anton James J. Genabio', '2024-04-28');
+(2, 900, 'A Night to Remember (Limited Edition)', 'None', 1, 200, 0, 200, 'Anton James J. Genabio', '2024-04-28'),
+(3, 9000, 'PSITS Condom', 'None', 5, 200, 50, 150, 'Jeshelle Andrea Colonia', '2024-04-28'),
+(4, 900, 'Rey and Jov', 'None', 1, 200, 100, 100, 'Anton James J. Genabio', '2024-04-29');
 
 -- --------------------------------------------------------
 
@@ -156,8 +160,8 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_type`, `product_pr
 (401431, 'PSITS Milo', 'Powder', 10, 2),
 (429965, 'Kopiko Black', 'Coffee Powder', 10, 20),
 (459149, 'Lumine', 'Sticker', 10, 10),
-(529906, 'Rey and Jov', 'Poster', 100, 1),
-(548371, 'PSITS Condom', 'Balloon', 30, 10),
+(529906, 'Rey and Jov', 'Poster', 100, 0),
+(548371, 'PSITS Condom', 'Balloon', 30, 5),
 (604140, 'Ate Jeshelle', 'Sims', 20000, 1),
 (729213, 'A Night to Remember (Limited Edition)', 'Picture', 200, 0),
 (753087, 'Snow Jeshelle', 'Human', 20000, 1);
@@ -186,13 +190,16 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id_number`, `first_name`, `middle_name`, `last_name`, `email`, `course`, `year`, `password`, `status`, `subscription`) VALUES
-(2, 'Anton James', 'Jala', 'Genabio', 'jamesgenabio31@gmail.com', 'BSIT', 3, '123', 'TRUE', 'Approve'),
+(2, 'Anton James', 'Jala', 'Genabio', 'jamesgenabio31@gmail.com', 'BSCS', 4, '123', 'TRUE', 'Approve'),
 (900, 'Daisy Lyn', 'L', 'Laygan', 'daisy@gmail.com', 'BSIT', 2, '123', 'TRUE', 'Approve'),
 (2000, 'Cyril', 'K', 'Ypil', 'cyril@gmail.com', 'BSIT', 2, '123', 'TRUE', 'Approve'),
 (9000, 'Rey Vincent', 'J', 'De Los Reyes', 'rey@gmail.com', 'BSIT', 2, '123', 'TRUE', 'Approve'),
+(19835641, 'test', 'test', 'test', 'jermaineaguilar10@gmail.com', 'BSIT', 1, '123', 'TRUE', 'Approve'),
+(19835642, 'Anton James', 'J.', 'Ypil', 'jamesgenabio2@gmail.com', 'BSIT', 4, '123', 'TRUE', 'Pending'),
 (19835644, 'Anton James', 'Jala', 'Genabio', 'jamesgenabio31@gmail.com', 'BSIT', 3, '123', 'TRUE', 'Approve'),
 (19835645, 'Anton James', 'Jala', 'Genabio', 'jamesgenabio31@gmail.com', 'BSIT', 3, '123', 'TRUE', 'Approve'),
-(19835646, 'Anton James', 'Jala', 'Genabio', 'jamesgenabio@yahoo.com', 'BSIT', 3, '123', 'TRUE', 'Approve');
+(19835646, 'Anton James', 'Jala', 'Genabio', 'jamesgenabio@yahoo.com', 'BSIT', 3, '123', 'TRUE', 'Approve'),
+(20220885, 'Jeshelle Andreaa', 'J.', 'Colonia', 'jeshelle@gmail.com', 'BSIT', 4, '123', 'TRUE', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -219,7 +226,8 @@ INSERT INTO `sub_report` (`sub_id`, `id_number`, `admin_name`, `date`, `time`) V
 (5, '19835645', 'Jeshelle Andrea Colonia', '2024-04-28', '03:18:34pm'),
 (6, '9000', 'Jeshelle Andrea Colonia', '2024-04-28', '03:39:19pm'),
 (7, '19835646', 'Anton James J. Genabio', '2024-04-28', '06:51:09pm'),
-(8, '900', 'Anton James J. Genabio', '2024-04-28', '07:58:38pm');
+(8, '900', 'Anton James J. Genabio', '2024-04-28', '07:58:38pm'),
+(9, '19835641', 'Anton James J. Genabio', '2024-04-29', '12:27:10am');
 
 --
 -- Indexes for dumped tables
@@ -281,19 +289,19 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sub_report`
 --
 ALTER TABLE `sub_report`
-  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
