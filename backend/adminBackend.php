@@ -13,6 +13,19 @@
               $listPerson[] = $row;
           }
         }
+       
+
+    $sqlSubReport = " SELECT students.id_number , students.first_name, students.middle_name, students.last_name , sub_report.admin_name , sub_report.date, sub_report.time FROM students INNER JOIN sub_report ON sub_report.id_number = students.id_number;";
+    $resultReport = mysqli_query($conn, $sqlSubReport);
+    if(mysqli_num_rows($resultReport) > 0)
+        {
+          $reportSub = [];   
+          while($row = mysqli_fetch_array($resultReport)) {
+              $reportSub[] = $row;
+          }
+        }
+
+
     $sqlSubscribe = "SELECT * FROM students WHERE status = 'TRUE' AND subscription = 'Pending'";
     $resultSub = mysqli_query($conn, $sqlSubscribe);
     if(mysqli_num_rows($resultSub) > 0)
@@ -52,7 +65,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Report</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -75,8 +88,14 @@
         <li class="nav-item">
           <a class="nav-link" href="../Admin/Students.php">Students</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../Admin/Subscription.php">Subscriptions</a>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Subscriptions
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="../Admin/Subscription.php">View Pending</a>
+            <a class="dropdown-item" href="../Admin/SubscriptionReport.php">Reports</a>
+        </div>
         </li>
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -105,6 +124,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.bootstrap5.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.1/js/dataTables.buttons.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.print.min.js"></script>
 
 
     
@@ -227,11 +253,16 @@ if(isset($_POST['delete'])){
     }
 }
 
+//Approve Subscription
 if(isset($_POST['approve'])){
   $id_number = $_POST['id_number'];
+  $adminName = $_SESSION['adminName'];
+  $time = date("h:i:sa");
+  $date = date('Y-m-d');
   $sqlApprove = "UPDATE `students` SET `subscription` = 'Approve' WHERE `id_number` = '$id_number'";
+  $sqlApproveAdmin = "INSERT INTO `sub_report` ( `id_number`, `admin_name`,`date`,`time`) VALUES('$id_number','$adminName','$date','$time')";
 
-   if(mysqli_query($conn,$sqlApprove)){
+   if(mysqli_query($conn,$sqlApprove) && mysqli_query($conn,$sqlApproveAdmin)){
         echo '<script>alert("Approve Successful");</script>';
 
 
