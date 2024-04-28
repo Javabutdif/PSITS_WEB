@@ -425,18 +425,24 @@ if(isset($_POST['submitPayment'])){
         $resultData = mysqli_query($conn,$sqlGetData);
         $orderResult = mysqli_fetch_array($resultData, MYSQLI_ASSOC);
 
+        $sqlGetProduct = "SELECT * FROM `product` WHERE product_id = '$product_id'";
+        $resultDataProduct = mysqli_query($conn,$sqlGetProduct);
+        $getProduct = mysqli_fetch_array($resultDataProduct, MYSQLI_ASSOC);
+       
+
         $id_number = $orderResult['id_number'];
         $name = $orderResult['name'];
         $size = $orderResult['size'];
         $quantity = $orderResult['quantity'];
         $admin_name =  $_SESSION['adminName'];
         $date = date('Y-m-d');
+        $newStocks = $getProduct['product_stocks'] - $quantity;
 
-
+       $sqlUpdateStocks = "UPDATE `product` SET `product_stocks` = '$newStocks' WHERE product_id = '$product_id'";
         $sqlUpdateOrder = "UPDATE `orders` SET `status` = 'Paid' WHERE order_id = '$order_id'";
        $sqlOrderDetails = "INSERT INTO `order_details`(`id_number`,`order_name`,`size`,`quantity`,`money`,`changeCoins`,`profit`,`admin_name`,`date`) VALUES ('$id_number','$name','$size','$quantity','$money','$change','$total','$admin_name','$date')";
 
-         if(mysqli_query($conn,$sqlUpdateOrder) && mysqli_query($conn,$sqlOrderDetails)){
+         if(mysqli_query($conn,$sqlUpdateOrder) && mysqli_query($conn,$sqlOrderDetails)&& mysqli_query($conn,$sqlUpdateStocks)){
             echo '<script>alert("Ordered Successfully");</script>';
             $conn->close();
             echo '<script>window.location.href = "../Admin/OrderMerch.php";</script>';

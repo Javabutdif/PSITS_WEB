@@ -53,6 +53,9 @@
                  <li class="nav-item">
                     <a class="nav-link" href="../User/Orders.php">Orders</a>
                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="../User/History.php">History</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Settings</a>
                 </li>
@@ -119,5 +122,22 @@ $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,pro
             
                 echo '<script>window.location.href = "../User/Merchandise.php";</script>';
             }
+      }
+
+      if(isset($_POST['cancel'])){
+        $order_id = $_POST['order_id'];
+
+        $sqlDelete = "DELETE FROM `orders` WHERE order_id = '$order_id';";
+   
+
+    if(mysqli_query($conn,$sqlDelete) ){
+        echo '<script>alert("Cancel Successful");</script>';
+
+
+        $conn->close();
+
+       
+        echo '<script>window.location.href = "../User/Orders.php";</script>';
+    }
       }
 ?>

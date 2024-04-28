@@ -2,7 +2,7 @@
     session_start();
     include '../../backend/userBackend.php';
     $id_number = $_SESSION['userId'];
-    $sqlUser = "SELECT * FROM orders WHERE id_number = '$id_number' AND status= 'Pending' ";
+    $sqlUser = "SELECT * FROM orders WHERE id_number = '$id_number' AND status= 'Paid' ";
     $orders = mysqli_query($conn, $sqlUser);
     if(mysqli_num_rows($orders) > 0)
         {
@@ -18,9 +18,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders</title>
+    <title>History</title>
 </head>
 <body>
+    
 <h1 class="text-center">Orders</h1>
 
 <div class="container">
@@ -33,7 +34,7 @@
             <th >Quantity</th>
             <th >Price</th>
             <th >Total</th>
-            <th >Actions</th>
+            <th >Status</th>
         </tr>
     </thead>
 
@@ -46,14 +47,8 @@
                 <td><?php echo $person['quantity']; ?></td>
                 <td><?php echo $person['price']; ?></td>
                  <td><?php echo $person['total']; ?></td>
-                <td class="align-middle">
-    <div  class="d-flex justify-content-center align-items-center gap-3">
-        <form action="Orders.php" method="POST" class="delete-form">
-                            <input type="hidden" name="order_id" value="<?php echo $person['order_id']; ?>" />
-                            <button type="submit" name="cancel" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
-                        </form>
-        </div>
-</td>
+                  <td style="color:green"><?php echo $person['status']; ?></td>
+               
             </tr>
         <?php endforeach; ?>
     </tbody>
@@ -66,15 +61,6 @@
 <script>
 new DataTable('#example');
   </script>
-
-    
-<script>
-document.getElementById("deleteBtn").addEventListener("click", function() {
-    if (confirm("Are you sure you want to cancel this order?")) {
-        document.getElementById("deleteForm").submit();
-    }
-});
-</script>
     
 </body>
 </html>

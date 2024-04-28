@@ -40,7 +40,7 @@
                  <td><?php echo $person['total']; ?></td>
                 <td class="align-middle">
     <div  class="d-flex justify-content-center align-items-center gap-3">
-           <button type="button" class="btn btn-success pay-btn" data-toggle="modal" data-target="#exampleModal" data-order-id = "<?php echo $person['order_id']; ?>" data-total-id = "<?php echo $person['total']; ?>">Pay</button>
+           <button type="button" class="btn btn-success pay-btn" data-toggle="modal" data-target="#exampleModal" data-order-id = "<?php echo $person['order_id']; ?>" data-product-id = "<?php echo $person['product_id']; ?>"  data-total-id = "<?php echo $person['total']; ?>">Pay</button>
 
         <form action="OrderMerch.php" method="POST" class="delete-form">
                             <input type="hidden" name="id_number" value="<?php echo $person['order_id']; ?>" />
@@ -74,6 +74,7 @@
         <input type="number" id="money" name="money" class="form-control">
         <input type="hidden" id="orderId" name="order_id" class="form-control">
         <input type="hidden" id="totalls" name="total" class="form-control">
+        <input type="hidden" id="productId" name="product_id" class="form-control">
     </div>
     
     
@@ -102,8 +103,10 @@ new DataTable('#example');
 
             var order_id = this.getAttribute('data-order-id');
             var totals = this.getAttribute('data-total-id');
+            var product_id = this.getAttribute('data-product-id');
             document.getElementById('orderId').value = order_id;
             document.getElementById('totalls').value = totals;
+            document.getElementById('productId').value = product_id;
             
         });
     });
