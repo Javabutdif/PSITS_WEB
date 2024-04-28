@@ -4,7 +4,7 @@
     include 'connection.php';
 
     //Retrieve students in table
-    $sqlStudents = "SELECT * FROM students WHERE status = 'TRUE'";
+    $sqlStudents = "SELECT * FROM students WHERE status = 'TRUE' AND subscription = 'Approve'";
     $result = mysqli_query($conn, $sqlStudents);
     if(mysqli_num_rows($result) > 0)
         {
@@ -13,8 +13,19 @@
               $listPerson[] = $row;
           }
         }
+    $sqlSubscribe = "SELECT * FROM students WHERE status = 'TRUE' AND subscription = 'Pending'";
+    $resultSub = mysqli_query($conn, $sqlSubscribe);
+    if(mysqli_num_rows($resultSub) > 0)
+        {
+          $listSub = [];   
+          while($row = mysqli_fetch_array($resultSub)) {
+              $listSub[] = $row;
+          }
+        }
 
-    $sqlCount = "SELECT COUNT(*) AS total FROM students WHERE status = 'TRUE'";
+
+    
+    $sqlCount = "SELECT COUNT(*) AS total FROM students WHERE status = 'TRUE' AND subscription = 'Paid'";
     $count = mysqli_query($conn,$sqlCount);
     $numbers = mysqli_fetch_array($count, MYSQLI_ASSOC);
     if($numbers['total']!= null){
@@ -63,6 +74,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="../Admin/Students.php">Students</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../Admin/Subscription.php">Subscriptions</a>
         </li>
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -210,6 +224,21 @@ if(isset($_POST['delete'])){
 
        
         echo '<script>window.location.href = "../Admin/Students.php";</script>';
+    }
+}
+
+if(isset($_POST['approve'])){
+  $id_number = $_POST['id_number'];
+  $sqlApprove = "UPDATE `students` SET `subscription` = 'Approve' WHERE `id_number` = '$id_number'";
+
+   if(mysqli_query($conn,$sqlApprove)){
+        echo '<script>alert("Approve Successful");</script>';
+
+
+        $conn->close();
+
+       
+        echo '<script>window.location.href = "../Admin/Subscription.php";</script>';
     }
 }
   //Upload Product and Data
