@@ -126,7 +126,7 @@
           <input type="hidden" id="editProductId" name="editProductId">
           <div class="form-group">
             <img id="productImage" class="img-fluid same-size" alt="Product Image" >
-            <input type="hidden" id="productId" name="productId">
+        
             <input type="hidden" id="productImgData" name="productImgData">
             <input type="hidden" id="productImgType" name="productImgType">
           </div>

@@ -343,10 +343,7 @@ if(isset($_POST['submit'])) {
     }
 }
 if(isset($_POST['editSubmit'])){
-    if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $name = $_FILES['image']['name'];
-        $type = $_FILES['image']['type'];
-        $data = file_get_contents($_FILES['image']['tmp_name']);
+   
 
         $product_id = $_POST['editProductId'];
         $product_name = $_POST['editName'];
@@ -360,19 +357,16 @@ if(isset($_POST['editSubmit'])){
         $stmtProducts->bind_param("ssdii", $product_name, $product_type, $product_price, $product_stocks, $product_id);
 
         // SQL query to update image details
-        $sqlUpdateImage = "UPDATE `image` SET `name` = ?, `type` = ?, `data` = ? WHERE `product_id` = ?";
-        $stmtImage = $conn->prepare($sqlUpdateImage);
-        $stmtImage->bind_param("sssi", $name, $type, $data, $product_id);
-
-        if($stmtProducts->execute() && $stmtImage->execute()) {
+      
+        if($stmtProducts->execute() ) {
             echo '<script>alert("Edit Product Successful");</script>';
             $conn->close();
-            echo '<script>window.location.href = "../Admin/Students.php";</script>';
+            echo '<script>window.location.href = "../Admin/ViewMerch.php";</script>';
         } else {
             echo '<script>alert("Error: Edit Product Failed");</script>';
         }
     }
-}
+
 
 if(isset($_POST['deleteProduct'])){
     $id_number = $_POST['id_number'];
