@@ -112,7 +112,7 @@
             </div>
             <div class="row justify-content-between align-items-center">
               <div class="col-md-6">
-                <button type="submit"  class="btn btn-primary register-btn" data-toggle="modal" data-target="#exampleModal">Proceed</button>
+                <button type="button" class="btn btn-primary register-btn" data-toggle="modal" data-target="#exampleModal" disabled >Proceed</button>
                  <a href="Login.php" class="btn btn-danger">Back</a>
               </div>
             </div>
@@ -168,8 +168,9 @@
         <label for="year">Year:</label>
         <input type="text" id="year1" name="year"  class="form-control" readonly>
     </div>
-    
-    <strong class="text-center " style="color:red;">You must pay P 50 fee after registering</strong>
+    <div class="form-group text-center ">
+    <strong style="color:red;">You must pay P50 fee after registering</strong>
+    </div>
     </div>
 
       <div class="modal-footer">
@@ -184,8 +185,8 @@
 
 <script>
   $(document).ready(function() {
-    $('.register-btn').click(function() {
-      // Get form data
+
+    function checkFields() {
       var id_number = $('#id_number').val();
       var password = $('#password').val();
       var first_name = $('#first_name').val();
@@ -194,9 +195,32 @@
       var email = $('#email').val();
       var course = $('#course').val();
       var year = $('#year').val();
-      // Other form fields go here
+
+      return (id_number !== "" && password !== "" && first_name !== "" && middle_name !== "" && last_name !== "" && email !== "" && course !== "" && year !== "");
+    }
+
+ 
+    $('#id_number, #password, #first_name, #middle_name, #last_name, #email, #course, #year').on('input', function() {
+      if (checkFields()) {
+        $('.register-btn').prop('disabled', false);
+      } else {
+        $('.register-btn').prop('disabled', true);
+      }
+    });
+
+    $('.register-btn').click(function() {
+     
+      var id_number = $('#id_number').val();
+      var password = $('#password').val();
+      var first_name = $('#first_name').val();
+      var middle_name = $('#middle_name').val();
+      var last_name = $('#last_name').val();
+      var email = $('#email').val();
+      var course = $('#course').val();
+      var year = $('#year').val();
       
-      // Populate modal fields
+     
+   
       $('#id').val(id_number);
       $('#password1').val(password);
       $('#first_name1').val(first_name);
@@ -206,12 +230,14 @@
       $('#course1').val(course);
       $('#year1').val(year);
 
-      // Other modal fields go here
+    
+     
+      
+     
     });
   });
 </script>
 
-<!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
