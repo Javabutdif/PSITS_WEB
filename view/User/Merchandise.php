@@ -111,7 +111,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="orderConfirm" class="btn btn-primary" >Order</button>
+              <button type="submit" name="orderConfirm" class="btn btn-primary" disabled>Order</button>
         </div>
       </form>
     </div>
@@ -119,12 +119,26 @@
 </div>
 
 
+
 <script>
 
 </script>
 
 <script>
+  function checkStocks() {
+    var stocks = parseInt(document.getElementById('editStocks').value);
+    var orderButton = document.querySelector('[name="orderConfirm"]');
+    
+    if (stocks <= 0) {
+      orderButton.disabled = true;
+    } else {
+      orderButton.disabled = false;
+    }
+  }
 
+  // Call the function initially and whenever the input value changes
+  checkStocks();
+  document.getElementById('editStocks').addEventListener('input', checkStocks);
     
 
     document.querySelectorAll('.edit-btn').forEach(function(button) {
@@ -149,7 +163,7 @@
             var productImage = document.getElementById('productImage');
             productImage.src = 'data:' + productImgType + ';base64,' + productImgData;
 
-
+             checkStocks();
 
          
         });

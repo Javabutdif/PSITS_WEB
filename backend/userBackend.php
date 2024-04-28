@@ -47,14 +47,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profile</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../User/Merchandise.php">Merchandise</a>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link" href="../User/Orders.php">Orders</a>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link" href="../User/History.php">History</a>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Merchandise
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="../User/Merchandise.php">Merchandise</a>
+                    <a class="dropdown-item" href="../User/Orders.php">Orders</a>
+                    <a class="dropdown-item" href="../User/History.php">History</a>
+                </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Settings</a>

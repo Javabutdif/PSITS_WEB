@@ -9,7 +9,7 @@
     <title>Merchandise</title>
 </head>
 <body>
-    <h1>This is the Report Merchandise Page</h1>
+    <h1 class="text-center">This is the Report Merchandise Page</h1>
 
     
 <div class="container">

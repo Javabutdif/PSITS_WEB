@@ -22,7 +22,7 @@
 </head>
 <body>
     
-<h1 class="text-center">Orders</h1>
+<h1 class="text-center">History</h1>
 
 <div class="container">
 <table id="example" class="table table-striped table-hover display compact " style="width:100%">

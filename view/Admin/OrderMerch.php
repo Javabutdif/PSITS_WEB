@@ -9,7 +9,7 @@
     <title>Merchandise</title>
 </head>
 <body>
-    <h1>This is the Order Merchandise Page</h1>
+    <h1 class="text-center">This is the Order Merchandise Page</h1>
 
     
 
@@ -43,8 +43,8 @@
            <button type="button" class="btn btn-success pay-btn" data-toggle="modal" data-target="#exampleModal" data-order-id = "<?php echo $person['order_id']; ?>" data-product-id = "<?php echo $person['product_id']; ?>"  data-total-id = "<?php echo $person['total']; ?>">Pay</button>
 
         <form action="OrderMerch.php" method="POST" class="delete-form">
-                            <input type="hidden" name="id_number" value="<?php echo $person['order_id']; ?>" />
-                            <button type="submit" name="cancel" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
+                            <input type="hidden" name="order_id" value="<?php echo $person['order_id']; ?>" />
+                            <button type="submit" name="cancelOrder" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
                         </form>
         </div>
 </td>

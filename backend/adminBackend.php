@@ -35,6 +35,13 @@
               $listSub[] = $row;
           }
         }
+        $sqlProfit = "SELECT SUM(ALL profit) as total from order_details;";
+        $profit = mysqli_query($conn,$sqlProfit);
+        $revenue = mysqli_fetch_array($profit, MYSQLI_ASSOC);
+        if($revenue['total']!= null){
+            $totalRevenue = $revenue['total'];
+        }
+        
 
 
     
@@ -122,7 +129,7 @@
         </li>
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Merchs
+            Merchandise
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="../Admin/ViewMerch.php">View</a>
@@ -169,6 +176,8 @@
 
 <?php
 
+
+
 //Login admin
 if ($_SESSION['adminId'] != null && !isset($_SESSION['success_toast_displayed'])) {
     echo '<script>
@@ -196,34 +205,49 @@ else if($_SESSION['adminId'] == null ){
     header('Location: ../Login.php');
 }
 
-//Retrive Edit student
-if(isset($_POST['editStudent'])){
-    // Assuming $conn is your mysqli connection object
+if(isset($_POST['cancelOrder'])){
+     $order_id = $_POST['order_id'];
 
-    // Get the ID number from the form data
+        $sqlDelete = "DELETE FROM `orders` WHERE order_id = '$order_id';";
+   
+
+    if(mysqli_query($conn,$sqlDelete) ){
+        echo '<script>alert("Cancel Successful");</script>';
+
+
+        $conn->close();
+
+       
+        echo '<script>window.location.href = "../User/Orders.php";</script>';
+    }
+      
+}
+
+
+if(isset($_POST['editStudent'])){
+    
     $id_number = $_POST['id_number'];
    
-    // Prepare the SQL statement with a placeholder for the ID number
+
     $sqlEdit = "SELECT * FROM students WHERE id_number = ?";
 
-    // Prepare the SQL statement
+
     $stmt = $conn->prepare($sqlEdit);
 
-    // Bind the ID number parameter
+    
     $stmt->bind_param('s', $id_number);
 
-    // Execute the prepared statement
+    
     $stmt->execute();
 
-    // Get the result
     $resultEdit = $stmt->get_result();
 
-    // Fetch the row
+ 
     $userEdit = $resultEdit->fetch_assoc();
 
-    // Check if user with provided ID number exists
+  
     if($userEdit !== null){
-        // Store user details in session
+      
         $_SESSION['id_number'] = $userEdit['id_number'];
         $_SESSION['first_name'] = $userEdit['first_name'];
         $_SESSION['middle_name'] = $userEdit['middle_name'];
@@ -232,10 +256,10 @@ if(isset($_POST['editStudent'])){
         $_SESSION['course'] = $userEdit['course'];
         $_SESSION['year'] = $userEdit['year'];
 
-        // Redirect to the edit page
+ 
         echo '<script>window.location.href = "../Admin/Edit.php";</script>';
     } else {
-        // Handle case where user with provided ID number does not exist
+       
         echo "User with provided ID number does not exist.";
     }
 }
