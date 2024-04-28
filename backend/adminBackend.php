@@ -67,6 +67,18 @@
         }
       }
 
+      
+    $sqlUserOrderDetails = "SELECT * FROM order_details  ";
+    $ordersD = mysqli_query($conn, $sqlUserOrderDetails);
+    if(mysqli_num_rows($ordersD) > 0)
+        {
+          $orderDetails = []; 
+          while($orderD = mysqli_fetch_array($ordersD)) {
+              $orderDetails[] = $orderD;
+   
+        }
+      }
+
     
 
 
