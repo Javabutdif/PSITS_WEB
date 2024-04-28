@@ -1,5 +1,6 @@
 <?php
     include '../backend/loginBackend.php';
+  
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +52,7 @@
           Register
         </div>
         <div class="card-body">
-          <form action="Register.php" method="POST">
+          
             <div class="mb-3">
               <label for="id_number" class="form-label">ID Number</label>
               <input type="text" class="form-control" id="id_number" name="id_number" required>
@@ -111,17 +112,104 @@
             </div>
             <div class="row justify-content-between align-items-center">
               <div class="col-md-6">
-                <button type="submit" name="submitRegister" class="btn btn-primary">Register</button>
+                <button type="submit"  class="btn btn-primary register-btn" data-toggle="modal" data-target="#exampleModal">Proceed</button>
                  <a href="Login.php" class="btn btn-danger">Back</a>
               </div>
             </div>
-          </form>
+    
         </div>
       </div>
     </div>
   </div>
 </div>
 
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Review your information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form method="POST" action="Register.php">
+     <div class="modal-body">
+      <p></p>
+    <div class="form-group">
+        <label for="id">Id Number:</label>
+        <input type="text" id="id" name="id_number" class="form-control-file" readonly>
+    </div>
+     <div class="form-group">
+        <input type="hidden" id="password1" name="password" class="form-control-file" >
+    </div>
+    <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name1" name="first_name" class="form-control" readonly>
+    </div>
+     <div class="form-group">
+        <label for="middle_name">Middle Name:</label>
+        <input type="text" id="middle_name1" name="middle_name" class="form-control" readonly>
+    </div>
+     <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name1" name="last_name" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email1" name="email"  class="form-control" readonly>
+    </div>
+    <div class="form-group">
+        <label for="course">Course:</label>
+        <input type="text" id="course1" name="course"  class="form-control" readonly>
+    </div>
+    <div class="form-group">
+        <label for="year">Year:</label>
+        <input type="text" id="year1" name="year"  class="form-control" readonly>
+    </div>
+    
+    <strong class="text-center " style="color:red;">You must pay P 50 fee after registering</strong>
+    </div>
+
+      <div class="modal-footer">
+        <button type="submit" name="submitRegister"  class="btn btn-primary">Register</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+            </form>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $(document).ready(function() {
+    $('.register-btn').click(function() {
+      // Get form data
+      var id_number = $('#id_number').val();
+      var password = $('#password').val();
+      var first_name = $('#first_name').val();
+      var middle_name = $('#middle_name').val();
+      var last_name = $('#last_name').val();
+      var email = $('#email').val();
+      var course = $('#course').val();
+      var year = $('#year').val();
+      // Other form fields go here
+      
+      // Populate modal fields
+      $('#id').val(id_number);
+      $('#password1').val(password);
+      $('#first_name1').val(first_name);
+      $('#middle_name1').val(middle_name);
+      $('#last_name1').val(last_name);
+      $('#email1').val(email);
+      $('#course1').val(course);
+      $('#year1').val(year);
+
+      // Other modal fields go here
+    });
+  });
+</script>
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
