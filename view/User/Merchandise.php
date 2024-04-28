@@ -34,7 +34,7 @@
                          <br>
                         <br>
                         <div class="product-details">
-                            <p><strong>Product Id:</strong> <?php echo $product['product_id']; ?></p> 
+                       
                             <p style="width: 200px;"><strong>Product Name:</strong> <?php echo $product['product_name']; ?></p> 
                             <p><strong>Product Type:</strong> <?php echo $product['product_type']; ?></p>
                             <p><strong>Product Price:</strong> <?php echo $product['product_price']; ?></p>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="d-flex flex-row  gap-3">
-                       <button type="button" name="order" class="btn btn-primary ">Order</button>
+                       <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" data-product-img="<?php echo base64_encode($product['data']); ?>" data-product-img-type="<?php echo $product['type']; ?>">Order</button>
                     </div>
                 </td>
         <?php
@@ -56,6 +56,106 @@
 
 
     </div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Order</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        
+
+      <form method="POST" action="Merchandise.php" enctype="multipart/form-data">
+        <div class="modal-body">
+          <input type="hidden" id="editProductId" name="editProductId">
+          <div class="form-group">
+            <img id="productImage" class="img-fluid same-size" alt="Product Image" >
+        
+            <input type="hidden" id="productImgData" name="productImgData">
+            <input type="hidden" id="productImgType" name="productImgType">
+          </div>
+          
+          <div class="form-group">
+            <label for="editName">Product Name:</label>
+            <input type="text"  id="editName" name="editName" placeholder="Enter product name" class="form-control" readonly>
+          </div>
+          <div class="form-group">
+            <label for="editType">Product Type:</label>
+            <input type="text"  id="editType" name="editType" placeholder="Enter product type" class="form-control" readonly>
+          </div>
+          <div class="form-group">
+            <label for="editPrice">Product Price:</label>
+            <input type="text"  id="editPrice" name="editPrice" placeholder="Enter product price" class="form-control" readonly>
+          </div>
+          <div class="form-group">
+            <label for="editStocks">Product Stocks:</label>
+            <input type="text"  id="editStocks" name="editStocks" placeholder="Enter product stocks" class="form-control" readonly>
+          </div>
+          <div class="form-group">
+            <label for="qty">Quantity:</label>
+            <input type="number"  id="qty" name="qty" placeholder="Enter Quantity" class="form-control" >
+            <small id="quantityHelp" class="text-danger"></small>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" name="order" class="btn btn-primary">Order</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+     
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+   document.getElementById('qty').addEventListener('change', function() {
+        var stocks = parseInt(document.getElementById('editStocks').value);
+        var quantity = parseInt(this.value);
+
+        var quantityHelp = document.getElementById('quantityHelp');
+
+        if (quantity > stocks) {
+            quantityHelp.innerHTML = '<strong>Quantity exceeds available stocks</strong>';
+            this.value = stocks; 
+        } else {
+            quantityHelp.textContent = '';
+        }
+    });
+
+    
+
+    document.querySelectorAll('.edit-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+          
+            var productId = this.getAttribute('data-product-id');
+            var productName = this.getAttribute('data-product-name');
+            var productType = this.getAttribute('data-product-type');
+            var productPrice = this.getAttribute('data-product-price');
+            var productStocks = this.getAttribute('data-product-stocks');
+            var productImgData = this.getAttribute('data-product-img'); 
+            var productImgType = this.getAttribute('data-product-img-type'); 
+
+
+         
+            document.getElementById('editProductId').value = productId;
+             document.getElementById('productId').value = productId;
+            document.getElementById('editName').value = productName;
+            document.getElementById('editType').value = productType;
+            document.getElementById('editPrice').value = productPrice;
+            document.getElementById('editStocks').value = productStocks;
+            var productImage = document.getElementById('productImage');
+            productImage.src = 'data:' + productImgType + ';base64,' + productImgData;
+
+
+
+         
+        });
+    });
+</script>
     
 </body>
 </html>
