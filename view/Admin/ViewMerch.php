@@ -44,7 +44,8 @@
                         </div>
                     </div>
                     <div class="d-flex flex-row  gap-3">
-                          <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>">Edit</button>
+                         <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" data-product-img="<?php echo base64_encode($product['data']); ?>" data-product-img-type="<?php echo $product['type']; ?>">Edit</button>
+
 
                         <form action="ViewMerch.php" method="POST" class="delete-form">
                             <input type="hidden" name="id_number" value="<?php echo $product['product_id']; ?>" />
@@ -124,8 +125,10 @@
         <div class="modal-body">
           <input type="hidden" id="editProductId" name="editProductId">
           <div class="form-group">
-            <label for="editImage">Upload Image:</label>
-            <input type="file" id="editImage" name="editImage" class="form-control-file">
+            <img id="productImage" class="img-fluid same-size" alt="Product Image" >
+            <input type="hidden" id="productId" name="productId">
+            <input type="hidden" id="productImgData" name="productImgData">
+            <input type="hidden" id="productImgType" name="productImgType">
           </div>
            <div class="form-group">
             <label for="productId">Product Id:</label>
@@ -167,6 +170,9 @@
             var productType = this.getAttribute('data-product-type');
             var productPrice = this.getAttribute('data-product-price');
             var productStocks = this.getAttribute('data-product-stocks');
+            var productImgData = this.getAttribute('data-product-img'); // New line: Get image data
+            var productImgType = this.getAttribute('data-product-img-type'); // New line: Get image type
+
 
             // Populate form fields of edit modal with product details
             document.getElementById('editProductId').value = productId;
@@ -175,6 +181,9 @@
             document.getElementById('editType').value = productType;
             document.getElementById('editPrice').value = productPrice;
             document.getElementById('editStocks').value = productStocks;
+            var productImage = document.getElementById('productImage');
+            productImage.src = 'data:' + productImgType + ';base64,' + productImgData;
+
 
             // Trigger the edit modal
          
