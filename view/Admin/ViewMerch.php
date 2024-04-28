@@ -10,7 +10,7 @@
     <style>
         .same-size {
             width: 200px; 
-            height: 150px;
+            height: 200px;
 }
     </style>
 </head>
@@ -37,7 +37,7 @@
                         <br>
                         <div class="product-details">
                             <p><strong>Product Id:</strong> <?php echo $product['product_id']; ?></p> 
-                            <p><strong>Product Name:</strong> <?php echo $product['product_name']; ?></p> 
+                            <p style="width: 200px;"><strong>Product Name:</strong> <?php echo $product['product_name']; ?></p> 
                             <p><strong>Product Type:</strong> <?php echo $product['product_type']; ?></p>
                             <p><strong>Product Price:</strong> <?php echo $product['product_price']; ?></p>
                             <p><strong>Product Stocks:</strong> <?php echo $product['product_stocks']; ?></p>
