@@ -109,7 +109,7 @@
 </div>
 
 
-<!-- Modal for Editing Product -->
+
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -164,17 +164,17 @@
 
     document.querySelectorAll('.edit-btn').forEach(function(button) {
         button.addEventListener('click', function() {
-            // Get product details from data attributes
+          
             var productId = this.getAttribute('data-product-id');
             var productName = this.getAttribute('data-product-name');
             var productType = this.getAttribute('data-product-type');
             var productPrice = this.getAttribute('data-product-price');
             var productStocks = this.getAttribute('data-product-stocks');
-            var productImgData = this.getAttribute('data-product-img'); // New line: Get image data
-            var productImgType = this.getAttribute('data-product-img-type'); // New line: Get image type
+            var productImgData = this.getAttribute('data-product-img'); 
+            var productImgType = this.getAttribute('data-product-img-type'); 
 
 
-            // Populate form fields of edit modal with product details
+         
             document.getElementById('editProductId').value = productId;
              document.getElementById('productId').value = productId;
             document.getElementById('editName').value = productName;
@@ -185,7 +185,7 @@
             productImage.src = 'data:' + productImgType + ';base64,' + productImgData;
 
 
-            // Trigger the edit modal
+
          
         });
     });
