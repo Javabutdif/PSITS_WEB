@@ -1,3 +1,5 @@
 {
-  "routes": [{ "handle": "vercel-php", "src": "/.*" }]
+  "routes": [
+    { "handle": "vercel-php", "src": "\/.*" }
+  ]
 }
