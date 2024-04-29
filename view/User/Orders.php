@@ -50,6 +50,8 @@
     <div  class="d-flex justify-content-center align-items-center gap-3">
         <form action="Orders.php" method="POST" class="delete-form">
                             <input type="hidden" name="order_id" value="<?php echo $person['order_id']; ?>" />
+                            <input type="hidden" name="product_id" value="<?php echo $person['product_id']; ?>" />
+                            <input type="hidden" name="quantity" value="<?php echo $person['quantity']; ?>" />
                             <button type="submit" name="cancel" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
                         </form>
         </div>

@@ -91,7 +91,7 @@
 
 <?php 
 
-$sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,product.product_id, product.product_name , product.product_type , product.product_price, product.product_stocks FROM image INNER JOIN product on image.product_id = product.product_id;";
+$sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,product.product_id, product.product_name , product.product_type , product.product_price, product.product_stocks FROM image INNER JOIN product on image.product_id = product.product_id where product.product_stocks != 0 AND product.product_stocks > 0 ";
     $products = mysqli_query($conn, $sqlTableProduct);
     if(mysqli_num_rows($products) > 0)
         {
@@ -111,10 +111,18 @@ $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,pro
         $product_total = $_POST['total'];
         $id_number =   $_SESSION['userId'];
 
+        $sqlGetProduct = "SELECT * FROM `product` WHERE product_id = '$product_id'";
+        $resultDataProduct = mysqli_query($conn,$sqlGetProduct);
+        $getProduct = mysqli_fetch_array($resultDataProduct, MYSQLI_ASSOC);
+
+        $newStocks = $getProduct['product_stocks'] - $product_qty;
+       
+
+        $sqlUpdateStocks = "UPDATE `product` SET `product_stocks` = '$newStocks' WHERE product_id = '$product_id'";
         $sql = "INSERT INTO `orders` (`id_number`,`name`,`size`,`quantity`,`price`,`total`,`product_id`,`status`)
         VALUES('$id_number','$product_name','None','$product_qty','$product_price','$product_total','$product_id','Pending');";
         
-        if(mysqli_query($conn,$sql)){
+        if(mysqli_query($conn,$sql)&&mysqli_query($conn,$sqlUpdateStocks)){
                 echo '<script>alert("Ordered Successfull");</script>';
 
 
@@ -127,11 +135,19 @@ $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,pro
 
       if(isset($_POST['cancel'])){
         $order_id = $_POST['order_id'];
+        $product_id = $_POST['product_id'];
+        $qty = $_POST['quantity'];
 
+        $sqlGetProduct = "SELECT * FROM `product` WHERE product_id = '$product_id'";
+        $resultDataProduct = mysqli_query($conn,$sqlGetProduct);
+        $getProduct = mysqli_fetch_array($resultDataProduct, MYSQLI_ASSOC);
+
+        $newStocks = $getProduct['product_stocks'] + $qty;
+        $sqlUpdateStocks = "UPDATE `product` SET `product_stocks` = '$newStocks' WHERE product_id = '$product_id'";
         $sqlDelete = "DELETE FROM `orders` WHERE order_id = '$order_id';";
    
 
-    if(mysqli_query($conn,$sqlDelete) ){
+    if(mysqli_query($conn,$sqlDelete)&&mysqli_query($conn,$sqlUpdateStocks)  ){
         echo '<script>alert("Cancel Successful");</script>';
 
 
