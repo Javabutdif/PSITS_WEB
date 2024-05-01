@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PSITS Landing Page</title>
+    <title>Philippine Society of Information Technology Students</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,11 +42,12 @@
     </style>
 </head>
 <body>
+
 <div class="container">
     <h1>Philippine Society of Information Technology Students - UC MAIN</h1>
     <p>This is a simple landing page example.</p>
-    <a href="view/Login.php" class="btn">Login</a>
-    <a href="view/Register.php" class="btn">Register</a>
+    <a href="Login.php" class="btn">Login</a>
+    <a href="Register.php" class="btn">Register</a>
 </div>
 
 </body>

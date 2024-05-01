@@ -1,5 +1,5 @@
 <?php   
-    include '../../backend/adminBackend.php';
+     include 'BackendAdmin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +42,7 @@
     <div  class="d-flex justify-content-center align-items-center gap-3">
            <button type="button" class="btn btn-success pay-btn" data-toggle="modal" data-target="#exampleModal" data-order-id = "<?php echo $person['order_id']; ?>" data-product-id = "<?php echo $person['product_id']; ?>"  data-total-id = "<?php echo $person['total']; ?>">Pay</button>
 
-        <form action="OrderMerch.php" method="POST" class="delete-form">
+        <form action="AdminOrderMerch.php" method="POST" class="delete-form">
                             <input type="hidden" name="order_id" value="<?php echo $person['order_id']; ?>" />
                             <button type="submit" name="cancelOrder" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
                         </form>
@@ -66,7 +66,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-        <form method="POST" action="OrderMerch.php">
+        <form method="POST" action="AdminOrderMerch.php">
      <div class="modal-body">
 
     <div class="form-group">

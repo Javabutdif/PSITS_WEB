@@ -2,35 +2,6 @@
 session_start();
 include 'connection.php';
 
-if(isset($_SESSION['adminId']) && $_SESSION['adminId'] != null){
-    session_destroy();
-}
-
-if(isset($_POST['submitRegister'])){
-    $id_number = $_POST['id_number'];
-    $password = $_POST['password'];
-    $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $course = $_POST['course'];
-    $year = $_POST['year'];
-
-  
-
-    $sql = "INSERT INTO `students` (`id_number`, `first_name`, `middle_name`, `last_name`, `email`,`course`,`year`,`password`, `status`,`subscription`)
-    VALUES('$id_number','$first_name','$middle_name','$last_name','$email','$course','$year','$password' , 'TRUE','Pending')";
-
-    if(mysqli_query($conn, $sql)){
-        echo '<script>alert("Register Successfull");</script>';
-        $conn->close();  
-    }
-    else{
-        echo '<script>alert("Duplicate Id Number");</script>';
-        $conn->close();  
-    }
-}
-
 
 ?>
 <!DOCTYPE html>
@@ -38,7 +9,7 @@ if(isset($_POST['submitRegister'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -69,27 +40,31 @@ if(isset($_POST['submit'])){
     $password = $_POST['password'];
 
     //Admin Login
-    $sqlAdmin = "SELECT * FROM `admin` WHERE id_number = '$id_number' AND password = '$password'";
+    $sqlAdmin = "SELECT * FROM `admin` WHERE id_number = '$id_number'";
     $resultAdmin = mysqli_query($conn,$sqlAdmin);
     $adminGet = mysqli_fetch_array($resultAdmin, MYSQLI_ASSOC);
     //User Login
-    $sqlUser = "SELECT * FROM `students` WHERE id_number = '$id_number' AND password = '$password'";
+    $sqlUser = "SELECT * FROM `students` WHERE id_number = '$id_number'";
     $resultUser = mysqli_query($conn,$sqlUser);
     $userGet = mysqli_fetch_array($resultUser, MYSQLI_ASSOC);
 
-    if($adminGet['id_number'] != null){
-        header('Location: ../view/Admin/Dashboard.php');
+    if($adminGet['id_number'] != null && password_verify($password,$adminGet['password'])){
+        ini_set('session.cookie_lifetime', 1800);
         $_SESSION['adminId'] = $adminGet['id_number'];
         $_SESSION['adminName'] = $adminGet['name'];
+        session_regenerate_id();
+        header('Location: AdminDashboard.php');
         exit;
     }
-    else if($userGet['id_number'] != null && $userGet['subscription'] == 'Approve'){
-        header('Location: ../view/User/Dashboard.php');
+    else if($userGet['id_number'] != null && $userGet['subscription'] == 'Approve' && password_verify($password,$userGet['password'])){
+        ini_set('session.cookie_lifetime', 1800);
         $_SESSION['userId'] = $userGet['id_number'];
         $_SESSION['userName'] = $userGet['first_name']." ".$userGet['middle_name'].". ".$userGet['last_name'];
+        session_regenerate_id();
+        header('Location: UserDashboard.php');
         exit;
     }
-    else if($userGet['id_number'] != null && $userGet['subscription'] == 'Pending'){
+    else if($userGet['id_number'] != null && $userGet['subscription'] == 'Pending' && password_verify($password,$userGet['password'])){
         echo '<script>Swal.fire({
 					icon: "error",
 					title: "Oops...",
@@ -101,7 +76,7 @@ if(isset($_POST['submit'])){
         echo '<script>Swal.fire({
 					icon: "error",
 					title: "Oops...",
-					text: "Incorret ID Number and Password!",
+					text: "Incorrect ID Number and Password!",
 					
 				  });</script>';
     }

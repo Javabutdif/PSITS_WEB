@@ -1,6 +1,7 @@
 <?php
-    include '../backend/loginBackend.php';
-  
+    include 'BackendRegister.php';
+
+      
 ?>
 
 <!DOCTYPE html>
@@ -8,6 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <title>Register</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -134,7 +140,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-        <form method="POST" action="Register.php">
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
      <div class="modal-body">
       <p></p>
     <div class="form-group">
@@ -181,7 +187,6 @@
     </div>
   </div>
 </div>
-
 
 <script>
   $(document).ready(function() {
@@ -238,6 +243,9 @@
   });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
+
+
+

@@ -1,5 +1,5 @@
 <?php   
-    include '../../backend/adminBackend.php';
+      include 'BackendAdmin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +16,7 @@
  
 <!-- Table -->
 <div class="container d-flex flex-row  gap-3 ">
-  <a class="btn btn-primary " href="Add.php">Add Student</a>
+  <a class="btn btn-primary " href="AdminAddStudent.php">Add Student</a>
 </div>
 
   
@@ -44,12 +44,12 @@
                
                 <td class="align-middle">
     <div  class="d-flex justify-content-center align-items-center gap-3">
-    <form action="Students.php" method="POST">
+    <form action="AdminStudents.php" method="POST">
         <button type="submit" name="editStudent" class="btn btn-primary">Edit</button>
         <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>"/>
         </form>
         
-        <form action="Students.php" method="POST" class="delete-form">
+        <form action="AdminStudents.php" method="POST" class="delete-form">
                             <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
                             <button type="submit" name="delete" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this Student?')">Delete</button>
                         </form>

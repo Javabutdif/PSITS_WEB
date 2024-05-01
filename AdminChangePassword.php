@@ -1,5 +1,5 @@
 <?php
-    include '../../backend/adminBackend.php';
+      include 'BackendAdmin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
 
 <div class="container container-fluid p-5 m-5 text-center d-block ">
     <h5>Change Password</h5>
-    <form action="ChangePassword.php" method="POST" onsubmit="return validatePassword()">
+    <form action="AdminChangePassword.php" method="POST" onsubmit="return validatePassword()">
         <input type="password" name="newPassword" id="newPassword" placeholder="New Password"/>
         <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"/>
         <button type="submit" name="changePass" class="btn btn-primary">Change Password</button>

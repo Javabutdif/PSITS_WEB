@@ -1,5 +1,5 @@
 <?php
-    include '../../backend/adminBackend.php';
+      include 'BackendAdmin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,14 +39,14 @@
                
                 <td class="align-middle">
     <div  class="d-flex justify-content-center align-items-center gap-3">
-        <form action="Subscription.php" method="POST" class="approve-form" id="approveForm">
+        <form action="AdminSubscription.php" method="POST" class="approve-form" id="approveForm">
             <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
             <button type="submit" name="approve" class="btn btn-success mr-2" id="approveBtn" >Approve</button>
         </form>
 
-        <form action="Subscription.php" method="POST" class="delete-form">
+        <form action="AdminSubscription.php" method="POST" class="delete-form">
                             <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
-                            <button type="submit" name="delete" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this Student?')">Delete</button>
+                            <button type="submit" name="deleteMembership" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this Student?')">Delete</button>
         </form>
         </div>
 </td>

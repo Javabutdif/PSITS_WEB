@@ -2,7 +2,9 @@
     include 'connection.php';
 
 
-   
+   if($_SESSION['userId'] == null){
+      echo '<script>window.location.href = "Login.php";</script>';
+   }
 
 ?>
 <!DOCTYPE html>
@@ -43,7 +45,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../User/Dashboard.php">Home</a>
+                    <a class="nav-link active" aria-current="page" href="UserDashboard.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profile</a>
@@ -53,16 +55,16 @@
                     Merchandise
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="../User/Merchandise.php">Merchandise</a>
-                    <a class="dropdown-item" href="../User/Orders.php">Orders</a>
-                    <a class="dropdown-item" href="../User/History.php">History</a>
+                    <a class="dropdown-item" href="UserMerchandise.php">Merchandise</a>
+                    <a class="dropdown-item" href="UserOrders.php">Orders</a>
+                    <a class="dropdown-item" href="UserHistory.php">History</a>
                 </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Login.php">Logout</a>
+                    <a class="nav-link" href="Login.php">Logout</a>
                 </li>
             </ul>
         </div>
@@ -130,7 +132,7 @@ $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,pro
                 $conn->close();
 
             
-                echo '<script>window.location.href = "../User/Merchandise.php";</script>';
+                echo '<script>window.location.href = "UserMerchandise.php";</script>';
             }
       }
 
@@ -155,7 +157,7 @@ $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,pro
         $conn->close();
 
        
-        echo '<script>window.location.href = "../User/Orders.php";</script>';
+        echo '<script>window.location.href = "UserOrders.php";</script>';
     }
       }
 ?>

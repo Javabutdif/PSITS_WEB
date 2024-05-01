@@ -1,5 +1,2 @@
- RewriteBase /
-RewriteRule ^index\.html$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.html [L]
+php_value date.timezone Asia/Manila
+php_value display_errors On
