@@ -14,6 +14,7 @@
 
 
 <div class="container mt-5">
+  <h1>Welcome! <?php echo $_SESSION['adminName'] ?></h1>
   <div class="row">
     <div class="col-md-4 mb-4"> 
       <div class="card">

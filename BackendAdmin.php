@@ -269,7 +269,8 @@ if(isset($_POST['changePass'])){
   $newPassword = $_POST['newPassword'];
   $adminId =  $_SESSION['adminId'];
 
-  $sqlAdminPassword = "UPDATE `admin` SET `password` = '$newPassword' WHERE `id_number` = '$adminId' ";
+$hashPassword = password_hash($newPassword,PASSWORD_DEFAULT );
+  $sqlAdminPassword = "UPDATE `admin` SET `password` = '$hashPassword' WHERE `id_number` = '$adminId' ";
     if(mysqli_query($conn,$sqlAdminPassword)){
         echo '<script>alert("Change Password Successful");</script>';
 
