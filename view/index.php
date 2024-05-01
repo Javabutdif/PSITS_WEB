@@ -1,7 +1,7 @@
 <?php 
 
     header('Content-Type: text/html');
-header('Content-Type: application/json');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@ header('Content-Type: application/json');
 </head>
 <body>
 
-<div class="container"><a class="btn btn-primary " href="view/Login.php">Login</a></div>
+<div class="container"><a class="btn btn-primary " href="Login.php">Login</a></div>
 
     
     

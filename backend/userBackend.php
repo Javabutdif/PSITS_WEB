@@ -1,6 +1,6 @@
 <?php
     include 'connection.php';
-    header('Content-Type: text/html');
+
 
    
 
