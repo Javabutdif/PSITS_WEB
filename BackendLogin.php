@@ -2,7 +2,10 @@
 session_start();
 include 'connection.php';
 
-if(isset($_SESSION['adminId']) && $_SESSION['adminId'] != null){
+if( $_SESSION['adminId'] != null){
+    session_destroy();
+}
+if( $_SESSION['userId'] != null){
     session_destroy();
 }
 

@@ -2,7 +2,9 @@
     include 'connection.php';
 
 
-   
+   if($_SESSION['userId'] == null){
+      echo '<script>window.location.href = "Login.php";</script>';
+   }
 
 ?>
 <!DOCTYPE html>

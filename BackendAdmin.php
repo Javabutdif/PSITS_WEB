@@ -202,7 +202,7 @@ if ($_SESSION['adminId'] != null && !isset($_SESSION['success_toast_displayed'])
     $_SESSION['success_toast_displayed'] = true;
 }
 else if($_SESSION['adminId'] == null ){
-    header('Location: ../Login.php');
+     echo '<script>window.location.href = "Login.php";</script>';
 }
 
 if(isset($_POST['cancelOrder'])){
