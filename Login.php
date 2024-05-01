@@ -1,11 +1,14 @@
 <?php
     include 'BackendLogin.php';
+<<<<<<< HEAD
 if( $_SESSION['adminId'] != null){
     session_destroy();
 }
 if( $_SESSION['userId'] != null){
     session_destroy();
 }
+=======
+>>>>>>> 18b7369be302e6024d4b31fb2079f8e22742a46f
 ?>
 <!DOCTYPE html>
 <html lang="en">
