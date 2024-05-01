@@ -113,18 +113,18 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="../Admin/Dashboard.php">Home</a>
+          <a class="nav-link" href="AdminDashboard.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../Admin/Students.php">Students</a>
+          <a class="nav-link" href="AdminStudents.php">Students</a>
         </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Subscriptions
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../Admin/Subscription.php">View Pending</a>
-            <a class="dropdown-item" href="../Admin/SubscriptionReport.php">History and Report</a>
+            <a class="dropdown-item" href="AdminSubscription.php">View Pending</a>
+            <a class="dropdown-item" href="AdminSubscriptionReport.php">History and Report</a>
         </div>
         </li>
        <li class="nav-item dropdown">
@@ -132,9 +132,9 @@
             Merchandise
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../Admin/ViewMerch.php">View</a>
-            <a class="dropdown-item" href="../Admin/OrderMerch.php">Orders</a>
-            <a class="dropdown-item" href="../Admin/ReportMerch.php">Reports</a>
+            <a class="dropdown-item" href="AdminViewMerch.php">View</a>
+            <a class="dropdown-item" href="AdminOrderMerch.php">Orders</a>
+            <a class="dropdown-item" href="AdminReportMerch.php">Reports</a>
         </div>
         </li>
         <li class="nav-item dropdown">
@@ -142,8 +142,8 @@
             Settings
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../Admin/ChangePassword.php">Change Password</a>
-            <a class="dropdown-item" href="../Login.php">Logout</a>
+            <a class="dropdown-item" href="AdminChangePassword.php">Change Password</a>
+            <a class="dropdown-item" href="Login.php">Logout</a>
         
         </div>
         </li>
@@ -218,7 +218,7 @@ if(isset($_POST['cancelOrder'])){
         $conn->close();
 
        
-        echo '<script>window.location.href = "../User/Orders.php";</script>';
+        echo '<script>window.location.href = "AdminOrders.php";</script>';
     }
       
 }
@@ -257,7 +257,7 @@ if(isset($_POST['editStudent'])){
         $_SESSION['year'] = $userEdit['year'];
 
  
-        echo '<script>window.location.href = "../Admin/Edit.php";</script>';
+        echo '<script>window.location.href = "AdminEdit.php";</script>';
     } else {
        
         echo "User with provided ID number does not exist.";
@@ -277,7 +277,7 @@ if(isset($_POST['changePass'])){
         $conn->close();
 
        
-        echo '<script>window.location.href = "../Admin/Dashboard.php";</script>';
+        echo '<script>window.location.href = "AdminDashboard.php";</script>';
     }
 }
 
@@ -303,7 +303,7 @@ if(isset($_POST['submitEdit'])){
         $conn->close();
 
        
-        echo '<script>window.location.href = "../Admin/Students.php";</script>';
+        echo '<script>window.location.href = "AdminStudents.php";</script>';
     }
 
 }
@@ -346,7 +346,7 @@ if(isset($_POST['delete'])){
         $conn->close();
 
        
-        echo '<script>window.location.href = "../Admin/Students.php";</script>';
+        echo '<script>window.location.href = "AdminStudents.php";</script>';
     }
 }
 
@@ -366,7 +366,7 @@ if(isset($_POST['approve'])){
         $conn->close();
 
        
-        echo '<script>window.location.href = "../Admin/Subscription.php";</script>';
+        echo '<script>window.location.href = "AdminSubscription.php";</script>';
     }
 }
   //Upload Product and Data
@@ -400,7 +400,7 @@ if(isset($_POST['submit'])) {
         // Execute statements
         if($stmtImage->execute() && $stmtProduct->execute()) {
             echo '<script>alert("Add Product Successful");</script>';
-            echo '<script>window.location.href = "../Admin/ViewMerch.php";</script>';
+            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
         } else {
             echo '<script>alert("Error: ' . $conn->error . '");</script>';
         }
@@ -432,7 +432,7 @@ if(isset($_POST['editSubmit'])){
         if($stmtProducts->execute() ) {
             echo '<script>alert("Edit Product Successful");</script>';
             $conn->close();
-            echo '<script>window.location.href = "../Admin/ViewMerch.php";</script>';
+            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
         } else {
             echo '<script>alert("Error: Edit Product Failed");</script>';
         }
@@ -452,7 +452,7 @@ if(isset($_POST['deleteProduct'])){
         $conn->close();
 
        
-        echo '<script>window.location.href = "../Admin/ViewMerch.php";</script>';
+        echo '<script>window.location.href = "AdminViewMerch.php";</script>';
     }
 }
 
@@ -493,7 +493,7 @@ if(isset($_POST['submitPayment'])){
          if(mysqli_query($conn,$sqlUpdateOrder) && mysqli_query($conn,$sqlOrderDetails)&& mysqli_query($conn,$sqlUpdateStocks)){
             echo '<script>alert("Ordered Successfully");</script>';
             $conn->close();
-            echo '<script>window.location.href = "../Admin/OrderMerch.php";</script>';
+            echo '<script>window.location.href = "AdminOrderMerch.php";</script>';
         }
 
     }

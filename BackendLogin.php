@@ -57,6 +57,9 @@ if(isset($_POST['submitRegister'])){
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.2/js/dataTables.bootstrap5.js"></script>
 
+<script>
+
+    </script>
 
     
 </body>

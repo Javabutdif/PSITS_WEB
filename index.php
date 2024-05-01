@@ -45,8 +45,8 @@
 <div class="container">
     <h1>Philippine Society of Information Technology Students - UC MAIN</h1>
     <p>This is a simple landing page example.</p>
-    <a href="view/Login.php" class="btn">Login</a>
-    <a href="view/Register.php" class="btn">Register</a>
+    <a href="Login.php" class="btn">Login</a>
+    <a href="Register.php" class="btn">Register</a>
 </div>
 
 </body>

@@ -1,6 +1,6 @@
 <?php
 
-    include '../../backend/adminBackend.php';
+      include 'BackendAdmin.php';
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +52,7 @@
           Edit Student
         </div>
         <div class="card-body">
-          <form action="Edit.php" method="POST">
+          <form action="AdminEdit.php" method="POST">
             <div class="mb-3">
               <label for="id_number" class="form-label">ID Number</label>
               <input type="text" value="<?php echo $_SESSION['id_number'] ?>" class="form-control" id="id_number" name="id_number" readonly>
@@ -107,7 +107,7 @@
             <div class="row justify-content-between align-items-center">
               <div class="col-md-6">
                 <button type="submit" name="submitEdit" class="btn btn-primary">Save</button>
-                 <a href="../Admin/Students.php" class="btn btn-danger">Back</a>
+                 <a href="AdminStudents.php" class="btn btn-danger">Back</a>
               </div>
             </div>
           </form>
