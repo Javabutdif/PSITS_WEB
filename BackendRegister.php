@@ -1,7 +1,6 @@
 <?php
 session_start();
 include 'connection.php';
-<<<<<<< HEAD
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -9,19 +8,12 @@ ini_set('display_errors', 1);
 
 ?>
 
-=======
-?>
->>>>>>> 18b7369be302e6024d4b31fb2079f8e22742a46f
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <title>Register</title>
-=======
-    <title>Login</title>
->>>>>>> 18b7369be302e6024d4b31fb2079f8e22742a46f
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -45,18 +37,11 @@ ini_set('display_errors', 1);
 </body>
 </html>
 
-<<<<<<< HEAD
 
 <?php
     
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-=======
-<?php
-    
-
-if(isset($_POST['submitRegister'])){
->>>>>>> 18b7369be302e6024d4b31fb2079f8e22742a46f
     $id_number = $_POST['id_number'];
     $password = $_POST['password'];
     $first_name = $_POST['first_name'];
@@ -66,7 +51,6 @@ if(isset($_POST['submitRegister'])){
     $course = $_POST['course'];
     $year = $_POST['year'];
 
-<<<<<<< HEAD
 
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -118,21 +102,3 @@ if(isset($_POST['submitRegister'])){
     }
 
 ?>
-=======
-    $hashPassword = password_hash($password,PASSWORD_DEFAULT );
-
-    $sql = "INSERT INTO `students` (`id_number`, `first_name`, `middle_name`, `last_name`, `email`,`course`,`year`,`password`, `status`,`subscription`)
-    VALUES('$id_number','$first_name','$middle_name','$last_name','$email','$course','$year','$hashPassword' , 'TRUE','Pending')";
-
-    if(mysqli_query($conn, $sql)){
-        echo '<script>alert("Register Successfull");</script>';
-        $conn->close();  
-    }
-    else{
-        echo '<script>alert("Duplicate Id Number");</script>';
-        $conn->close();  
-    }
-}
-
-?>
->>>>>>> 18b7369be302e6024d4b31fb2079f8e22742a46f

@@ -1,12 +1,7 @@
 <?php
-<<<<<<< HEAD
     include 'BackendRegister.php';
 
       
-=======
-    include 'BackendLogin.php';
-  
->>>>>>> 18b7369be302e6024d4b31fb2079f8e22742a46f
 ?>
 
 <!DOCTYPE html>

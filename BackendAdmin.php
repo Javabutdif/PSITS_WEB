@@ -3,90 +3,6 @@
  
     include 'connection.php';
 
-    //Retrieve students in table
-    $sqlStudents = "SELECT * FROM students WHERE status = 'TRUE' AND subscription = 'Approve'";
-    $result = mysqli_query($conn, $sqlStudents);
-    if(mysqli_num_rows($result) > 0)
-        {
-          $listPerson = [];   
-          while($row = mysqli_fetch_array($result)) {
-              $listPerson[] = $row;
-          }
-        }
-       
-
-    $sqlSubReport = " SELECT students.id_number , students.first_name, students.middle_name, students.last_name , sub_report.admin_name , sub_report.date, sub_report.time FROM students INNER JOIN sub_report ON sub_report.id_number = students.id_number;";
-    $resultReport = mysqli_query($conn, $sqlSubReport);
-    if(mysqli_num_rows($resultReport) > 0)
-        {
-          $reportSub = [];   
-          while($row = mysqli_fetch_array($resultReport)) {
-              $reportSub[] = $row;
-          }
-        }
-
-
-    $sqlSubscribe = "SELECT * FROM students WHERE status = 'TRUE' AND subscription = 'Pending'";
-    $resultSub = mysqli_query($conn, $sqlSubscribe);
-    if(mysqli_num_rows($resultSub) > 0)
-        {
-          $listSub = [];   
-          while($row = mysqli_fetch_array($resultSub)) {
-              $listSub[] = $row;
-          }
-        }
-        $sqlProfit = "SELECT SUM(ALL profit) as total from order_details;";
-        $profit = mysqli_query($conn,$sqlProfit);
-        $revenue = mysqli_fetch_array($profit, MYSQLI_ASSOC);
-        if($revenue['total']!= null){
-            $totalRevenue = $revenue['total'];
-        }
-        
-
-
-    
-    $sqlCount = "SELECT COUNT(*) AS total FROM students WHERE status = 'TRUE' AND subscription = 'Approve'";
-    $count = mysqli_query($conn,$sqlCount);
-    $numbers = mysqli_fetch_array($count, MYSQLI_ASSOC);
-    if($numbers['total']!= null){
-        $totalStudents = $numbers['total'];
-    }
-    
-    $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,product.product_id, product.product_name , product.product_type , product.product_price, product.product_stocks FROM image INNER JOIN product on image.product_id = product.product_id;";
-    $products = mysqli_query($conn, $sqlTableProduct);
-    if(mysqli_num_rows($products) > 0)
-        {
-          $listProducts = []; 
-          while($carts = mysqli_fetch_array($products)) {
-              $listProducts[] = $carts;
-   
-        }
-      }
-
-    $sqlUserOrder = "SELECT * FROM orders WHERE status = 'Pending' ";
-    $orders = mysqli_query($conn, $sqlUserOrder);
-    if(mysqli_num_rows($orders) > 0)
-        {
-          $listOrders = []; 
-          while($order = mysqli_fetch_array($orders)) {
-              $listOrders[] = $order;
-   
-        }
-      }
-
-      
-    $sqlUserOrderDetails = "SELECT * FROM order_details  ";
-    $ordersD = mysqli_query($conn, $sqlUserOrderDetails);
-    if(mysqli_num_rows($ordersD) > 0)
-        {
-          $orderDetails = []; 
-          while($orderD = mysqli_fetch_array($ordersD)) {
-              $orderDetails[] = $orderD;
-   
-        }
-      }
-
-    
 
 
 ?>
@@ -175,6 +91,92 @@
 </html>
 
 <?php
+
+
+    //Retrieve students in table
+    $sqlStudents = "SELECT * FROM students WHERE status = 'TRUE' AND subscription = 'Approve'";
+    $result = mysqli_query($conn, $sqlStudents);
+    if(mysqli_num_rows($result) > 0)
+        {
+          $listPerson = [];   
+          while($row = mysqli_fetch_array($result)) {
+              $listPerson[] = $row;
+          }
+        }
+       
+
+    $sqlSubReport = " SELECT students.id_number , students.first_name, students.middle_name, students.last_name , sub_report.admin_name , sub_report.date, sub_report.time FROM students INNER JOIN sub_report ON sub_report.id_number = students.id_number;";
+    $resultReport = mysqli_query($conn, $sqlSubReport);
+    if(mysqli_num_rows($resultReport) > 0)
+        {
+          $reportSub = [];   
+          while($row = mysqli_fetch_array($resultReport)) {
+              $reportSub[] = $row;
+          }
+        }
+
+
+    $sqlSubscribe = "SELECT * FROM students WHERE status = 'TRUE' AND subscription = 'Pending'";
+    $resultSub = mysqli_query($conn, $sqlSubscribe);
+    if(mysqli_num_rows($resultSub) > 0)
+        {
+          $listSub = [];   
+          while($row = mysqli_fetch_array($resultSub)) {
+              $listSub[] = $row;
+          }
+        }
+        $sqlProfit = "SELECT SUM(ALL profit) as total from order_details;";
+        $profit = mysqli_query($conn,$sqlProfit);
+        $revenue = mysqli_fetch_array($profit, MYSQLI_ASSOC);
+        if($revenue['total']!= null){
+            $totalRevenue = $revenue['total'];
+        }
+        
+
+
+    
+    $sqlCount = "SELECT COUNT(*) AS total FROM students WHERE status = 'TRUE' AND subscription = 'Approve'";
+    $count = mysqli_query($conn,$sqlCount);
+    $numbers = mysqli_fetch_array($count, MYSQLI_ASSOC);
+    if($numbers['total']!= null){
+        $totalStudents = $numbers['total'];
+    }
+    
+    $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,product.product_id, product.product_name , product.product_type , product.product_price, product.product_stocks FROM image INNER JOIN product on image.product_id = product.product_id;";
+    $products = mysqli_query($conn, $sqlTableProduct);
+    if(mysqli_num_rows($products) > 0)
+        {
+          $listProducts = []; 
+          while($carts = mysqli_fetch_array($products)) {
+              $listProducts[] = $carts;
+   
+        }
+      }
+
+    $sqlUserOrder = "SELECT * FROM orders WHERE status = 'Pending' ";
+    $orders = mysqli_query($conn, $sqlUserOrder);
+    if(mysqli_num_rows($orders) > 0)
+        {
+          $listOrders = []; 
+          while($order = mysqli_fetch_array($orders)) {
+              $listOrders[] = $order;
+   
+        }
+      }
+
+      
+    $sqlUserOrderDetails = "SELECT * FROM order_details  ";
+    $ordersD = mysqli_query($conn, $sqlUserOrderDetails);
+    if(mysqli_num_rows($ordersD) > 0)
+        {
+          $orderDetails = []; 
+          while($orderD = mysqli_fetch_array($ordersD)) {
+              $orderDetails[] = $orderD;
+   
+        }
+      }
+
+    
 
 
 
@@ -311,6 +313,7 @@ if(isset($_POST['submitEdit'])){
 
 //Register Student in admin side
 if(isset($_POST['submitAdd'])){
+  
     $id_number = $_POST['id_number'];
     $password = $_POST['password'];
     $first_name = $_POST['first_name'];
@@ -320,20 +323,57 @@ if(isset($_POST['submitAdd'])){
     $course = $_POST['course'];
     $year = $_POST['year'];
 
-  
 
-   $sql = "INSERT INTO `students` (`id_number`, `first_name`, `middle_name`, `last_name`, `email`,`course`,`year`,`password`, `status`,`subscription`)
-    VALUES('$id_number','$first_name','$middle_name','$last_name','$email','$course','$year','$password' , 'TRUE','Pending')";
 
-    if(mysqli_query($conn, $sql)){
-        echo '<script>alert("Register Successfull");</script>';
-        $conn->close();  
+    $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+
+
+    $stmt = $conn->prepare("INSERT INTO students (id_number, first_name, middle_name, last_name, email, course, year, password, status, subscription) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'TRUE', 'Pending')");
+    $stmt->bind_param("ssssssss", $id_number, $first_name, $middle_name, $last_name, $email, $course, $year, $hashPassword);
+
+
+     try {
+        if ($stmt->execute()) {
+            echo '<script>alert("Registration Successful");</script>';
+            echo '<script>window.location.href = "AdminStudents.php";</script>';
+            exit(); 
+        } else {
+            echo '<script>
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Duplicate ID Number",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "AdminStudents.php";
+            }
+        });
+    </script>';
+            exit(); 
+        }
+    } catch (mysqli_sql_exception $e) {
+         echo '<script>
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Duplicate ID Number",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "AdminStudents.php";
+            }
+        });
+    </script>';
+ 
+        exit(); 
     }
-    else{
-        echo '<script>alert("Duplicate Id Number");</script>';
-        $conn->close();  
+
+
+
+    $stmt->close();
+    $conn->close();
+
     }
-}
+
 //Delete Students
 if(isset($_POST['delete'])){
     $id_number = $_POST['id_number'];
@@ -387,14 +427,63 @@ if(isset($_POST['approve'])){
         echo '<script>window.location.href = "AdminSubscription.php";</script>';
     }
 }
-  //Upload Product and Data
+//Upload Product and Data
 if(isset($_POST['submit'])) {
     if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        // Get uploaded image details
         $name = $_FILES['image']['name'];
         $type = $_FILES['image']['type'];
-        $data = file_get_contents($_FILES['image']['tmp_name']);
+        $tmp_name = $_FILES['image']['tmp_name'];
 
-        // Data
+        // Resize image
+        $max_width = 300; // Set maximum width for the resized image
+        $max_height = 300; // Set maximum height for the resized image
+        list($width, $height) = getimagesize($tmp_name);
+        $ratio = min($max_width/$width, $max_height/$height);
+        $new_width = $width * $ratio;
+        $new_height = $height * $ratio;
+
+        // Create new image from uploaded file
+        switch($type) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $image = imagecreatefromjpeg($tmp_name);
+                break;
+            case 'image/png':
+                $image = imagecreatefrompng($tmp_name);
+                break;
+            case 'image/gif':
+                $image = imagecreatefromgif($tmp_name);
+                break;
+            default:
+                // Unsupported image type
+                echo '<script>alert("Unsupported image type");</script>';
+                exit();
+        }
+
+        // Create resized image
+        $image_resized = imagecreatetruecolor($new_width, $new_height);
+        imagecopyresampled($image_resized, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+        // Output resized image to a temporary file
+        $tmp_resized_name = tempnam(sys_get_temp_dir(), 'resized_image_');
+        switch($type) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                imagejpeg($image_resized, $tmp_resized_name);
+                break;
+            case 'image/png':
+                imagepng($image_resized, $tmp_resized_name);
+                break;
+            case 'image/gif':
+                imagegif($image_resized, $tmp_resized_name);
+                break;
+        }
+
+        // Read resized image data
+        $data = file_get_contents($tmp_resized_name);
+
+        // Data for product
         $product_id = rand(111111,999999);
         $product_name = $_POST['name'];
         $product_type = $_POST['type'];
@@ -427,10 +516,15 @@ if(isset($_POST['submit'])) {
         $stmtProduct->close();
         $stmtImage->close();
         $conn->close();
+
+        // Clean up temporary files
+        imagedestroy($image_resized);
+        unlink($tmp_resized_name);
     } else {
         echo '<script>alert("Error uploading image");</script>';
     }
 }
+
 if(isset($_POST['editSubmit'])){
    
 
