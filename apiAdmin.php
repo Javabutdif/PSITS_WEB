@@ -319,6 +319,78 @@ if(isset($_POST['submit'])) {
 }
 
 
+if(isset($_POST['editSubmit'])){
+   
+
+        $product_id = $_POST['editProductId'];
+        $product_name = $_POST['editName'];
+        $product_type = $_POST['editType'];
+        $product_price = $_POST['editPrice'];
+        $product_stocks = $_POST['editStocks'];
+
+      
+        if(edit_product($product_id,$product_name,$product_type,$product_price,$product_stocks)) {
+            echo '<script>alert("Edit Product Successful");</script>';
+            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+            exit;
+        } else {
+            echo '<script>alert("Error: Edit Product Failed");</script>';
+            exit;
+        }
+    }
+
+if(isset($_POST['deleteProduct'])){
+    $id_number = $_POST['id_number'];
+
+   
+    if(delete_product($id_number)){
+        echo '<script>alert("Delete Product Successful");</script>';
+        echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+        exit;
+    }
+    else{
+        echo '<script>alert("Delete Product Unsuccessful");</script>';
+        echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+        exit;
+    }
+}
+
+if(isset($_POST['submitPayment'])){
+    $order_id = $_POST['order_id'];
+    $product_id = $_POST['product_id'];
+    $money = $_POST['money'];
+    $total = $_POST['total'];
+
+    if($money < $total){
+        echo '<script>alert("Not Enough Money");</script>';
+       
+    }
+    else{
+        $change = $money - $total;
+
+        $orderResult = order_result($order_id);
+        $id_number = $orderResult['id_number'];
+        $name = $orderResult['name'];
+        $size = $orderResult['size'];
+        $quantity = $orderResult['quantity'];
+        $admin_name =  $_SESSION['adminName'];
+        $date = date('Y-m-d');
+        
+        if(payment($order_id,$product_id,$money,$change,$total,$id_number,$name,$size,$quantity,$admin_name,$date)){
+            echo '<script>alert("Ordered Successfully");</script>';
+            echo '<script>window.location.href = "AdminOrderMerch.php";</script>';
+            exit;
+        }
+        else{
+            echo '<script>alert("Ordered Unsuccessfully");</script>';
+            echo '<script>window.location.href = "AdminOrderMerch.php";</script>';
+            exit;
+        }
+
+    }
+
+
+}
 
 
 

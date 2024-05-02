@@ -304,92 +304,54 @@ function add_product($image_name,$image_type,$image_data,$product_id,$product_na
 
 }
 
+function edit_product($product_id,$product_name,$product_type,$product_price,$product_stocks){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
 
-if(isset($_POST['editSubmit'])){
-   
-
-        $product_id = $_POST['editProductId'];
-        $product_name = $_POST['editName'];
-        $product_type = $_POST['editType'];
-        $product_price = $_POST['editPrice'];
-        $product_stocks = $_POST['editStocks'];
-
-        // SQL query to update product details
-        $sqlUpdateProducts = "UPDATE `product` SET `product_name` = ?, `product_type` = ?, `product_price` = ?, `product_stocks` = ? WHERE `product_id` = ?";
+     $sqlUpdateProducts = "UPDATE `product` SET `product_name` = ?, `product_type` = ?, `product_price` = ?, `product_stocks` = ? WHERE `product_id` = ?";
         $stmtProducts = $conn->prepare($sqlUpdateProducts);
         $stmtProducts->bind_param("ssdii", $product_name, $product_type, $product_price, $product_stocks, $product_id);
-
-        // SQL query to update image details
       
-        if($stmtProducts->execute() ) {
-            echo '<script>alert("Edit Product Successful");</script>';
-            $conn->close();
-            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
-        } else {
-            echo '<script>alert("Error: Edit Product Failed");</script>';
-        }
-    }
+        if($stmtProducts->execute() ) {return true;}
+        else{return false;}
 
+}
 
-if(isset($_POST['deleteProduct'])){
-    $id_number = $_POST['id_number'];
+function delete_product($id_number){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
 
     $sqlDelete = "DELETE FROM `product` WHERE product_id = '$id_number';";
     $sqlDeleteImg = "DELETE FROM `image` WHERE product_id = '$id_number';";
 
-    if(mysqli_query($conn,$sqlDelete) && mysqli_query($conn,$sqlDeleteImg)){
-        echo '<script>alert("Delete Successful");</script>';
-
-
-        $conn->close();
-
-       
-        echo '<script>window.location.href = "AdminViewMerch.php";</script>';
-    }
-}
-
-if(isset($_POST['submitPayment'])){
-    $order_id = $_POST['order_id'];
-    $product_id = $_POST['product_id'];
-    $money = $_POST['money'];
-    $total = $_POST['total'];
-
-    if($money < $total){
-        echo '<script>alert("Not Enough Money");</script>';
-       
-    }
-    else{
-        $change = $money - $total;
-
-        $sqlGetData = "SELECT * FROM `orders` WHERE order_id = '$order_id'";
-        $resultData = mysqli_query($conn,$sqlGetData);
-        $orderResult = mysqli_fetch_array($resultData, MYSQLI_ASSOC);
-
-      
-       
-
-        $id_number = $orderResult['id_number'];
-        $name = $orderResult['name'];
-        $size = $orderResult['size'];
-        $quantity = $orderResult['quantity'];
-        $admin_name =  $_SESSION['adminName'];
-        $date = date('Y-m-d');
-      
-
-       
-        $sqlUpdateOrder = "UPDATE `orders` SET `status` = 'Paid' WHERE order_id = '$order_id'";
-       $sqlOrderDetails = "INSERT INTO `order_details`(`id_number`,`order_name`,`size`,`quantity`,`money`,`changeCoins`,`profit`,`admin_name`,`date`) VALUES ('$id_number','$name','$size','$quantity','$money','$change','$total','$admin_name','$date')";
-
-         if(mysqli_query($conn,$sqlUpdateOrder) && mysqli_query($conn,$sqlOrderDetails)){
-            echo '<script>alert("Ordered Successfully");</script>';
-            $conn->close();
-            echo '<script>window.location.href = "AdminOrderMerch.php";</script>';
-        }
-
-    }
-
+    if(mysqli_query($conn,$sqlDelete) && mysqli_query($conn,$sqlDeleteImg)){return true;}
+    else{return false;}
 
 }
+
+
+function payment($order_id, $product_id,$money,$change,$total,$id_number,$name,$size,$quantity,$admin_name,$date){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+
+    $sqlUpdateOrder = "UPDATE `orders` SET `status` = 'Paid' WHERE order_id = '$order_id'";
+    $sqlOrderDetails = "INSERT INTO `order_details`(`id_number`,`order_name`,`size`,`quantity`,`money`,`changeCoins`,`profit`,`admin_name`,`date`) VALUES ('$id_number','$name','$size','$quantity','$money','$change','$total','$admin_name','$date')";
+
+    if(mysqli_query($conn,$sqlUpdateOrder) && mysqli_query($conn,$sqlOrderDetails)){return true;}
+    else{return false;}
+
+}
+function order_result($order_id){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+
+    $sqlGetData = "SELECT * FROM `orders` WHERE order_id = '$order_id'";
+    $resultData = mysqli_query($conn,$sqlGetData);
+    $orderResult = mysqli_fetch_array($resultData, MYSQLI_ASSOC);
+
+    return $orderResult;
+}
+
 
 
   
