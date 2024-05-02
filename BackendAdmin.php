@@ -268,113 +268,24 @@ function cancel_membership($id_number){
 }
 
 
+function approve_membership($id_number,$admin_name,$time,$date){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
 
+    $sqlApprove = "UPDATE `students` SET `subscription` = 'Approve' WHERE `id_number` = '$id_number'";
+    $sqlApproveAdmin = "INSERT INTO `sub_report` ( `id_number`, `admin_name`,`date`,`time`) VALUES('$id_number','$admin_name','$date','$time')";
 
-//Membership Delete
-if(isset($_POST['deleteMembership'])){
-     $id_number = $_POST['id_number'];
-     $sqlDelete = "DELETE FROM `students` WHERE id_number = '$id_number';";
-     if(mysqli_query($conn,$sqlDelete)){
-        echo '<script>alert("Delete Successful");</script>';
-
-
-        $conn->close();
-
-       
-        echo '<script>window.location.href = "AdminStudents.php";</script>';
-    }
+    if(mysqli_query($conn,$sqlApprove) && mysqli_query($conn,$sqlApproveAdmin)){return true;}
+    else{return false;}
 }
 
 
+function add_product($image_name,$image_type,$image_data,$product_id,$product_name,$product_type,$product_price,$product_stocks){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
 
-
-//Approve Subscription
-if(isset($_POST['approve'])){
-  $id_number = $_POST['id_number'];
-  $adminName = $_SESSION['adminName'];
-  $time = date("h:i:sa");
-  $date = date('Y-m-d');
-  $sqlApprove = "UPDATE `students` SET `subscription` = 'Approve' WHERE `id_number` = '$id_number'";
-  $sqlApproveAdmin = "INSERT INTO `sub_report` ( `id_number`, `admin_name`,`date`,`time`) VALUES('$id_number','$adminName','$date','$time')";
-
-   if(mysqli_query($conn,$sqlApprove) && mysqli_query($conn,$sqlApproveAdmin)){
-        echo '<script>alert("Approve Successful");</script>';
-
-
-        $conn->close();
-
-       
-        echo '<script>window.location.href = "AdminSubscription.php";</script>';
-    }
-}
-//Upload Product and Data
-if(isset($_POST['submit'])) {
-    if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        // Get uploaded image details
-        $name = $_FILES['image']['name'];
-        $type = $_FILES['image']['type'];
-        $tmp_name = $_FILES['image']['tmp_name'];
-
-        // Resize image
-        $max_width = 300; // Set maximum width for the resized image
-        $max_height = 300; // Set maximum height for the resized image
-        list($width, $height) = getimagesize($tmp_name);
-        $ratio = min($max_width/$width, $max_height/$height);
-        $new_width = $width * $ratio;
-        $new_height = $height * $ratio;
-
-        // Create new image from uploaded file
-        switch($type) {
-            case 'image/jpeg':
-            case 'image/jpg':
-                $image = imagecreatefromjpeg($tmp_name);
-                break;
-            case 'image/png':
-                $image = imagecreatefrompng($tmp_name);
-                break;
-            case 'image/gif':
-                $image = imagecreatefromgif($tmp_name);
-                break;
-            default:
-                // Unsupported image type
-                echo '<script>alert("Unsupported image type");</script>';
-                exit();
-        }
-
-        // Create resized image
-        $image_resized = imagecreatetruecolor($new_width, $new_height);
-        imagecopyresampled($image_resized, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-
-        // Output resized image to a temporary file
-        $tmp_resized_name = tempnam(sys_get_temp_dir(), 'resized_image_');
-        switch($type) {
-            case 'image/jpeg':
-            case 'image/jpg':
-                imagejpeg($image_resized, $tmp_resized_name);
-                break;
-            case 'image/png':
-                imagepng($image_resized, $tmp_resized_name);
-                break;
-            case 'image/gif':
-                imagegif($image_resized, $tmp_resized_name);
-                break;
-        }
-
-        // Read resized image data
-        $data = file_get_contents($tmp_resized_name);
-
-        // Data for product
-        $product_id = rand(111111,999999);
-        $product_name = $_POST['name'];
-        $product_type = $_POST['type'];
-        $product_price = $_POST['price'];
-        $product_stocks = $_POST['stocks'];
-
-        // SQL queries with prepared statements
-        $sqlProduct = "INSERT INTO product (`product_id`,`product_name`,`product_type`,`product_price`,`product_stocks`)
-                       VALUES (?,?,?,?,?)";
-        $sqlImage = "INSERT INTO image (`name`,`type`,`data`,`product_id`)
-                     VALUES (?,?,?,?)";
+        $sqlProduct = "INSERT INTO product (`product_id`,`product_name`,`product_type`,`product_price`,`product_stocks`) VALUES (?,?,?,?,?)";
+        $sqlImage = "INSERT INTO image (`image_name`,`image_type`,`image_data`,`product_id`)VALUES (?,?,?,?)";
 
         // Prepare statements
         $stmtProduct = $conn->prepare($sqlProduct);
@@ -386,24 +297,13 @@ if(isset($_POST['submit'])) {
 
         // Execute statements
         if($stmtImage->execute() && $stmtProduct->execute()) {
-            echo '<script>alert("Add Product Successful");</script>';
-            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+            return true;
         } else {
-            echo '<script>alert("Error: ' . $conn->error . '");</script>';
+            return false;
         }
 
-        // Close statements and connection
-        $stmtProduct->close();
-        $stmtImage->close();
-        $conn->close();
-
-        // Clean up temporary files
-        imagedestroy($image_resized);
-        unlink($tmp_resized_name);
-    } else {
-        echo '<script>alert("Error uploading image");</script>';
-    }
 }
+
 
 if(isset($_POST['editSubmit'])){
    

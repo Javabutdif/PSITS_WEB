@@ -212,6 +212,114 @@ if(isset($_POST['cancelMembership'])){
 }
 
 
+//Approve Subscription
+if(isset($_POST['approve'])){
+  $id_number = $_POST['id_number'];
+  $admin_name = $_SESSION['adminName'];
+  $time = date("h:i:sa");
+  $date = date('Y-m-d');
+
+  if(approve_membership($id_number,$admin_name,$time,$date)){
+        echo '<script>alert("Approve Membership Successful");</script>';
+        echo '<script>window.location.href = "AdminSubscription.php";</script>';
+        exit;
+  }
+  else{
+        echo '<script>alert("Approve Membership Unsuccessful");</script>';
+        echo '<script>window.location.href = "AdminSubscription.php";</script>';
+        exit;
+  }
+
+    
+}
+
+
+//Upload Product and Data
+if(isset($_POST['submit'])) {
+    if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        // Get uploaded image details
+        $name = $_FILES['image']['name'];
+        $type = $_FILES['image']['type'];
+        $tmp_name = $_FILES['image']['tmp_name'];
+
+        // Resize image
+        $max_width = 300; // Set maximum width for the resized image
+        $max_height = 300; // Set maximum height for the resized image
+        list($width, $height) = getimagesize($tmp_name);
+        $ratio = min($max_width/$width, $max_height/$height);
+        $new_width = $width * $ratio;
+        $new_height = $height * $ratio;
+
+        // Create new image from uploaded file
+        switch($type) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $image = imagecreatefromjpeg($tmp_name);
+                break;
+            case 'image/png':
+                $image = imagecreatefrompng($tmp_name);
+                break;
+            case 'image/gif':
+                $image = imagecreatefromgif($tmp_name);
+                break;
+            default:
+                // Unsupported image type
+                echo '<script>alert("Unsupported image type");</script>';
+                exit();
+        }
+
+        // Create resized image
+        $image_resized = imagecreatetruecolor($new_width, $new_height);
+        imagecopyresampled($image_resized, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+        // Output resized image to a temporary file
+        $tmp_resized_name = tempnam(sys_get_temp_dir(), 'resized_image_');
+        switch($type) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                imagejpeg($image_resized, $tmp_resized_name);
+                break;
+            case 'image/png':
+                imagepng($image_resized, $tmp_resized_name);
+                break;
+            case 'image/gif':
+                imagegif($image_resized, $tmp_resized_name);
+                break;
+        }
+
+        // Read resized image data
+        $data = file_get_contents($tmp_resized_name);
+
+        // Data for product
+        $product_id = rand(111111,999999);
+        $product_name = $_POST['name'];
+        $product_type = $_POST['type'];
+        $product_price = $_POST['price'];
+        $product_stocks = $_POST['stocks'];
+
+      
+        if(add_product($name,$type,$data,$product_id,$product_name,$product_type,$product_price,$product_stocks)) {
+            echo '<script>alert("Add Product Successful");</script>';
+            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+        } else {
+            echo '<script>alert("Error: ' . $conn->error . '");</script>';
+        }
+
+        // Close statements and connection
+        $stmtProduct->close();
+        $stmtImage->close();
+        $conn->close();
+
+        // Clean up temporary files
+        imagedestroy($image_resized);
+        unlink($tmp_resized_name);
+    } else {
+        echo '<script>alert("Error uploading image");</script>';
+    }
+}
+
+
+
 
 
 
