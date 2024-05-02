@@ -1,5 +1,7 @@
 <?php
-      include 'BackendAdmin.php';
+      include 'apiAdmin.php';
+      $totalStudents = totalStudents();
+      $totalRevenue = profit();
 ?>
 <!DOCTYPE html>
 <html lang="en">

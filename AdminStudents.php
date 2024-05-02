@@ -1,5 +1,6 @@
 <?php   
-      include 'BackendAdmin.php';
+     include 'apiAdmin.php';
+     $listPerson = retrieveStudents();
 ?>
 <!DOCTYPE html>
 <html lang="en">
