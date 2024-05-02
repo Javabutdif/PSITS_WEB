@@ -47,7 +47,7 @@
 
         <form action="AdminSubscription.php" method="POST" class="delete-form">
                             <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
-                            <button type="submit" name="deleteMembership" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this Student?')">Delete</button>
+                            <button type="submit" name="cancelMembership" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to cancel this membership?')">Cancel</button>
         </form>
         </div>
 </td>
@@ -63,7 +63,7 @@ new DataTable('#example');
      
 <script>
 document.getElementById("deleteBtn").addEventListener("click", function() {
-    if (confirm("Are you sure you want to delete this Student?")) {
+    if (confirm("Are you sure you want to cancel this membership?")) {
         document.getElementById("deleteForm").submit();
     }
 });

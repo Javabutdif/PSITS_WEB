@@ -32,10 +32,10 @@
         </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Subscriptions
+            Membership
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="AdminSubscription.php">View Pending</a>
+            <a class="dropdown-item" href="AdminSubscription.php">Membership Request</a>
             <a class="dropdown-item" href="AdminSubscriptionReport.php">History and Report</a>
         </div>
         </li>
@@ -44,7 +44,8 @@
             Merchandise
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="AdminViewMerch.php">View</a>
+            <a class="dropdown-item" href="AdminViewMerch.php">Merchandise</a>
+            <a class="dropdown-item" href="AdminOrderMerch.php">History</a>
             <a class="dropdown-item" href="AdminOrderMerch.php">Orders</a>
             <a class="dropdown-item" href="AdminReportMerch.php">Reports</a>
         </div>
@@ -179,6 +180,36 @@ if(isset($_POST['submitAdd'])){
             exit(); 
         }
     }
+//Delete Students
+if(isset($_POST['delete'])){
+    $id_number = $_POST['id_number'];
+
+    if(delete_student($id_number)){
+        echo '<script>alert("Delete Student Successful");</script>';  
+        echo '<script>window.location.href = "AdminStudents.php";</script>';
+        exit;
+    }
+    else{
+        echo '<script>alert("Delete Student Unsuccessful");</script>';  
+        echo '<script>window.location.href = "AdminStudents.php";</script>';
+        exit;
+    }
+}
+
+//Membership Cancel
+if(isset($_POST['cancelMembership'])){
+     $id_number = $_POST['id_number'];
+     
+     if(cancel_membership($id_number)){
+        echo '<script>alert("Cancel Membership Successful");</script>';
+        echo '<script>window.location.href = "AdminSubscription.php";</script>';
+        exit;
+    }else{
+        echo '<script>alert("Cancel Membership Unsuccessful");</script>';
+        echo '<script>window.location.href = "AdminSubscription.php";</script>';
+        exit;
+    }
+}
 
 
 

@@ -248,27 +248,28 @@ function submit_add_student($id_number,$password,$first_name,$middle_name,$last_
 
 }
 
-
-
-
-
-
-//Delete Students
-if(isset($_POST['delete'])){
-    $id_number = $_POST['id_number'];
+function delete_student($id_number){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
 
     $sqlDelete = "UPDATE `students` SET `status` = 'FALSE' WHERE `id_number` = '$id_number'";
 
-    if(mysqli_query($conn,$sqlDelete)){
-        echo '<script>alert("Delete Successful");</script>';
-
-
-        $conn->close();
-
-       
-        echo '<script>window.location.href = "AdminStudents.php";</script>';
-    }
+    if(mysqli_query($conn,$sqlDelete)){return true;}
+    else{return false;}
 }
+
+function cancel_membership($id_number){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+    
+    $sqlCancel = "DELETE FROM `students` WHERE id_number = '$id_number';";
+     if(mysqli_query($conn,$sqlCancel)){return true;}
+     else{return false;}
+}
+
+
+
+
 //Membership Delete
 if(isset($_POST['deleteMembership'])){
      $id_number = $_POST['id_number'];
