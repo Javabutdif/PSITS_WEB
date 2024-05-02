@@ -200,114 +200,58 @@ function edit_student($id_number){
 
 }
 
+function change_admin_password($newPassword, $adminId){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
 
-//Change password
-if(isset($_POST['changePass'])){
-  $newPassword = $_POST['newPassword'];
-  $adminId =  $_SESSION['adminId'];
-
-$hashPassword = password_hash($newPassword,PASSWORD_DEFAULT );
-  $sqlAdminPassword = "UPDATE `admin` SET `password` = '$hashPassword' WHERE `id_number` = '$adminId' ";
+    
+    $hashPassword = password_hash($newPassword,PASSWORD_DEFAULT );
+    $sqlAdminPassword = "UPDATE `admin` SET `password` = '$hashPassword' WHERE `id_number` = '$adminId' ";
     if(mysqli_query($conn,$sqlAdminPassword)){
-        echo '<script>alert("Change Password Successful");</script>';
-
-
-        $conn->close();
-
-       
-        echo '<script>window.location.href = "AdminDashboard.php";</script>';
+        return true;
     }
+    else{
+        return false;
+    }
+    
 }
 
-
-
-
-//Edit Student
-if(isset($_POST['submitEdit'])){
-    $id_number = $_POST['id_number'];
-    $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $course = $_POST['course'];
-    $year = $_POST['year'];
+function submit_edit_student($id_number,$first_name,$middle_name,$last_name,$email,$course,$year){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
 
     $sqlUpdate = "UPDATE `students` SET `first_name` = '$first_name',`middle_name` = '$middle_name',`last_name` = '$last_name',`email` = '$email',`course` = '$course',`year` = '$year' WHERE `id_number` = '$id_number'";
 
-    if(mysqli_query($conn,$sqlUpdate)){
-        echo '<script>alert("Edit Successful");</script>';
-
-
-        $conn->close();
-
-       
-        echo '<script>window.location.href = "AdminStudents.php";</script>';
-    }
+    if(mysqli_query($conn,$sqlUpdate)){return true;}
+    else{return false;}
 
 }
 
-//Register Student in admin side
-if(isset($_POST['submitAdd'])){
-  
-    $id_number = $_POST['id_number'];
-    $password = $_POST['password'];
-    $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $course = $_POST['course'];
-    $year = $_POST['year'];
-
-
+function submit_add_student($id_number,$password,$first_name,$middle_name,$last_name,$email,$course,$year){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
 
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-
-
     $stmt = $conn->prepare("INSERT INTO students (id_number, first_name, middle_name, last_name, email, course, year, password, status, subscription) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'TRUE', 'Pending')");
     $stmt->bind_param("ssssssss", $id_number, $first_name, $middle_name, $last_name, $email, $course, $year, $hashPassword);
 
-
-     try {
-        if ($stmt->execute()) {
-            echo '<script>alert("Registration Successful");</script>';
-            echo '<script>window.location.href = "AdminStudents.php";</script>';
-            exit(); 
-        } else {
-            echo '<script>
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Duplicate ID Number",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "AdminStudents.php";
+        try {
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
             }
-        });
-    </script>';
-            exit(); 
+        } catch (mysqli_sql_exception $e) {
+            return false;
         }
-    } catch (mysqli_sql_exception $e) {
-         echo '<script>
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Duplicate ID Number",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "AdminStudents.php";
-            }
-        });
-    </script>';
- 
-        exit(); 
-    }
+        $stmt->close();
+
+}
 
 
 
-    $stmt->close();
-    $conn->close();
 
-    }
+
 
 //Delete Students
 if(isset($_POST['delete'])){

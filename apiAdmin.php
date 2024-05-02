@@ -108,6 +108,77 @@ if(isset($_POST['editStudent'])){
     $id_number = $_POST['id_number'];
     edit_student($id_number);
 }
+//Change password
+if(isset($_POST['changePass'])){
+  $newPassword = $_POST['newPassword'];
+  $adminId =  $_SESSION['adminId'];
+
+  if(change_admin_password($newPassword,$adminId)){
+    echo '<script>alert("Change Password Successful");</script>';
+    echo '<script>window.location.href = "AdminDashboard.php";</script>';
+    exit;
+  }
+  else{
+    echo '<script>alert("Changed Password Unsuccessful");</script>';
+    echo '<script>window.location.href = "AdminDashboard.php";</script>';
+    exit;
+  }
+}
+
+//Edit Student
+if(isset($_POST['submitEdit'])){
+    $id_number = $_POST['id_number'];
+    $first_name = $_POST['first_name'];
+    $middle_name = $_POST['middle_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $course = $_POST['course'];
+    $year = $_POST['year'];
+
+    if(submit_edit_student($id_number,$first_name,$middle_name,$last_name,$email,$course,$year)){
+        echo '<script>alert("Edit Successful");</script>';
+        echo '<script>window.location.href = "AdminStudents.php";</script>';
+        exit;
+    }
+    else{
+        echo '<script>alert("Edit Unsuccessful");</script>';
+        echo '<script>window.location.href = "AdminStudents.php";</script>';
+        exit;
+    }
+
+}
+
+//Register Student in admin side
+if(isset($_POST['submitAdd'])){
+  
+    $id_number = $_POST['id_number'];
+    $password = $_POST['password'];
+    $first_name = $_POST['first_name'];
+    $middle_name = $_POST['middle_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $course = $_POST['course'];
+    $year = $_POST['year'];
+
+        if (submit_add_student($id_number,$password,$first_name,$middle_name,$last_name,$email,$course,$year)) {
+            echo '<script>alert("Registration Successful");</script>';
+            echo '<script>window.location.href = "AdminStudents.php";</script>';
+            exit(); 
+        } else {
+            echo '<script>
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Duplicate ID Number",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "AdminStudents.php";
+            }
+        });
+            </script>';
+            exit(); 
+        }
+    }
 
 
 
