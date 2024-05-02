@@ -1,5 +1,6 @@
 <?php   
      include 'apiAdmin.php';
+     $orderDetails = orderDetails();
 ?>
 <!DOCTYPE html>
 <html lang="en">

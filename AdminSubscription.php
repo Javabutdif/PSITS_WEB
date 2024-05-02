@@ -1,15 +1,16 @@
 <?php
      include 'apiAdmin.php';
+     $listSub = membership();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription</title>
+    <title>Membership</title>
 </head>
 <body>
-<h1 class="text-center">Pending Student Subscription</h1>
+<h1 class="text-center">Pending Student Membership</h1>
 
  
 

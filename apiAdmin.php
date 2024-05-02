@@ -1,6 +1,5 @@
 <?php
-    include 'BackendAdmin.php';
-
+    require_once 'BackendAdmin.php';
 ?>
 
 <!DOCTYPE html>
@@ -85,6 +84,32 @@
 
 <?php
 //Actions
+//Login Admin
+loginAdmin();
+
+//Cancel Order
+if(isset($_POST['cancelOrder'])){
+    $order_id = $_POST['order_id'];
+    
+    if(cancel_order($order_id)){
+        echo '<script>alert("Cancel Successful");</script>';
+        echo '<script>window.location.href = "AdminOrderMerch.php";</script>';
+        exit;
+    }
+    else{
+        echo '<script>alert("Cancel Unsuccessful");</script>';
+        echo '<script>window.location.href = "AdminOrderMerch.php";</script>';
+        exit;
+    }
+  
+          
+}
+if(isset($_POST['editStudent'])){
+    $id_number = $_POST['id_number'];
+    edit_student($id_number);
+}
+
+
 
 
 

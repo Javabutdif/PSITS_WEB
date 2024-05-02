@@ -1,7 +1,7 @@
 <?php   
      include 'apiAdmin.php';
     
-
+    $listProducts = merchandise();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,17 +22,17 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Product</button>
         <br>
         <br>
-    <h2>Products</h2>
-   <table class="table">
-    <tbody>
+    <h2 class="text-center">Merchandise</h2>
+   <table class="table table-responsive p-5 m-5 ">
+    <tbody >
         <?php
         $products_count = count($listProducts);
-        for ($i = 0; $i < $products_count; $i += 3) {
+        for ($i = 0; $i < $products_count; $i += 4) {
             echo "<tr>";
-            for ($j = $i; $j < min($i + 3, $products_count); $j++) {
+            for ($j = $i; $j < min($i + 4, $products_count); $j++) {
                 $product = $listProducts[$j];
         ?>      
-                <td class="product-cell">
+                <td class="product-cell ">
                     <div class="product-info">
                         <img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size">
                          <br>

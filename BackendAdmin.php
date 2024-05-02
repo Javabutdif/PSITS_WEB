@@ -1,10 +1,7 @@
-<?php
-    session_start();
-    include 'connection.php';
-?>
 
 <?php
-
+session_start();
+include 'connection.php';
 
 function retrieveStudents(){
     $db = Database::getInstance();
@@ -133,13 +130,9 @@ function orderDetails(){
       return $orderDetails;
  
 }
-      
+
+function loginAdmin(){
     
-    
-
-
-
-//Login admin
 if ($_SESSION['adminId'] != null && !isset($_SESSION['success_toast_displayed'])) {
     echo '<script>
             const Toast = Swal.mixin({
@@ -165,48 +158,33 @@ if ($_SESSION['adminId'] != null && !isset($_SESSION['success_toast_displayed'])
 else if($_SESSION['adminId'] == null ){
      echo '<script>window.location.href = "Login.php";</script>';
 }
-
-if(isset($_POST['cancelOrder'])){
-     $order_id = $_POST['order_id'];
-
-        $sqlDelete = "DELETE FROM `orders` WHERE order_id = '$order_id';";
+}
+      
+    
+function cancel_order($order_id){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+    $sqlDelete = "DELETE FROM `orders` WHERE order_id = '$order_id';";
    
 
     if(mysqli_query($conn,$sqlDelete) ){
-        echo '<script>alert("Cancel Successful");</script>';
-
-
-        $conn->close();
-
-       
-        echo '<script>window.location.href = "AdminOrders.php";</script>';
+       return true;
     }
-      
+    else{
+        return false;
+    }
 }
 
-
-if(isset($_POST['editStudent'])){
-    
-    $id_number = $_POST['id_number'];
-   
+function edit_student($id_number){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
 
     $sqlEdit = "SELECT * FROM students WHERE id_number = ?";
-
-
     $stmt = $conn->prepare($sqlEdit);
-
-    
     $stmt->bind_param('s', $id_number);
-
-    
     $stmt->execute();
-
     $resultEdit = $stmt->get_result();
-
- 
     $userEdit = $resultEdit->fetch_assoc();
-
-  
     if($userEdit !== null){
       
         $_SESSION['id_number'] = $userEdit['id_number'];
@@ -217,13 +195,11 @@ if(isset($_POST['editStudent'])){
         $_SESSION['course'] = $userEdit['course'];
         $_SESSION['year'] = $userEdit['year'];
 
- 
         echo '<script>window.location.href = "AdminEdit.php";</script>';
-    } else {
-       
-        echo "User with provided ID number does not exist.";
     }
+
 }
+
 
 //Change password
 if(isset($_POST['changePass'])){

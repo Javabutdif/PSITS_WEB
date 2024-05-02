@@ -1,5 +1,6 @@
 <?php
      include 'apiAdmin.php';
+     $reportSub = membershipReport();
 ?>
 <!DOCTYPE html>
 <html lang="en">
