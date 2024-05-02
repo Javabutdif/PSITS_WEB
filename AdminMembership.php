@@ -10,7 +10,7 @@
     <title>Membership</title>
 </head>
 <body>
-<h1 class="text-center">Pending Student Membership</h1>
+<h1 class="text-center">Student Membership</h1>
 
  
 
@@ -18,13 +18,13 @@
 <table id="example" class="table table-striped table-hover display compact " style="width:100%">
     <thead>
         <tr>
-            <th class="text-white">ID Number</th>
-            <th class="text-white">Name</th>
-            <th class="text-white">Year Level</th>
-            <th class="text-white">Course</th>
-            <th class="text-white">Email</th>
-            <th class="text-white">Status</th>
-            <th class="text-white">Actions</th>
+            <th>ID Number</th>
+            <th>Name</th>
+            <th>Year Level</th>
+            <th>Course</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
         </tr>
     </thead>
 
@@ -40,12 +40,12 @@
                
                 <td class="align-middle">
     <div  class="d-flex justify-content-center align-items-center gap-3">
-        <form action="AdminSubscription.php" method="POST" class="approve-form" id="approveForm">
+        <form action="AdminMembership.php" method="POST" class="approve-form" id="approveForm">
             <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
             <button type="submit" name="approve" class="btn btn-success mr-2" id="approveBtn" >Approve</button>
         </form>
 
-        <form action="AdminSubscription.php" method="POST" class="delete-form">
+        <form action="AdminMembership.php" method="POST" class="delete-form">
                             <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
                             <button type="submit" name="cancelMembership" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to cancel this membership?')">Cancel</button>
         </form>

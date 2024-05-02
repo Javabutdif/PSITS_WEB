@@ -25,12 +25,12 @@
 <table id="example" class="table table-striped table-hover display compact " style="width:100%">
     <thead>
         <tr>
-            <th class="text-white">ID Number</th>
-            <th class="text-white">Name</th>
-            <th class="text-white">Year Level</th>
-            <th class="text-white">Course</th>
-            <th class="text-white">Email</th>
-            <th class="text-white">Actions</th>
+            <th>ID Number</th>
+            <th>Name</th>
+            <th>Year Level</th>
+            <th>Course</th>
+            <th>Email</th>
+            <th>Actions</th>
         </tr>
     </thead>
 

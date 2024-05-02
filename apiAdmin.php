@@ -35,8 +35,8 @@
             Membership
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="AdminSubscription.php">Membership Request</a>
-            <a class="dropdown-item" href="AdminSubscriptionReport.php">History and Report</a>
+            <a class="dropdown-item" href="AdminMembership.php">Membership Request</a>
+            <a class="dropdown-item" href="AdminMembershipReport.php">History and Report</a>
         </div>
         </li>
        <li class="nav-item dropdown">
@@ -45,11 +45,13 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="AdminViewMerch.php">Merchandise</a>
+            <a type="button" class="dropdown-item" data-toggle="modal" data-target="#addMerch">Add Merchandise</a>
             <a class="dropdown-item" href="AdminOrderMerch.php">History</a>
             <a class="dropdown-item" href="AdminOrderMerch.php">Orders</a>
             <a class="dropdown-item" href="AdminReportMerch.php">Reports</a>
         </div>
         </li>
+        
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Settings
@@ -64,6 +66,49 @@
     </div>
   </div>
 </nav>
+
+
+<div class="modal fade" id="addMerch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Merchandise</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="apiAdmin.php" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="image">Upload Image:</label>
+                        <input type="file" id="image" name="image" class="form-control-file">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Product Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter product name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Product Type:</label>
+                        <input type="text" id="type" name="type" placeholder="Enter product type" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Product Price:</label>
+                        <input type="text" id="price" name="price" placeholder="Enter product price" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="stocks">Product Stocks:</label>
+                        <input type="text" id="stocks" name="stocks" placeholder="Enter product stocks" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="submitImage"  class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -233,90 +278,51 @@ if(isset($_POST['approve'])){
     
 }
 
-
-//Upload Product and Data
-if(isset($_POST['submit'])) {
+if(isset($_POST['submitImage'])) {
     if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
         // Get uploaded image details
         $name = $_FILES['image']['name'];
         $type = $_FILES['image']['type'];
         $tmp_name = $_FILES['image']['tmp_name'];
 
-        // Resize image
-        $max_width = 300; // Set maximum width for the resized image
-        $max_height = 300; // Set maximum height for the resized image
-        list($width, $height) = getimagesize($tmp_name);
-        $ratio = min($max_width/$width, $max_height/$height);
-        $new_width = $width * $ratio;
-        $new_height = $height * $ratio;
-
-        // Create new image from uploaded file
-        switch($type) {
-            case 'image/jpeg':
-            case 'image/jpg':
-                $image = imagecreatefromjpeg($tmp_name);
-                break;
-            case 'image/png':
-                $image = imagecreatefrompng($tmp_name);
-                break;
-            case 'image/gif':
-                $image = imagecreatefromgif($tmp_name);
-                break;
-            default:
-                // Unsupported image type
-                echo '<script>alert("Unsupported image type");</script>';
-                exit();
-        }
-
-        // Create resized image
-        $image_resized = imagecreatetruecolor($new_width, $new_height);
-        imagecopyresampled($image_resized, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-
-        // Output resized image to a temporary file
-        $tmp_resized_name = tempnam(sys_get_temp_dir(), 'resized_image_');
-        switch($type) {
-            case 'image/jpeg':
-            case 'image/jpg':
-                imagejpeg($image_resized, $tmp_resized_name);
-                break;
-            case 'image/png':
-                imagepng($image_resized, $tmp_resized_name);
-                break;
-            case 'image/gif':
-                imagegif($image_resized, $tmp_resized_name);
-                break;
-        }
-
-        // Read resized image data
-        $data = file_get_contents($tmp_resized_name);
-
-        // Data for product
         $product_id = rand(111111,999999);
         $product_name = $_POST['name'];
         $product_type = $_POST['type'];
         $product_price = $_POST['price'];
         $product_stocks = $_POST['stocks'];
 
+        // Move uploaded image to a directory
+        $upload_directory = 'upload/';
+        $destination = $upload_directory . $name;
+        if(move_uploaded_file($tmp_name, $destination)) {
+            // Image uploaded successfully, now insert product and image details into the database
+            $sqlProduct = "INSERT INTO product (product_id, product_name, product_type, product_price, product_stocks) VALUES (?, ?, ?, ?, ?)";
+            $sqlImage = "INSERT INTO image (name, type, path, product_id) VALUES (?, ?, ?, ?)";
       
-        if(add_product($name,$type,$data,$product_id,$product_name,$product_type,$product_price,$product_stocks)) {
-            echo '<script>alert("Add Product Successful");</script>';
-            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+            $stmtProduct = $conn->prepare($sqlProduct);
+            $stmtProduct->bind_param("issss", $product_id, $product_name, $product_type, $product_price, $product_stocks);
+
+            $stmtImage = $conn->prepare($sqlImage);
+            $stmtImage->bind_param("sssi", $name, $type, $destination, $product_id);
+
+            // Execute statements
+            if ($stmtProduct->execute() && $stmtImage->execute()) {
+                echo '<script>alert("Add Product Successful");</script>';
+                echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+                exit;
+            } else {
+                echo '<script>alert("Unsuccessful");</script>';
+                echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+                exit;
+            }
         } else {
-            echo '<script>alert("Error: ' . $conn->error . '");</script>';
+            echo '<script>alert("Error uploading image");</script>';
         }
-
-        // Close statements and connection
-        $stmtProduct->close();
-        $stmtImage->close();
-        $conn->close();
-
-        // Clean up temporary files
-        imagedestroy($image_resized);
-        unlink($tmp_resized_name);
-    } else {
-        echo '<script>alert("Error uploading image");</script>';
     }
 }
+
 
 
 if(isset($_POST['editSubmit'])){
