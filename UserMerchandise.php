@@ -19,7 +19,7 @@
 <body>
 
 <div class="container ">
-    <h2>Merchandise</h2>
+    <h2 class="text-center">Merchandise</h2>
    <table class="table table-responsive p-5 m-5 ">
     <tbody>
         <?php

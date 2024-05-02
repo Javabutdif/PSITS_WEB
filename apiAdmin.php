@@ -300,12 +300,12 @@ if(isset($_POST['submitImage'])) {
 
         if($stmt->execute() && mysqli_query($conn,$sqlProduct)){
             echo '<script>alert("Add Merchandise Successful");</script>';
-            echo '<script>window.location.href = "AdminMembership.php";</script>';
+            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
             exit;
         }
         else{
             echo '<script>alert("Unsuccessful");</script>';
-            echo '<script>window.location.href = "AdminMembership.php";</script>';
+            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
             exit;
         }
     }
