@@ -1,6 +1,7 @@
 <?php
     session_start();
-      include 'BackendUser.php';
+    include 'apiUser.php';
+    $listProducts = product_table();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,13 +20,13 @@
 
 <div class="container ">
     <h2>Merchandise</h2>
-   <table class="table">
+   <table class="table table-responsive p-5 m-5 ">
     <tbody>
         <?php
         $products_count = count($listProducts);
-        for ($i = 0; $i < $products_count; $i += 3) {
+        for ($i = 0; $i < $products_count; $i += 4) {
             echo "<tr>";
-            for ($j = $i; $j < min($i + 3, $products_count); $j++) {
+            for ($j = $i; $j < min($i + 4, $products_count); $j++) {
                 $product = $listProducts[$j];
         ?>
                 <td class="product-cell">

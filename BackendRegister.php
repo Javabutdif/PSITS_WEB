@@ -39,7 +39,8 @@ ini_set('display_errors', 1);
 
 
 <?php
-    
+   $db = Database::getInstance();
+    $conn = $db->getConnection(); 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_number = $_POST['id_number'];

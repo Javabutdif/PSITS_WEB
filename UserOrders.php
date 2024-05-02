@@ -1,17 +1,9 @@
 <?php
     session_start();
-      include 'BackendUser.php';
+    include 'apiUser.php';
     $id_number = $_SESSION['userId'];
-    $sqlUser = "SELECT * FROM orders WHERE id_number = '$id_number' AND status= 'Pending' ";
-    $orders = mysqli_query($conn, $sqlUser);
-    if(mysqli_num_rows($orders) > 0)
-        {
-          $listOrders = []; 
-          while($order = mysqli_fetch_array($orders)) {
-              $listOrders[] = $order;
+    $listOrders = user_orders($id_number);
    
-        }
-      }
 ?>
 <!DOCTYPE html>
 <html lang="en">
