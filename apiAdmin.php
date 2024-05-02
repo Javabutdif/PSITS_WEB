@@ -247,11 +247,11 @@ if(isset($_POST['cancelMembership'])){
      
      if(cancel_membership($id_number)){
         echo '<script>alert("Cancel Membership Successful");</script>';
-        echo '<script>window.location.href = "AdminSubscription.php";</script>';
+        echo '<script>window.location.href = "AdminMembership.php";</script>';
         exit;
     }else{
         echo '<script>alert("Cancel Membership Unsuccessful");</script>';
-        echo '<script>window.location.href = "AdminSubscription.php";</script>';
+        echo '<script>window.location.href = "AdminMembership.php";</script>';
         exit;
     }
 }
@@ -266,12 +266,12 @@ if(isset($_POST['approve'])){
 
   if(approve_membership($id_number,$admin_name,$time,$date)){
         echo '<script>alert("Approve Membership Successful");</script>';
-        echo '<script>window.location.href = "AdminSubscription.php";</script>';
+        echo '<script>window.location.href = "AdminMembership.php";</script>';
         exit;
   }
   else{
         echo '<script>alert("Approve Membership Unsuccessful");</script>';
-        echo '<script>window.location.href = "AdminSubscription.php";</script>';
+        echo '<script>window.location.href = "AdminMembership.php";</script>';
         exit;
   }
 
@@ -285,7 +285,7 @@ if(isset($_POST['submitImage'])) {
         // Get uploaded image details
         $name = $_FILES['image']['name'];
         $type = $_FILES['image']['type'];
-        $tmp_name = $_FILES['image']['tmp_name'];
+        $data = file_get_contents($_FILES['image']['tmp_name']);
 
         $product_id = rand(111111,999999);
         $product_name = $_POST['name'];
@@ -293,32 +293,20 @@ if(isset($_POST['submitImage'])) {
         $product_price = $_POST['price'];
         $product_stocks = $_POST['stocks'];
 
-        // Move uploaded image to a directory
-        $upload_directory = 'upload/';
-        $destination = $upload_directory . $name;
-        if(move_uploaded_file($tmp_name, $destination)) {
-            // Image uploaded successfully, now insert product and image details into the database
-            $sqlProduct = "INSERT INTO product (product_id, product_name, product_type, product_price, product_stocks) VALUES (?, ?, ?, ?, ?)";
-            $sqlImage = "INSERT INTO image (name, type, path, product_id) VALUES (?, ?, ?, ?)";
-      
-            $stmtProduct = $conn->prepare($sqlProduct);
-            $stmtProduct->bind_param("issss", $product_id, $product_name, $product_type, $product_price, $product_stocks);
+  
+        $sqlProduct = "INSERT INTO product (`product_id`,`product_name`,`product_type`,`product_price`,`product_stocks`) VALUES ('$product_id','$product_name','$product_type','$product_price','$product_stocks')";
+        $stmt = $conn->prepare("INSERT INTO image (name, type, data, product_id) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sssi", $name, $type, $data, $product_id);
 
-            $stmtImage = $conn->prepare($sqlImage);
-            $stmtImage->bind_param("sssi", $name, $type, $destination, $product_id);
-
-            // Execute statements
-            if ($stmtProduct->execute() && $stmtImage->execute()) {
-                echo '<script>alert("Add Product Successful");</script>';
-                echo '<script>window.location.href = "AdminViewMerch.php";</script>';
-                exit;
-            } else {
-                echo '<script>alert("Unsuccessful");</script>';
-                echo '<script>window.location.href = "AdminViewMerch.php";</script>';
-                exit;
-            }
-        } else {
-            echo '<script>alert("Error uploading image");</script>';
+        if($stmt->execute() && mysqli_query($conn,$sqlProduct)){
+            echo '<script>alert("Add Merchandise Successful");</script>';
+            echo '<script>window.location.href = "AdminMembership.php";</script>';
+            exit;
+        }
+        else{
+            echo '<script>alert("Unsuccessful");</script>';
+            echo '<script>window.location.href = "AdminMembership.php";</script>';
+            exit;
         }
     }
 }
