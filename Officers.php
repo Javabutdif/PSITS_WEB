@@ -12,6 +12,7 @@
             
               object-fit: cover; 
             }
+           
     </style>
 </head>
 <body>

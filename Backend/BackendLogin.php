@@ -18,7 +18,7 @@ require 'connection.php';
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
- <nav class="navbar navbar-expand-lg" style="background-color:#074873">
+  <nav class="navbar navbar-expand-lg" style="background-color:#074873">
   <div class="container">
     <img src="img/psits-logo.png" style="width:3rem; height:3rem;"/>
     <a class="navbar-brand text-white" href="index.php"> Philippine Society of Information Technology Students</a>
@@ -36,6 +36,7 @@ require 'connection.php';
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Faculty Members</a>
+            <a class="dropdown-item" href="Officers.php">Officers</a>
             <a class="dropdown-item" href="Developers.php">Developers</a>
         </div>
         </li>
@@ -52,6 +53,7 @@ require 'connection.php';
     </div>
   </div>
 </nav>
+
 
 
 
