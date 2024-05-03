@@ -11,47 +11,62 @@
     <title>Merchandise</title>
     <style>
         .same-size {
-            width: 200px; 
-            height: 200px;
+            width: 10rem; 
+            height: 10rem;
+            overflow: hidden;
+        
 }
+        .card-img-top {
+            
+              object-fit: cover; 
+            }
+          
+            .card-img-container {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 200px;
+            }
     </style>
 </head>
 <body>
 
-    <div class="container p-5">
+    <div class="container align-content-center p-5">
 
-    <h2 class="text-center">Merchandise</h2>
-   <table class="table table-responsive p-5 m-5 ">
+    <h2 class="text-center" style="color:#074873">Merchandise</h2>
+   <table class="table table-responsive table-borderless ">
     <tbody >
         <?php
         $products_count = count($listProducts);
-        for ($i = 0; $i < $products_count; $i += 4) {
+        for ($i = 0; $i < $products_count; $i += 3) {
             echo "<tr>";
-            for ($j = $i; $j < min($i + 4, $products_count); $j++) {
+            for ($j = $i; $j < min($i + 3, $products_count); $j++) {
                 $product = $listProducts[$j];
         ?>      
                 <td class="product-cell ">
-                    <div class="product-info">
-                        <img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size">
-                         <br>
-                        <br>
-                        <div class="product-details">
-                            <p><strong>Product Id:</strong> <?php echo $product['product_id']; ?></p> 
-                            <p style="width: 200px;"><strong>Product Name:</strong> <?php echo $product['product_name']; ?></p> 
-                            <p><strong>Product Type:</strong> <?php echo $product['product_type']; ?></p>
-                            <p><strong>Product Price:</strong> <?php echo $product['product_price']; ?></p>
-                            <p><strong>Product Stocks:</strong> <?php echo $product['product_stocks']; ?></p>
+                    <div class="card" style="width: 18rem; height:30rem">
+                     <div class="card-img-container">
+                       <img class="card-img-top product-image same-size" src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" >
+                     </div>
+                        <div class="card-body">
+                         <p class="card-text"><strong>Product Id:</strong> <?php echo $product['product_id']; ?></p> 
+                            <p class="card-text" style="width: 200px;"><strong>Product Name:</strong> <?php echo $product['product_name']; ?></p> 
+                            <p class="card-text"><strong>Product Type:</strong> <?php echo $product['product_type']; ?></p>
+                            <p class="card-text"><strong>Product Price:</strong> <?php echo $product['product_price']; ?></p>
+                            <p class="card-text"><strong>Product Stocks:</strong> <?php echo $product['product_stocks']; ?></p>
                         </div>
-                    </div>
-                    <div class="d-flex flex-row  gap-3">
-                         <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" data-product-img="<?php echo base64_encode($product['data']); ?>" data-product-img-type="<?php echo $product['type']; ?>">Edit</button>
+                        <div class="d-flex flex-row  gap-3 card-footer ">
+                           <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" data-product-img="<?php echo base64_encode($product['data']); ?>" data-product-img-type="<?php echo $product['type']; ?>">Edit</button>
 
 
                         <form action="AdminViewMerch.php" method="POST" class="delete-form">
                             <input type="hidden" name="id_number" value="<?php echo $product['product_id']; ?>" />
                             <button type="submit" name="deleteProduct" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this Product?')">Delete</button>
                         </form>
-                    </div>
+                        </div>
+                      </div>
+          
+              
                 </td>
              
         <?php

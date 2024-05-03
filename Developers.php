@@ -17,7 +17,7 @@
     <h5 class=" card-header text-white " style="background-color:#074873">Backend Developer</h5>
     <img class="card-img-top" src="img/me.jpg" alt="Jems">
     <div class="card-body">
-        <h5 class="card-title">Anton James Genabio</h5>
+    <h4 class="card-title">Anton James Genabio</h4>
   
     </div>
     </div>
