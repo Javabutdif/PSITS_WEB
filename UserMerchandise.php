@@ -52,10 +52,10 @@
                             <p class="card-text" style="width: 200px;"><strong><?php echo $product['product_name']; ?></strong></p> 
                            
                             <p class="card-text"><strong>₱ <?php echo $product['product_price']; ?>.00</strong> </p>
-                            <p class="card-text"><strong>Stocks: <?php echo $product['product_stocks']; ?> Remaining</strong> </p>
+                            <p class="card-text"><strong>Stocks: <?php echo $product['product_stocks']; ?></strong> </p>
                         </div>
                        <div class="d-flex flex-row  gap-3 card-footer">
-                       <button type="button" class="btn btn-primary order-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" data-product-img="<?php echo base64_encode($product['data']); ?>" data-product-img-type="<?php echo $product['type']; ?>">Order</button>
+                       <button type="button" class="btn btn-primary order-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>"  data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" >Order</button>
                     </div>
                 </td>
         <?php
@@ -85,27 +85,16 @@
 
       <form method="POST" action="UserMerchandise.php" enctype="multipart/form-data">
         <div class="modal-body">
-          <input type="hidden" id="editProductId" name="editProductId">
+          <input type="hidden" id="productId" name="productId">
+          
+           
           <div class="form-group">
-            <img id="productImage" class="img-fluid same-size" alt="Product Image" >
-        
-            <input type="hidden" id="productImgData" name="productImgData">
-            <input type="hidden" id="productImgType" name="productImgType">
-          </div>
-           <div class="form-group">
-            <label for="productId">Product Id:</label>
-            <input type="text"  id="productId" name="productId"   class="form-control" readonly>
-          </div>
-          <div class="form-group">
-            <label for="editName">Product Name:</label>
+            <label for="editName">Name:</label>
             <input type="text"  id="editName" name="editName" placeholder="Enter product name" class="form-control" readonly>
           </div>
+          
           <div class="form-group">
-            <label for="editType">Product Type:</label>
-            <input type="text"  id="editType" name="editType" placeholder="Enter product type" class="form-control" readonly>
-          </div>
-          <div class="form-group">
-            <label for="editPrice">Product Price:</label>
+            <label for="editPrice">Price: ₱</label>
             <input type="text"  id="editPrice" name="editPrice" placeholder="Enter product price" class="form-control" readonly>
           </div>
           <div class="form-group">
@@ -159,23 +148,16 @@
           
             var productId = this.getAttribute('data-product-id');
             var productName = this.getAttribute('data-product-name');
-            var productType = this.getAttribute('data-product-type');
             var productPrice = this.getAttribute('data-product-price');
             var productStocks = this.getAttribute('data-product-stocks');
-            var productImgData = this.getAttribute('data-product-img'); 
-            var productImgType = this.getAttribute('data-product-img-type'); 
 
 
-         
-            document.getElementById('editProductId').value = productId;
+
              document.getElementById('productId').value = productId;
             document.getElementById('editName').value = productName;
-            document.getElementById('editType').value = productType;
             document.getElementById('editPrice').value = productPrice;
             document.getElementById('editStocks').value = productStocks;
-            var productImage = document.getElementById('productImage');
-            productImage.src = 'data:' + productImgType + ';base64,' + productImgData;
-
+        
              checkStocks();
 
          
