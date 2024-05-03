@@ -89,6 +89,7 @@
 </html>
 
 <?php
+loginUser();
 
 if(isset($_POST['orderConfirm'])){
     $product_id = $_POST['productId'];
