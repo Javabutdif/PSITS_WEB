@@ -1,5 +1,5 @@
 <?php
-    include '../connection.php';
+    include 'connection.php';
 
  
 function loginUser(){
@@ -27,7 +27,7 @@ if ($_SESSION['userId'] != null && !isset($_SESSION['success_toast_displayed']))
     $_SESSION['success_toast_displayed'] = true;
 }
 else if($_SESSION['userId'] == null ){
-     echo '<script>window.location.href = "Login.php";</script>';
+     echo '<script>window.location.href = "../Login.php";</script>';
 }
 }
 

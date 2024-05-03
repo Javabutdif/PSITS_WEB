@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../connection.php';
+require 'connection.php';
 
 
 
@@ -69,7 +69,7 @@ include '../connection.php';
 
 <?php
   $db = Database::getInstance();
-    $conn = $db->getConnection();
+  $conn = $db->getConnection();
     
 if(isset($_POST['submit'])){
     $id_number = $_POST['id_number'];
@@ -97,7 +97,7 @@ if(isset($_POST['submit'])){
         $_SESSION['userId'] = $userGet['id_number'];
         $_SESSION['userName'] = $userGet['first_name']." ".$userGet['middle_name'].". ".$userGet['last_name'];
         session_regenerate_id();
-        header('Location: UserDashboard.php');
+        echo '<script>window.location.href = "User/UserDashboard.php";</script>';
         exit;
     }
     else if($userGet['id_number'] != null && $userGet['subscription'] == 'Pending' && password_verify($password,$userGet['password'])){

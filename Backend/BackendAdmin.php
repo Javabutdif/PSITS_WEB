@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-include '../connection.php';
+include 'connection.php';
 
 function retrieveStudents(){
     $db = Database::getInstance();
