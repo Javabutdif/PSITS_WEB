@@ -3,6 +3,7 @@ session_start();
 include 'connection.php';
 
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +18,40 @@ include 'connection.php';
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+ <nav class="navbar navbar-expand-lg" style="background-color:#074873">
+  <div class="container">
+    <img src="img/psits-logo.png" style="width:3rem; height:3rem;"/>
+    <a class="navbar-brand text-white" href="index.php"> Philippine Society of Information Technology Students</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+         <li class="nav-item">
+          <a class="nav-link text-white" href="index.php">Home</a>
+        </li>
+         <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Community
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Faculty Members</a>
+            <a class="dropdown-item" href="Developers.php">Developers</a>
+        </div>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link text-white" href="Login.php">Login</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link text-white" href="Register.php">Register</a>
+        </li>
+       
+       
+      </ul>
+    </div>
+  </div>
+</nav>
 
 
 
@@ -25,17 +60,16 @@ include 'connection.php';
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/2.0.2/js/dataTables.bootstrap5.js"></script>
-
-
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+   
     
 </body>
 </html>
 
 <?php
   $db = Database::getInstance();
-$conn = $db->getConnection();
+    $conn = $db->getConnection();
     
 if(isset($_POST['submit'])){
     $id_number = $_POST['id_number'];
