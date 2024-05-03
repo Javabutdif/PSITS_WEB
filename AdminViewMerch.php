@@ -44,7 +44,7 @@
                 $product = $listProducts[$j];
         ?>      
                 <td class="product-cell ">
-                    <div class="card" style="width: 18rem; height:30rem">
+                    <div class="card" style="width: 20rem; height:30rem">
                      <div class="card-img-container">
                        <img class="card-img-top product-image same-size" src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" >
                      </div>
@@ -56,7 +56,8 @@
                             <p class="card-text"><strong>Product Stocks:</strong> <?php echo $product['product_stocks']; ?></p>
                         </div>
                         <div class="d-flex flex-row  gap-3 card-footer ">
-                           <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" data-product-img="<?php echo base64_encode($product['data']); ?>" data-product-img-type="<?php echo $product['type']; ?>">Edit</button>
+                          <button class="btn btn-primary ">Add Stocks</button>
+                           <button type="button" class="btn btn-dark edit-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" data-product-img="<?php echo base64_encode($product['data']); ?>" data-product-img-type="<?php echo $product['type']; ?>">Edit</button>
 
 
                         <form action="AdminViewMerch.php" method="POST" class="delete-form">

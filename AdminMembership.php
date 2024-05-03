@@ -15,7 +15,7 @@
  
 
 <div class="container">
-<table id="example" class="table table-striped table-hover display compact " style="width:100%">
+<table id="example" class="table table-striped table-hover display compact " style="width:100%; overflow:auto">
     <thead>
         <tr>
             <th>ID Number</th>
