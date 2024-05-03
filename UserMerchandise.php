@@ -10,40 +10,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merchandise</title>
     <style>
+       
         .same-size {
-            width: 200px; 
-            height: 200px;
-        }
+            width: 10rem; 
+            height: 10rem;
+            overflow: hidden;
+        
+}
+        .card-img-top {
+            
+              object-fit: cover; 
+            }
+          
+            .card-img-container {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 200px;
+            }
     </style>
 </head>
 <body>
 
-<div class="container ">
-    <h2 class="text-center">Merchandise</h2>
-   <table class="table table-responsive p-5 m-5 ">
+<div class="container align-content-center p-5">
+    <h2 class="text-center" style="color:#074873">Merchandise</h2>
+   <table class="table table-responsive table-borderless ">
     <tbody>
         <?php
         $products_count = count($listProducts);
-        for ($i = 0; $i < $products_count; $i += 4) {
+        for ($i = 0; $i < $products_count; $i += 3) {
             echo "<tr>";
-            for ($j = $i; $j < min($i + 4, $products_count); $j++) {
+            for ($j = $i; $j < min($i + 3, $products_count); $j++) {
                 $product = $listProducts[$j];
         ?>
                 <td class="product-cell">
-                    <div class="product-info">
-                        <img src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" class="product-image same-size">
-                         <br>
-                        <br>
-                        <div class="product-details">
-                       
-                            <p style="width: 200px;"><strong>Product Name:</strong> <?php echo $product['product_name']; ?></p> 
-                            <p><strong>Product Type:</strong> <?php echo $product['product_type']; ?></p>
-                            <p><strong>Product Price:</strong> <?php echo $product['product_price']; ?></p>
-                            <p><strong>Product Stocks:</strong> <?php echo $product['product_stocks']; ?></p>
+                    <div class="card" style="width: 20rem; height:25rem">
+                     <div class="card-img-container">
+                       <img class="card-img-top product-image same-size" src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" >
+                     </div>
+                        <div class="card-body">
+                            <p class="card-text" style="width: 200px;"><strong><?php echo $product['product_name']; ?></strong></p> 
+                           
+                            <p class="card-text"><strong>₱ <?php echo $product['product_price']; ?>.00</strong> </p>
+                            <p class="card-text"><strong>Stocks: <?php echo $product['product_stocks']; ?> Remaining</strong> </p>
                         </div>
-                    </div>
-                    <div class="d-flex flex-row  gap-3">
-                       <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" data-product-img="<?php echo base64_encode($product['data']); ?>" data-product-img-type="<?php echo $product['type']; ?>">Order</button>
+                       <div class="d-flex flex-row  gap-3 card-footer">
+                       <button type="button" class="btn btn-primary order-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>" data-product-type="<?php echo $product['product_type']; ?>" data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" data-product-img="<?php echo base64_encode($product['data']); ?>" data-product-img-type="<?php echo $product['type']; ?>">Order</button>
                     </div>
                 </td>
         <?php
@@ -142,7 +154,7 @@
   document.getElementById('editStocks').addEventListener('input', checkStocks);
     
 
-    document.querySelectorAll('.edit-btn').forEach(function(button) {
+    document.querySelectorAll('.order-btn').forEach(function(button) {
         button.addEventListener('click', function() {
           
             var productId = this.getAttribute('data-product-id');
