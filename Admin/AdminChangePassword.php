@@ -1,5 +1,5 @@
 <?php
-      include 'apiAdmin.php';
+       include '../api/apiAdmin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

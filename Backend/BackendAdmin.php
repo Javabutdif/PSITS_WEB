@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-include 'connection.php';
+include '../connection.php';
 
 function retrieveStudents(){
     $db = Database::getInstance();
@@ -281,18 +281,7 @@ function approve_membership($id_number,$admin_name,$time,$date){
 
 
 function add_product($image_name, $image_type, $image_data, $product_id, $product_name, $product_type, $product_price, $product_stocks) {
-    $db = Database::getInstance();
-    $conn = $db->getConnection();
-
-    $sqlProduct = "INSERT INTO `product` (`product_id`, `product_name`, `product_type`, `product_price`, `product_stocks`) VALUES ('$product_id', '$product_name', '$product_type', '$product_price', '$product_stocks')";
-    $sqlImage = "INSERT INTO `image` (`name`, `type`, `data`, `product_id`) VALUES ('$image_name', '$image_type', '$image_data', '$product_id')";
-
-  
-    if (mysqli_query($conn,$sqlProduct) && mysqli_query($conn,$sqlImage)) {
-        return true;
-    } else {
-        return false;
-    }
+    
 
 }
 

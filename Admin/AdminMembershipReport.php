@@ -1,5 +1,5 @@
 <?php
-     include 'apiAdmin.php';
+      include '../api/apiAdmin.php';
      $reportSub = membershipReport();
 ?>
 <!DOCTYPE html>

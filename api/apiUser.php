@@ -1,6 +1,6 @@
 <?php
 
-    include 'BackendUser.php';
+    include '../Backend/BackendUser.php';
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="UserDashboard.php">Home</a>
+                    <a class="nav-link active text-white" aria-current="page" href="../User/UserDashboard.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="#">Profile</a>
@@ -51,16 +51,16 @@
                     Merchandise
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="UserMerchandise.php">Merchandise</a>
-                    <a class="dropdown-item" href="UserOrders.php">Orders</a>
-                    <a class="dropdown-item" href="UserHistory.php">History</a>
+                    <a class="dropdown-item" href="../User/UserMerchandise.php">Merchandise</a>
+                    <a class="dropdown-item" href="../User/UserOrders.php">Orders</a>
+                    <a class="dropdown-item" href="../User/UserHistory.php">History</a>
                 </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="#">Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="Login.php">Logout</a>
+                    <a class="nav-link text-white" href="../Login.php">Logout</a>
                 </li>
             </ul>
         </div>
@@ -102,11 +102,11 @@ if(isset($_POST['orderConfirm'])){
         
     if(order_confirm($product_id,$product_name,$product_price,$product_qty,$product_total,$id_number)){
         echo '<script>alert("Ordered Successfull");</script>';
-        echo '<script>window.location.href = "UserMerchandise.php";</script>';
+        echo '<script>window.location.href = "../User/UserMerchandise.php";</script>';
         exit;
     }else{
         echo '<script>alert("Ordered Unsuccessfull");</script>';
-        echo '<script>window.location.href = "UserMerchandise.php";</script>';
+        echo '<script>window.location.href = "../User/UserMerchandise.php";</script>';
         exit;
     }
 }
@@ -120,12 +120,12 @@ if(isset($_POST['cancel'])){
 
     if(cancel_order($order_id,$product_id,$qty) ){
         echo '<script>alert("Cancel Successful");</script>';
-        echo '<script>window.location.href = "UserOrders.php";</script>';
+        echo '<script>window.location.href = "../User/UserOrders.php";</script>';
         exit;
     }
     else{
         echo '<script>alert("Unsuccessful");</script>';
-        echo '<script>window.location.href = "UserOrders.php";</script>';
+        echo '<script>window.location.href = "../User/UserOrders.php";</script>';
         exit;
     }
 }

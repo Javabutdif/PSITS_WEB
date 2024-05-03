@@ -1,5 +1,5 @@
 <?php
-    require_once 'BackendAdmin.php';
+    require_once '../Backend/BackendAdmin.php';
 ?>
 
 <!DOCTYPE html>
@@ -25,18 +25,18 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link text-white " href="AdminDashboard.php">Home</a>
+          <a class="nav-link text-white " href="../Admin/AdminDashboard.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="AdminStudents.php">Students</a>
+          <a class="nav-link text-white" href="../Admin/AdminStudents.php">Students</a>
         </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Membership
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="AdminMembership.php">Membership Request</a>
-            <a class="dropdown-item" href="AdminMembershipReport.php">History and Report</a>
+            <a class="dropdown-item" href="../Admin/AdminMembership.php">Membership Request</a>
+            <a class="dropdown-item" href="../Admin/AdminMembershipReport.php">History and Report</a>
         </div>
         </li>
        <li class="nav-item dropdown">
@@ -46,9 +46,9 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="AdminViewMerch.php">Merchandise</a>
             <a type="button" class="dropdown-item" data-toggle="modal" data-target="#addMerch">Add Merchandise</a>
-            <a class="dropdown-item" href="AdminOrderMerch.php">History</a>
-            <a class="dropdown-item" href="AdminOrderMerch.php">Orders</a>
-            <a class="dropdown-item" href="AdminReportMerch.php">Reports</a>
+            <a class="dropdown-item" href="../Admin/AdminOrderMerch.php">History</a>
+            <a class="dropdown-item" href="../Admin/AdminOrderMerch.php">Orders</a>
+            <a class="dropdown-item" href="../Admin/AdminReportMerch.php">Reports</a>
         </div>
         </li>
         
@@ -57,8 +57,8 @@
             Settings
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="AdminChangePassword.php">Change Password</a>
-            <a class="dropdown-item" href="Login.php">Logout</a>
+            <a class="dropdown-item" href="../Admin/AdminChangePassword.php">Change Password</a>
+            <a class="dropdown-item" href="../Login.php">Logout</a>
         
         </div>
         </li>
@@ -139,12 +139,12 @@ if(isset($_POST['cancelOrder'])){
     
     if(cancel_order($order_id)){
         echo '<script>alert("Cancel Successful");</script>';
-        echo '<script>window.location.href = "AdminOrderMerch.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminOrderMerch.php";</script>';
         exit;
     }
     else{
         echo '<script>alert("Cancel Unsuccessful");</script>';
-        echo '<script>window.location.href = "AdminOrderMerch.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminOrderMerch.php";</script>';
         exit;
     }
   
@@ -161,12 +161,12 @@ if(isset($_POST['changePass'])){
 
   if(change_admin_password($newPassword,$adminId)){
     echo '<script>alert("Change Password Successful");</script>';
-    echo '<script>window.location.href = "AdminDashboard.php";</script>';
+    echo '<script>window.location.href = "../Admin/AdminDashboard.php";</script>';
     exit;
   }
   else{
     echo '<script>alert("Changed Password Unsuccessful");</script>';
-    echo '<script>window.location.href = "AdminDashboard.php";</script>';
+    echo '<script>window.location.href = "../Admin/AdminDashboard.php";</script>';
     exit;
   }
 }
@@ -183,12 +183,12 @@ if(isset($_POST['submitEdit'])){
 
     if(submit_edit_student($id_number,$first_name,$middle_name,$last_name,$email,$course,$year)){
         echo '<script>alert("Edit Successful");</script>';
-        echo '<script>window.location.href = "AdminStudents.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
         exit;
     }
     else{
         echo '<script>alert("Edit Unsuccessful");</script>';
-        echo '<script>window.location.href = "AdminStudents.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
         exit;
     }
 
@@ -208,7 +208,7 @@ if(isset($_POST['submitAdd'])){
 
         if (submit_add_student($id_number,$password,$first_name,$middle_name,$last_name,$email,$course,$year)) {
             echo '<script>alert("Registration Successful");</script>';
-            echo '<script>window.location.href = "AdminStudents.php";</script>';
+            echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
             exit(); 
         } else {
             echo '<script>
@@ -218,7 +218,7 @@ if(isset($_POST['submitAdd'])){
             text: "Duplicate ID Number",
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "AdminStudents.php";
+                window.location.href = "../Admin/AdminStudents.php";
             }
         });
             </script>';
@@ -231,12 +231,12 @@ if(isset($_POST['delete'])){
 
     if(delete_student($id_number)){
         echo '<script>alert("Delete Student Successful");</script>';  
-        echo '<script>window.location.href = "AdminStudents.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
         exit;
     }
     else{
         echo '<script>alert("Delete Student Unsuccessful");</script>';  
-        echo '<script>window.location.href = "AdminStudents.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
         exit;
     }
 }
@@ -247,11 +247,11 @@ if(isset($_POST['cancelMembership'])){
      
      if(cancel_membership($id_number)){
         echo '<script>alert("Cancel Membership Successful");</script>';
-        echo '<script>window.location.href = "AdminMembership.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminMembership.php";</script>';
         exit;
     }else{
         echo '<script>alert("Cancel Membership Unsuccessful");</script>';
-        echo '<script>window.location.href = "AdminMembership.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminMembership.php";</script>';
         exit;
     }
 }
@@ -266,12 +266,12 @@ if(isset($_POST['approve'])){
 
   if(approve_membership($id_number,$admin_name,$time,$date)){
         echo '<script>alert("Approve Membership Successful");</script>';
-        echo '<script>window.location.href = "AdminMembership.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminMembership.php";</script>';
         exit;
   }
   else{
         echo '<script>alert("Approve Membership Unsuccessful");</script>';
-        echo '<script>window.location.href = "AdminMembership.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminMembership.php";</script>';
         exit;
   }
 
@@ -300,12 +300,12 @@ if(isset($_POST['submitImage'])) {
 
         if($stmt->execute() && mysqli_query($conn,$sqlProduct)){
             echo '<script>alert("Add Merchandise Successful");</script>';
-            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+            echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
             exit;
         }
         else{
             echo '<script>alert("Unsuccessful");</script>';
-            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+            echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
             exit;
         }
     }
@@ -325,7 +325,7 @@ if(isset($_POST['editSubmit'])){
       
         if(edit_product($product_id,$product_name,$product_type,$product_price,$product_stocks)) {
             echo '<script>alert("Edit Product Successful");</script>';
-            echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+            echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
             exit;
         } else {
             echo '<script>alert("Error: Edit Product Failed");</script>';
@@ -339,12 +339,12 @@ if(isset($_POST['deleteProduct'])){
    
     if(delete_product($id_number)){
         echo '<script>alert("Delete Product Successful");</script>';
-        echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
         exit;
     }
     else{
         echo '<script>alert("Delete Product Unsuccessful");</script>';
-        echo '<script>window.location.href = "AdminViewMerch.php";</script>';
+        echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
         exit;
     }
 }
@@ -372,12 +372,12 @@ if(isset($_POST['submitPayment'])){
         
         if(payment($order_id,$product_id,$money,$change,$total,$id_number,$name,$size,$quantity,$admin_name,$date)){
             echo '<script>alert("Ordered Successfully");</script>';
-            echo '<script>window.location.href = "AdminOrderMerch.php";</script>';
+            echo '<script>window.location.href = "../Admin/AdminOrderMerch.php";</script>';
             exit;
         }
         else{
             echo '<script>alert("Ordered Unsuccessfully");</script>';
-            echo '<script>window.location.href = "AdminOrderMerch.php";</script>';
+            echo '<script>window.location.href = "../Admin/AdminOrderMerch.php";</script>';
             exit;
         }
 

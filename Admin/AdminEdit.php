@@ -1,5 +1,6 @@
 <?php
-    include 'apiAdmin.php';
+
+       include '../api/apiAdmin.php';
 ?>
 
 <!DOCTYPE html>
@@ -48,47 +49,43 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header text-center">
-          Add Student
+          Edit Student
         </div>
         <div class="card-body">
-          <form action="AdminAddStudent.php" method="POST">
+          <form action="AdminEdit.php" method="POST">
             <div class="mb-3">
               <label for="id_number" class="form-label">ID Number</label>
-              <input type="text"  class="form-control" id="id_number" name="id_number" required>
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password" required>
+              <input type="text" value="<?php echo $_SESSION['id_number'] ?>" class="form-control" id="id_number" name="id_number" readonly>
             </div>
             <div class="row">
               <div class="col-md-4">
                 <div class="mb-3">
                   <label for="first_name" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="first_name" name="first_name" required>
+                  <input type="text" value="<?php echo $_SESSION['first_name'] ?>" class="form-control" id="first_name" name="first_name" required>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="mb-3">
                   <label for="middle_name" class="form-label">Middle Name</label>
-                  <input type="text" class="form-control" id="middle_name" name="middle_name" required>
+                  <input type="text" value="<?php echo $_SESSION['middle_name'] ?>" class="form-control" id="middle_name" name="middle_name" required>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Last Name</label>
-                  <input type="text"  class="form-control" id="last_name" name="last_name" required>
+                  <input type="text" value="<?php echo $_SESSION['last_name'] ?>" class="form-control" id="last_name" name="last_name" required>
                 </div>
               </div>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" name="email" required>
+              <input type="email" value="<?php echo $_SESSION['email'] ?>" class="form-control" id="email" name="email" required>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="course" class="form-label">Course</label>
-                  <select class="form-control"  id="course" name="course" required>
+                  <select class="form-control" value="<?php echo $_SESSION['course'] ?>"  id="course" name="course" required>
                     <option value="BSIT">BSIT</option>
                     <option value="BSCS">BSCS</option>
                     <option value="ACT">ACT</option>
@@ -98,7 +95,7 @@
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="year" class="form-label">Year</label>
-                  <select class="form-control"  id="year" name="year" required>
+                  <select class="form-control" value="<?php echo $_SESSION['year'] ?>"  id="year" name="year" required>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -109,7 +106,7 @@
             </div>
             <div class="row justify-content-between align-items-center">
               <div class="col-md-6">
-                <button type="submit" name="submitAdd" class="btn btn-primary">Register</button>
+                <button type="submit" name="submitEdit" class="btn btn-primary">Save</button>
                  <a href="AdminStudents.php" class="btn btn-danger">Back</a>
               </div>
             </div>
