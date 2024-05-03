@@ -4,51 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Philippine Society of Information Technology Students</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            color: #666;
-            line-height: 1.6;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+     
 </head>
 <body>
+        
+<nav class="navbar navbar-expand-lg" style="background-color:#074873">
+  <div class="container">
+    <img src="img/psits-logo.png" style="width:3rem; height:3rem;"/>
+    <a class="navbar-brand text-white" href="index.php"> Philippine Society of Information Technology Students - UC MAIN</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="Login.php">Login</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link text-white" href="Register.php">Register</a>
+        </li>
+       
+       
+      </ul>
+    </div>
+  </div>
+</nav>
 
-<div class="container">
-    <h1>Philippine Society of Information Technology Students - UC MAIN</h1>
-    <p>This is a simple landing page example.</p>
-    <a href="Login.php" class="btn">Login</a>
-    <a href="Register.php" class="btn">Register</a>
-</div>
+
+
 
 </body>
 </html>
