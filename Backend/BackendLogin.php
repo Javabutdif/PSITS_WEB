@@ -18,7 +18,7 @@ require 'connection.php';
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg" style="background-color:#074873">
+  <nav class="navbar navbar-expand-sm" style="background-color:#074873">
   <div class="container">
     <img src="img/psits-logo.png" style="width:3rem; height:3rem;"/>
     <a class="navbar-brand text-white" href="index.php"> Philippine Society of Information Technology Students</a>

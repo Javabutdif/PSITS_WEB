@@ -103,7 +103,7 @@
           </div>
            <div class="form-group">
             <label for="qty">Quantity:</label>
-            <input type="number"  id="qty" name="qty" placeholder="Enter Quantity" class="form-control" >
+            <input type="number" value="1"  id="qty" name="qty" placeholder="Enter Quantity" class="form-control" >
             <small id="quantityHelp" class="text-danger"></small>
           </div>
           <div class="form-group">
