@@ -67,6 +67,7 @@
               <label for="confirmpassword" class="form-label">Confirm Password</label>
               <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" required>
             </div>
+            <span id="passwordMismatch" style="color: red; display: none;">Passwords do not match</span>
             <div class="row">
               <div class="col-md-4">
                 <div class="mb-3">
@@ -203,9 +204,22 @@
 
       return (id_number !== "" && password !== "" && first_name !== "" && middle_name !== "" && last_name !== "" && email !== "" && course !== "" && year !== "");
     }
+     $('#password, #confirmpassword').on('input', function() {
+      var pass = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmpassword").value;
+      var passwordMismatchSpan = $('#passwordMismatch');
 
- 
+      if (pass === confirmPassword) {
+        passwordMismatchSpan.hide();
+        $('.register-btn').prop('disabled', false);
+      } else {
+        passwordMismatchSpan.show();
+        $('.register-btn').prop('disabled', true);
+      }
+    });
     $('#id_number, #password, #first_name, #middle_name, #last_name, #email, #course, #year').on('input', function() {
+      
+      
       if (checkFields()) {
         $('.register-btn').prop('disabled', false);
       } else {
