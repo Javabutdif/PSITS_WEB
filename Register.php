@@ -1,6 +1,6 @@
 <?php
     include 'BackendRegister.php';
-
+    include 'indexInherit.php';
       
 ?>
 
@@ -9,14 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <title>Register</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
   body {
     background-color: #f8f9fa;
@@ -29,7 +25,7 @@
   }
 
   .card-header {
-    background-color: #343a40;
+    background-color: #074873;
     color: #fff;
     border-radius: 10px 10px 0 0;
   }
@@ -66,6 +62,10 @@
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+              <label for="confirmpassword" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" required>
             </div>
             <div class="row">
               <div class="col-md-4">

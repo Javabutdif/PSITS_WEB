@@ -1,5 +1,6 @@
 <?php
     include 'BackendLogin.php';
+    include 'indexInherit.php';
 if( $_SESSION['adminId'] != null){
     session_destroy();
 }
