@@ -29,6 +29,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Faculty Members</a>
+            <a class="dropdown-item" href="Officers.php">Officers</a>
             <a class="dropdown-item" href="Developers.php">Developers</a>
         </div>
         </li>
