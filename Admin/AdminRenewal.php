@@ -60,11 +60,12 @@ new DataTable('#example');
      
 
 <script>
-document.getElementById("approveBtn").addEventListener("click", function() {
-    if (confirm("Proceed?")) {
-        document.getElementById("approveForm").submit();
-    }
-});
+    document.getElementById("approveBtn").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        if (confirm("Proceed?")) {
+            document.getElementById("approveForm").submit();
+        }
+    });
 </script>
 
 

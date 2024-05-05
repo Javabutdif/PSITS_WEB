@@ -94,6 +94,18 @@ function profit(){
         }
          return $totalRevenue;
 }
+function membershipProfit(){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+
+    $sqlProfit = "SELECT COUNT(sub_id) as total from sub_report;";
+        $profit = mysqli_query($conn,$sqlProfit);
+        $revenue = mysqli_fetch_array($profit, MYSQLI_ASSOC);
+        if($revenue['total']!= null){
+            $totalRevenue = $revenue['total'];
+        }
+         return $totalRevenue;
+}
     
 function totalStudents(){
     $db = Database::getInstance();
@@ -263,10 +275,12 @@ function submit_add_student($id_number,$password,$first_name,$middle_name,$last_
 
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
     $stmt = $conn->prepare("INSERT INTO students (id_number, first_name, middle_name, last_name, email, course, year, password, status, subscription) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'TRUE', 'Pending')");
+    $ren = $conn->prepare("INSERT INTO renewal (id_number,status,admin_name,renewal_date) VALUES (?,'Deactivate','None','None')");
+    $ren->bind_param("s", $id_number);
     $stmt->bind_param("ssssssss", $id_number, $first_name, $middle_name, $last_name, $email, $course, $year, $hashPassword);
 
         try {
-            if ($stmt->execute()) {
+            if ($stmt->execute() && $ren->execute()) {
                 return true;
             } else {
                 return false;

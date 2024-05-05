@@ -289,6 +289,8 @@ if(isset($_POST['submitImage'])) {
         $type = $_FILES['image']['type'];
         $data = file_get_contents($_FILES['image']['tmp_name']);
 
+        
+
         $product_id = rand(111111,999999);
         $product_name = $_POST['name'];
         $product_type = $_POST['type'];

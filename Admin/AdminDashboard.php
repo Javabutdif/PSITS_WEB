@@ -2,6 +2,7 @@
       include '../api/apiAdmin.php';
       $totalStudents = totalStudents();
       $totalRevenue = profit();
+      $membershipProfit = membershipProfit();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +39,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Subscription Revenue</h5>
-          <p class="card-text"><strong>Php <?php echo ($totalStudents*50) ?></strong> </p>
+          <p class="card-text"><strong>Php <?php echo ($membershipProfit*50) ?></strong> </p>
         </div>
       </div>
     </div>

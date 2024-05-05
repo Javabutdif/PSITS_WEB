@@ -1,6 +1,7 @@
 <?php
     include 'Backend/connection.php';
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 ?>
 
@@ -62,18 +63,14 @@
               <label for="password" class="form-label">Password</label>
               <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <div class="row">
-              <div class="col-md-4">
+       
                 <div class="mb-3">
                   <label for="name" class="form-label">Name</label>
                   <input type="text" class="form-control" id="name" name="name" required>
                 </div>
-              </div>
+     
               
-            <div class="mb-3">
-              <label for="role" class="form-label">Role</label>
-              <input type="role" class="form-control" id="role" name="role" required>
-            </div>
+        
            
             <div class="row justify-content-between align-items-center">
               <div class="col-md-6">
@@ -102,13 +99,15 @@ if(isset($_POST['addAdmin'])){
     $id_number = $_POST['id_number'];
     $password = $_POST['password'];
     $name = $_POST['name'];
-    $role = $_POST['role'];
+      $db = Database::getInstance();
+    $conn = $db->getConnection();
+
     
 
     $hashPassword = password_hash($password,PASSWORD_DEFAULT );
 
-    $sql = "INSERT INTO `admin` (`id_number`, `password`, `name`, `role`, `status`)
-    VALUES('$id_number','$hashPassword','$name','$role' ,'Active')";
+    $sql = "INSERT INTO `admin` (`id_number`, `password`, `name`)
+    VALUES('$id_number','$hashPassword','$name')";
 
     if(mysqli_query($conn, $sql)){
         echo '<script>alert("Register Successfull");</script>';
