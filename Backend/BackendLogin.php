@@ -82,7 +82,7 @@ if(isset($_POST['submit'])){
     $resultAdmin = mysqli_query($conn,$sqlAdmin);
     $adminGet = mysqli_fetch_array($resultAdmin, MYSQLI_ASSOC);
     //User Login
-    $sqlUser = "SELECT * FROM `students` WHERE id_number = '$id_number'";
+    $sqlUser = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name,students.password, students.subscription, renewal.status,renewal.renewal_date FROM `students` INNER JOIN renewal ON students.id_number = renewal.id_number WHERE students.id_number = '$id_number'";
     $resultUser = mysqli_query($conn,$sqlUser);
     $userGet = mysqli_fetch_array($resultUser, MYSQLI_ASSOC);
 
@@ -94,7 +94,7 @@ if(isset($_POST['submit'])){
         echo '<script>window.location.href = "Admin/AdminDashboard.php";</script>';
         exit;
     }
-    else if($userGet['id_number'] != null && $userGet['subscription'] == 'Approve' && password_verify($password,$userGet['password'])){
+    else if($userGet['id_number'] != null && $userGet['subscription'] == 'Approve'  && $userGet['status'] == 'Deactivate' && $userGet['renewal_date'] == 'None' && password_verify($password,$userGet['password'])){
         ini_set('session.cookie_lifetime', 1800);
         $_SESSION['userId'] = $userGet['id_number'];
         $_SESSION['userName'] = $userGet['first_name']." ".$userGet['middle_name'].". ".$userGet['last_name'];
@@ -102,11 +102,20 @@ if(isset($_POST['submit'])){
         echo '<script>window.location.href = "User/UserDashboard.php";</script>';
         exit;
     }
+     else if($userGet['id_number'] != null && $userGet['subscription'] == 'Approve' && $userGet['status'] == 'Activate' && password_verify($password,$userGet['password'])){
+        echo '<script>Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "You are obligated to settle the renewal fee of ₱20 at the PSITS Office.",
+					
+				  });</script>';
+    }
+
     else if($userGet['id_number'] != null && $userGet['subscription'] == 'Pending' && password_verify($password,$userGet['password'])){
         echo '<script>Swal.fire({
 					icon: "error",
 					title: "Oops...",
-					text: "You Need to Pay for the Subscription at the PSITS Office!",
+					text: "You must pay the membership fee of ₱50 at the PSITS Office.",
 					
 				  });</script>';
     }

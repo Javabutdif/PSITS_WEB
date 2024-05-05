@@ -8,7 +8,7 @@ function retrieveStudents(){
     $conn = $db->getConnection();
 
     //Retrieve students in table
-    $sqlStudents = "SELECT * FROM students WHERE status = 'TRUE' AND subscription = 'Approve'";
+    $sqlStudents = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name, students.year, students.course, students.email from students inner join renewal on students.id_number = renewal.id_number where students.status = 'TRUE' AND students.subscription = 'Approve' AND renewal.status = 'Deactivate' AND renewal.renewal_date = 'None'";
     $result = mysqli_query($conn, $sqlStudents);
     if(mysqli_num_rows($result) > 0)
         {
@@ -35,6 +35,21 @@ function membershipReport(){
         }
         return $reportSub;
 }
+function renewalReport(){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+
+    $sql = "SELECT students.id_number , students.first_name, students.middle_name, students.last_name , renewal.admin_name , renewal.renewal_date  FROM students inner join renewal on students.id_number = renewal.id_number WHERE renewal_date != 'None'";
+    $resultReport = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($resultReport) > 0)
+        {
+          $reportSub = [];   
+          while($row = mysqli_fetch_array($resultReport)) {
+              $reportSub[] = $row;
+          }
+        }
+        return $reportSub;
+}
 
 function membership(){
     $db = Database::getInstance();
@@ -50,6 +65,21 @@ function membership(){
           }
         }
         return $listSub;
+}
+function renewalTable(){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+
+    $sqlStudents = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name, students.year, students.course, students.email from students inner join renewal on students.id_number = renewal.id_number where students.status = 'TRUE' AND students.subscription = 'Approve' AND renewal.status = 'Activate';";
+    $result = mysqli_query($conn, $sqlStudents);
+    if(mysqli_num_rows($result) > 0)
+        {
+          $listPerson = [];   
+          while($row = mysqli_fetch_array($result)) {
+              $listPerson[] = $row;
+          }
+        }
+    return $listPerson;
 }
 
 function profit(){
@@ -328,6 +358,28 @@ function order_result($order_id){
     $orderResult = mysqli_fetch_array($resultData, MYSQLI_ASSOC);
 
     return $orderResult;
+}
+
+function renewal(){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+
+    $sql = "UPDATE `renewal` SET `status` = 'Activate' WHERE `renewal_date` = 'None'";
+    if(mysqli_query($conn,$sql)){return true;}
+    else{return false;}
+
+}
+function renewal_approve($id_number,$admin_name){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+    $date = date("Y-m-d H:i:s");
+
+     $sql = "UPDATE `renewal` SET `status` = 'Deactivate',`admin_name` ='$admin_name', `renewal_date` = '$date'  WHERE `id_number` = '$id_number'";
+     $ren = $conn->prepare("INSERT INTO renewal (id_number,status,admin_name,renewal_date) VALUES (?,'Deactivate','None','None')");
+    $ren->bind_param("s", $id_number);
+
+    if(mysqli_query($conn,$sql) && $ren->execute()){return true;}
+    else{return false;}
 }
 
 

@@ -36,7 +36,9 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="../Admin/AdminMembership.php">Membership Request</a>
-            <a class="dropdown-item" href="../Admin/AdminMembershipReport.php">History and Report</a>
+            <a class="dropdown-item" href="../Admin/AdminRenewal.php">Membership Renewal</a>
+            <a class="dropdown-item" href="../Admin/AdminMembershipReport.php">Membership History</a>
+            <a class="dropdown-item" href="../Admin/AdminRenewalReport.php">Renewal History</a>
         </div>
         </li>
        <li class="nav-item dropdown">
@@ -384,6 +386,34 @@ if(isset($_POST['submitPayment'])){
     }
 
 
+}
+
+if(isset($_POST['renew'])){
+    if(renewal()){
+        echo '<script>alert("Renewal Successful");</script>';
+        echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
+        exit;
+    }
+    else{
+        echo '<script>alert("Renewal Unsuccessful");</script>';
+        echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
+        exit;
+    }
+}
+if(isset($_POST['approveRenewal'])){
+    $id_number = $_POST['id_number'];
+    $admin_name = $_POST['admin_name'];
+
+    if(renewal_approve($id_number,$admin_name)){
+        echo '<script>alert("Membership Renewal Successful");</script>';
+        echo '<script>window.location.href = "../Admin/AdminRenewal.php";</script>';
+        exit;
+    }
+    else{
+        echo '<script>alert("Membership Renewal Unsuccessful");</script>';
+        echo '<script>window.location.href = "../Admin/AdminRenewal.php";</script>';
+        exit;
+    }
 }
 
 

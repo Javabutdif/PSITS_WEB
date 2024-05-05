@@ -18,6 +18,10 @@
 <!-- Table -->
 <div class="container d-flex flex-row  gap-3 ">
   <a class="btn btn-primary " href="AdminAddStudent.php">Add Student</a>
+  <form action="AdminStudents.php" method="POST" class="delete-form">
+    <button id="renewBtn" type="submit" name="renew" class="btn btn-danger mr-2" onclick="return confirm('Are you certain about renewing the membership for all students?')">Renew</button>
+                        </form>
+
 </div>
 
   
@@ -76,6 +80,12 @@ document.getElementById("deleteBtn").addEventListener("click", function() {
         document.getElementById("deleteForm").submit();
     }
 });
+document.getElementById("renewBtn").addEventListener("click", function() {
+    if (confirm("Are you certain about renewing the membership for all students?")) {
+        document.getElementById("deleteForm").submit();
+    }
+});
+
 </script>
 
 </body>
