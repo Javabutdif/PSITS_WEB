@@ -39,7 +39,7 @@ function renewalReport(){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sql = "SELECT students.id_number , students.first_name, students.middle_name, students.last_name , renewal.admin_name , renewal.renewal_date  FROM students inner join renewal on students.id_number = renewal.id_number WHERE renewal_date != 'None'";
+    $sql = "SELECT students.id_number , students.first_name, students.middle_name, students.last_name , renewal.admin_name , renewal.renewal_date  FROM students inner join renewal on students.id_number = renewal.id_number WHERE renewal.status = 'Paid'";
     $resultReport = mysqli_query($conn, $sql);
     if(mysqli_num_rows($resultReport) > 0)
         {
@@ -374,7 +374,7 @@ function renewal_approve($id_number,$admin_name){
     $conn = $db->getConnection();
     $date = date("Y-m-d H:i:s");
 
-     $sql = "UPDATE `renewal` SET `status` = 'Deactivate',`admin_name` ='$admin_name', `renewal_date` = '$date'  WHERE `id_number` = '$id_number'";
+     $sql = "UPDATE `renewal` SET `status` = 'Paid',`admin_name` ='$admin_name', `renewal_date` = '$date'  WHERE `id_number` = '$id_number'";
      $ren = $conn->prepare("INSERT INTO renewal (id_number,status,admin_name,renewal_date) VALUES (?,'Deactivate','None','None')");
     $ren->bind_param("s", $id_number);
 

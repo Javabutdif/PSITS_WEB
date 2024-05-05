@@ -82,7 +82,7 @@ if(isset($_POST['submit'])){
     $resultAdmin = mysqli_query($conn,$sqlAdmin);
     $adminGet = mysqli_fetch_array($resultAdmin, MYSQLI_ASSOC);
     //User Login
-    $sqlUser = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name,students.password, students.subscription, renewal.status,renewal.renewal_date FROM `students` INNER JOIN renewal ON students.id_number = renewal.id_number WHERE students.id_number = '$id_number'";
+    $sqlUser = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name,students.password, students.subscription, renewal.status,renewal.renewal_date FROM `students` INNER JOIN renewal ON students.id_number = renewal.id_number WHERE students.id_number = '$id_number' AND renewal.renewal_date = 'None'";
     $resultUser = mysqli_query($conn,$sqlUser);
     $userGet = mysqli_fetch_array($resultUser, MYSQLI_ASSOC);
 
