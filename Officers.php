@@ -16,11 +16,11 @@
     </style>
 </head>
 <body>
-    <h1 class="text-center p-3" style="color:#074873">Officers</h1>
+    <h1 class="text-center" style="color:#074873">Officers</h1>
     <div class="container " >
         <div class="row justify-content-center">
             <div class="col-auto">
-            <table class="table table-borderless  ">
+            <table class="table table-borderless table-responsive-lg   ">
                 <tr>
                     <td class="text-center ">
                         <div class="card " style="width: 18rem;">

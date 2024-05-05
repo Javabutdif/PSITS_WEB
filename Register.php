@@ -1,8 +1,7 @@
 <?php
  
     include 'Backend/BackendRegister.php';
-     
-
+  include 'indexInherit.php';
       
 ?>
 
