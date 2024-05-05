@@ -244,7 +244,7 @@ function submit_add_student($id_number,$password,$first_name,$middle_name,$last_
         } catch (mysqli_sql_exception $e) {
             return false;
         }
-        $stmt->close();
+       
 
 }
 
@@ -280,10 +280,6 @@ function approve_membership($id_number,$admin_name,$time,$date){
 }
 
 
-function add_product($image_name, $image_type, $image_data, $product_id, $product_name, $product_type, $product_price, $product_stocks) {
-    
-
-}
 
 
 function edit_product($product_id,$product_name,$product_type,$product_price,$product_stocks){

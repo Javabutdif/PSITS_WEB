@@ -77,7 +77,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="apiAdmin.php" enctype="multipart/form-data">
+            <form method="POST" action="../api/apiAdmin.php" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="image">Upload Image:</label>
