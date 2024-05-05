@@ -108,7 +108,7 @@
           </div>
           <div class="form-group">
             <label for="total">Total:</label>
-            <input type="text"  id="total" name="total" placeholder="Total" class="form-control" readonly>
+            <input type="text"   id="total" name="total" placeholder="Total" class="form-control" readonly>
         </div>
         </div>
         <div class="modal-footer">
@@ -156,6 +156,7 @@
              document.getElementById('productId').value = productId;
             document.getElementById('editName').value = productName;
             document.getElementById('editPrice').value = productPrice;
+            document.getElementById('total').value = productPrice;
             document.getElementById('editStocks').value = productStocks;
         
              checkStocks();

@@ -1,5 +1,6 @@
 <?php 
     include 'indexInherit.php';
+ 
 
 ?>
 <!DOCTYPE html>
