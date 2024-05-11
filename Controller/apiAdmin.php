@@ -263,12 +263,13 @@ if(isset($_POST['cancelMembership'])){
 //Approve Subscription
 if(isset($_POST['approveMembership'])){
   $id_number = $_POST['id_number'];
+  $rfid = $_POST['rfid'];
   $admin_name = $_SESSION['adminName'];
   $time = date('h:m:sa');
   $date1 = date('M-d-Y');
 
 
-    if (approve_membership($id_number, $admin_name, $time, $date1)) {
+    if (approve_membership($id_number,$rfid, $admin_name, $time, $date1)) {
         echo '<script>alert("Approve Membership Successful");</script>';
         echo '<script>window.location.href = "../Admin/AdminMembership.php";</script>';
         exit;

@@ -43,12 +43,8 @@
     <div  class="d-flex justify-content-center align-items-center gap-3">
       
         
-    <form  action="AdminMembership.php" method="POST" class="approve-form" id="approveForm">
-    <input type="hidden" name="id_number" id="idnumber" />
-    <input type="hidden" name="approveMembership" />
-    </form>
-
-    <button type="button" class="btn btn-success mr-2" data-id_number="<?php echo $person['id_number']; ?>" id="approveBtn">Approve</button>
+    
+    <button type="button" class="btn btn-success mr-2 approve_btn" data-toggle="modal" data-target="#exampleModal"  data-id_number="<?php echo $person['id_number']; ?>" id="approveBtn">Approve</button>
 
 
         <form action="AdminMembership.php" method="POST" class="delete-form">
@@ -63,9 +59,58 @@
     </tbody>
 </table>
   </div>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Scan RFID Card</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form method="POST" action="AdminMembership.php">
+     <div class="modal-body">
+
+    <div class="form-group">
+        <label for="rfid">RFID: </label>
+        <input type="text" id="rfid" name="rfid" class="form-control">
+        <input type="hidden" id="idNum" name="id_number" class="form-control">
+     
+    </div>
+    
+    
+    </div>
+
+      <div class="modal-footer">
+        <button type="submit" name="approveMembership" class="btn btn-primary">Approve</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+    
+
+
     <script>
 new DataTable('#example');
   </script>
+
+<script>
+
+document.querySelectorAll('.approve_btn').forEach(function(button) {
+    button.addEventListener('click', function() {
+
+        var id = this.getAttribute('data-id_number');
+        document.getElementById('idNum').value = id;
+        
+    });
+});
+</script>
 
      
 <script>
@@ -75,17 +120,7 @@ document.getElementById("deleteBtn").addEventListener("click", function() {
     }
 });
 </script>
-<script>
-    document.getElementById("approveBtn").addEventListener("click", function(event) {
-    if (confirm("Proceed?")) {
-        var idNum = this.getAttribute('data-id_number');
-        document.getElementById('idnumber').value = idNum;
-        document.getElementById('approveForm').submit(); // Submit the form
-    }
-});
 
-
-</script>
 
 
 </body>

@@ -1,6 +1,6 @@
 
 <?php
-session_start();
+
 include 'connection.php';
 
 function retrieveStudents(){
@@ -313,11 +313,11 @@ function cancel_membership($id_number){
 }
 
 
-function approve_membership($id_number,$admin_name,$time,$date){
+function approve_membership($id_number,$rfid,$admin_name,$time,$date){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlApprove = "UPDATE students SET membership = 'Approve' WHERE id_number = '$id_number'";
+    $sqlApprove = "UPDATE `students` SET `membership` = 'Approve', `rfid` = '$rfid' WHERE id_number = '$id_number'";
     $sqlApproveAdmin = "INSERT INTO sub_report ( `id_number`, `admin_name`,`date`,`time`) VALUES('$id_number','$admin_name','$date','$time')";
 
     if(mysqli_query($conn,$sqlApprove) && mysqli_query($conn,$sqlApproveAdmin)){return true;}
