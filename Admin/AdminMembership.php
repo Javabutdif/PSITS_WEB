@@ -45,9 +45,10 @@
         
     <form  action="AdminMembership.php" method="POST" class="approve-form" id="approveForm">
     <input type="hidden" name="id_number" id="idnumber" />
+    <input type="hidden" name="approveMembership" />
     </form>
 
-    <button type="button" name="approveMembership" class="btn btn-success mr-2" data-id_number="<?php echo $person['id_number']; ?>" id="approveBtn">Approve</button>
+    <button type="button" class="btn btn-success mr-2" data-id_number="<?php echo $person['id_number']; ?>" id="approveBtn">Approve</button>
 
 
         <form action="AdminMembership.php" method="POST" class="delete-form">

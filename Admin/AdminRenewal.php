@@ -41,10 +41,13 @@
                 <td class="align-middle">
     <div  class="d-flex justify-content-center align-items-center gap-3">
         <form action="AdminRenewal.php" method="POST" class="approve-form" id="approveForm">
-            <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
-            <input type="hidden" name="admin_name" value="<?php echo $_SESSION['adminName'] ?>" />
-            <button type="submit" name="approveRenewal" class="btn btn-success mr-2" id="approveBtn" >Approve</button>
+            <input type="hidden" name="id_number" id="idnumber" />
+            <input type="hidden" name="admin_name" id="admin" />
+            
+            <input type="hidden" name="approveRenewal" />
+           
         </form>
+        <button type="submit"  class="btn btn-success mr-2" data-id_number="<?php echo $person['id_number']; ?>" data-admin_name="<?php echo $_SESSION['adminName'] ?>" id="approveBtn" >Approve</button>
 
         </div>
 </td>
@@ -60,17 +63,15 @@ new DataTable('#example');
      
 
 <script>
-    document.getElementById("approveBtn").addEventListener("click", function(event) {
-    console.log("Button clicked");
+  document.getElementById("approveBtn").addEventListener("click", function(event) {
     if (confirm("Proceed?")) {
-        console.log("User confirmed");
-        document.getElementById("approveForm").submit();
-    } else {
-        console.log("User cancelled");
-        // If user presses "Cancel", do nothing
+        var idNum = this.getAttribute('data-id_number');
+        var ad = this.getAttribute('data-admin_name');
+        document.getElementById('idnumber').value = idNum;
+        document.getElementById('admin').value = ad;
+        document.getElementById('approveForm').submit(); // Submit the form
     }
 });
-
 </script>
 
 
