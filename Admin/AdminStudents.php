@@ -29,7 +29,7 @@
 <table id="example" class="table table-striped table-hover display compact " style="width:100%; overflow:auto">
     <thead>
         <tr>
-            <th>ID Number</th>
+            <th>RFID</th>
             <th>Name</th>
             <th>Year Level</th>
             <th>Course</th>
@@ -41,7 +41,7 @@
     <tbody>
         <?php foreach ($listPerson as $person): ?>
             <tr>
-                <td><?php echo $person['id_number']; ?></td>
+                <td><?php echo $person['rfid']; ?></td>
                 <td><?php echo $person['first_name']." ".$person['middle_name'].". ".$person['last_name']; ?></td>
                 <td><?php echo $person['year']; ?></td>
                 <td><?php echo $person['course']; ?></td>

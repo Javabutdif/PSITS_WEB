@@ -21,7 +21,7 @@
 <table id="example" class="table table-striped table-hover display compact " style="width:100%; overflow:auto">
     <thead >
         <tr>
-            <th >ID Number</th>
+            <th >RFID</th>
             <th >Student Name</th>
             <th >Status</th>
             <th >Approve By</th>
@@ -34,7 +34,7 @@
     <tbody>
         <?php foreach ($reportSub as $person): ?>
             <tr>
-                <td><?php echo $person['id_number']; ?></td>
+                <td><?php echo $person['rfid']; ?></td>
                 <td><?php echo $person['first_name']." ".$person['middle_name'].". ".$person['last_name']; ?></td>
                 <td style="color:green">Paid</td>
                 <td><?php echo $person['admin_name']; ?></td>

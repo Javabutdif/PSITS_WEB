@@ -8,7 +8,7 @@ function retrieveStudents(){
     $conn = $db->getConnection();
 
     //Retrieve students in table
-    $sqlStudents = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name, students.year, students.course, students.email from students inner join renewal on students.id_number = renewal.id_number where students.status = 'TRUE' AND students.membership = 'Approve' AND renewal.status = 'Deactivate' AND renewal.renewal_date = 'None'";
+    $sqlStudents = "SELECT students.id_number,students.rfid, students.first_name, students.middle_name, students.last_name, students.year, students.course, students.email from students inner join renewal on students.id_number = renewal.id_number where students.status = 'TRUE' AND students.membership = 'Approve' AND renewal.status = 'Deactivate' AND renewal.renewal_date = 'None'";
     $result = mysqli_query($conn, $sqlStudents);
     if(mysqli_num_rows($result) > 0)
         {
@@ -24,7 +24,7 @@ function membershipReport(){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlSubReport = " SELECT students.id_number , students.first_name, students.middle_name, students.last_name , sub_report.admin_name , sub_report.date, sub_report.time FROM students INNER JOIN sub_report ON sub_report.id_number = students.id_number;";
+    $sqlSubReport = " SELECT students.id_number ,students.rfid, students.first_name, students.middle_name, students.last_name , sub_report.admin_name , sub_report.date, sub_report.time FROM students INNER JOIN sub_report ON sub_report.id_number = students.id_number;";
     $resultReport = mysqli_query($conn, $sqlSubReport);
     if(mysqli_num_rows($resultReport) > 0)
         {
@@ -70,7 +70,7 @@ function renewalTable(){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlStudents = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name, students.year, students.course, students.email from students inner join renewal on students.id_number = renewal.id_number where students.status = 'TRUE' AND students.membership = 'Approve' AND renewal.status = 'Activate';";
+    $sqlStudents = "SELECT students.id_number,students.rfid, students.first_name, students.middle_name, students.last_name, students.year, students.course, students.email from students inner join renewal on students.id_number = renewal.id_number where students.status = 'TRUE' AND students.membership = 'Approve' AND renewal.status = 'Activate';";
     $result = mysqli_query($conn, $sqlStudents);
     if(mysqli_num_rows($result) > 0)
         {
@@ -317,7 +317,7 @@ function approve_membership($id_number,$rfid,$admin_name,$time,$date){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlApprove = "UPDATE `students` SET `membership` = 'Approve', `rfid` = '$rfid' WHERE id_number = '$id_number'";
+    $sqlApprove = "UPDATE `students` SET `membership` = 'Approve', `rfid` = '$rfid' WHERE `id_number` = '$id_number'";
     $sqlApproveAdmin = "INSERT INTO sub_report ( `id_number`, `admin_name`,`date`,`time`) VALUES('$id_number','$admin_name','$date','$time')";
 
     if(mysqli_query($conn,$sqlApprove) && mysqli_query($conn,$sqlApproveAdmin)){return true;}

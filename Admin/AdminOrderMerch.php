@@ -19,7 +19,7 @@
     <thead>
         <tr>
             <th >Order Id</th>
-            <th >Student Id Number</th>
+            <th >Student RFID</th>
             <th >Name</th>
             <th >Size</th>
             <th >Quantity</th>
@@ -33,7 +33,7 @@
         <?php foreach ($listOrders as $person): ?>
             <tr>
                 <td><?php echo $person['order_id']; ?></td>
-                <td><?php echo $person['id_number']; ?></td>
+                <td><?php echo $person['rfid']; ?></td>
                 <td><?php echo $person['name'] ?></td>
                 <td><?php echo $person['size']; ?></td>
                 <td><?php echo $person['quantity']; ?></td>

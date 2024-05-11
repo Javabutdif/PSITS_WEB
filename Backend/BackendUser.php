@@ -55,7 +55,7 @@ function order_confirm($product_id,$product_name,$product_price,$product_qty,$pr
     $newStocks = get_product($product_id,$product_qty);
 
     $sqlUpdateStocks = "UPDATE `product` SET `product_stocks` = '$newStocks' WHERE product_id = '$product_id'";
-        $sql = "INSERT INTO `orders` (`id_number`,`name`,`size`,`quantity`,`price`,`total`,`product_id`,`status`)
+        $sql = "INSERT INTO `orders` (`rfid`,`name`,`size`,`quantity`,`price`,`total`,`product_id`,`status`)
         VALUES('$id_number','$product_name','None','$product_qty','$product_price','$product_total','$product_id','Pending');";
         
         if(mysqli_query($conn,$sql)&&mysqli_query($conn,$sqlUpdateStocks)){return true;}
@@ -95,7 +95,7 @@ function user_history($id_number){
     $db = Database::getInstance();
     $conn = $db->getConnection(); 
 
-    $sqlUser = "SELECT * FROM orders WHERE id_number = '$id_number' AND status= 'Paid' ";
+    $sqlUser = "SELECT * FROM orders WHERE rfid = '$id_number' AND status= 'Paid' ";
     $orders = mysqli_query($conn, $sqlUser);
     if(mysqli_num_rows($orders) > 0)
         {
@@ -112,7 +112,7 @@ function user_orders($id_number){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlOrder = "SELECT * FROM orders WHERE id_number = '$id_number' AND status= 'Pending' ";
+    $sqlOrder = "SELECT * FROM orders WHERE rfid = '$id_number' AND status= 'Pending' ";
     $orders = mysqli_query($conn, $sqlOrder);
     if(mysqli_num_rows($orders) > 0)
         {

@@ -57,7 +57,7 @@ $orders = orders();
             <div class="card-body">
             <div style="overflow-y: auto; max-height: 270px;">
                             <p> <?php foreach ($orders as $row) : ?>
-                            <p ><strong>ID: <?php echo $row['id_number'] ?></strong></p>
+                            <p ><strong>ID: <?php echo $row['rfid'] ?></strong></p>
                             <p><strong>Order Name: </strong><?php echo $row['name'] ?></p>
                             <p><strong>Quantity: </strong><?php echo $row['quantity'] ?></p>
                             <p><strong>Total: ₱</strong><?php echo $row['total'] ?></p>
