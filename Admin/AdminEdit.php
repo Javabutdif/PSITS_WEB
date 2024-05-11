@@ -1,6 +1,6 @@
 <?php
 
-       include '../api/apiAdmin.php';
+require '../Controller/apiAdmin.php';
 ?>
 
 <!DOCTYPE html>

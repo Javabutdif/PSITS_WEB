@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
 
 
-    $stmt = $conn->prepare("INSERT INTO students (id_number, first_name, middle_name, last_name, email, course, year, password, status, subscription) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'TRUE', 'Pending')");
+    $stmt = $conn->prepare("INSERT INTO students (id_number, first_name, middle_name, last_name, email, course, year, password, status, membership) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'TRUE', 'Pending')");
     $ren = $conn->prepare("INSERT INTO renewal (id_number,status,admin_name,renewal_date) VALUES (?,'Deactivate','None','None')");
     $ren->bind_param("s", $id_number);
     $stmt->bind_param("ssssssss", $id_number, $first_name, $middle_name, $last_name, $email, $course, $year, $hashPassword);

@@ -1,5 +1,5 @@
 <?php
-       include '../api/apiAdmin.php';
+       require_once '../Controller/apiAdmin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

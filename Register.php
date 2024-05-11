@@ -177,7 +177,7 @@
         <input type="text" id="year1" name="year"  class="form-control" readonly>
     </div>
     <div class="form-group text-center ">
-    <strong style="color:red;">You must pay P50 fee after registering</strong>
+    <strong style="color:red;">After completing the registration process, a fee of P50 is required to be paid.</strong>
     </div>
     </div>
 

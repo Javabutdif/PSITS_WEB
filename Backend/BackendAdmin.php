@@ -8,7 +8,7 @@ function retrieveStudents(){
     $conn = $db->getConnection();
 
     //Retrieve students in table
-    $sqlStudents = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name, students.year, students.course, students.email from students inner join renewal on students.id_number = renewal.id_number where students.status = 'TRUE' AND students.subscription = 'Approve' AND renewal.status = 'Deactivate' AND renewal.renewal_date = 'None'";
+    $sqlStudents = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name, students.year, students.course, students.email from students inner join renewal on students.id_number = renewal.id_number where students.status = 'TRUE' AND students.membership = 'Approve' AND renewal.status = 'Deactivate' AND renewal.renewal_date = 'None'";
     $result = mysqli_query($conn, $sqlStudents);
     if(mysqli_num_rows($result) > 0)
         {
@@ -55,7 +55,7 @@ function membership(){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlSubscribe = "SELECT * FROM students WHERE status = 'TRUE' AND subscription = 'Pending'";
+    $sqlSubscribe = "SELECT * FROM students WHERE status = 'TRUE' AND membership = 'Pending'";
     $resultSub = mysqli_query($conn, $sqlSubscribe);
     if(mysqli_num_rows($resultSub) > 0)
         {
@@ -70,7 +70,7 @@ function renewalTable(){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlStudents = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name, students.year, students.course, students.email from students inner join renewal on students.id_number = renewal.id_number where students.status = 'TRUE' AND students.subscription = 'Approve' AND renewal.status = 'Activate';";
+    $sqlStudents = "SELECT students.id_number, students.first_name, students.middle_name, students.last_name, students.year, students.course, students.email from students inner join renewal on students.id_number = renewal.id_number where students.status = 'TRUE' AND students.membership = 'Approve' AND renewal.status = 'Activate';";
     $result = mysqli_query($conn, $sqlStudents);
     if(mysqli_num_rows($result) > 0)
         {
@@ -111,7 +111,7 @@ function totalStudents(){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlCount = "SELECT COUNT(*) AS total FROM students WHERE status = 'TRUE' AND subscription = 'Approve'";
+    $sqlCount = "SELECT COUNT(*) AS total FROM students WHERE status = 'TRUE' AND membership = 'Approve'";
     $count = mysqli_query($conn,$sqlCount);
     $numbers = mysqli_fetch_array($count, MYSQLI_ASSOC);
     if($numbers['total']!= null){
@@ -274,7 +274,7 @@ function submit_add_student($id_number,$password,$first_name,$middle_name,$last_
     $conn = $db->getConnection();
 
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare("INSERT INTO students (id_number, first_name, middle_name, last_name, email, course, year, password, status, subscription) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'TRUE', 'Pending')");
+    $stmt = $conn->prepare("INSERT INTO students (id_number, first_name, middle_name, last_name, email, course, year, password, status, membership) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'TRUE', 'Pending')");
     $ren = $conn->prepare("INSERT INTO renewal (id_number,status,admin_name,renewal_date) VALUES (?,'Deactivate','None','None')");
     $ren->bind_param("s", $id_number);
     $stmt->bind_param("ssssssss", $id_number, $first_name, $middle_name, $last_name, $email, $course, $year, $hashPassword);
@@ -306,8 +306,9 @@ function cancel_membership($id_number){
     $db = Database::getInstance();
     $conn = $db->getConnection();
     
+    $sql_cancel_renewal = "DELETE FROM `renewal` WHERE id_number = '$id_number'";
     $sqlCancel = "DELETE FROM `students` WHERE id_number = '$id_number';";
-     if(mysqli_query($conn,$sqlCancel)){return true;}
+     if(mysqli_query($conn,$sql_cancel_renewal)&& mysqli_query($conn,$sqlCancel)){return true;}
      else{return false;}
 }
 
@@ -316,8 +317,8 @@ function approve_membership($id_number,$admin_name,$time,$date){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlApprove = "UPDATE `students` SET `subscription` = 'Approve' WHERE `id_number` = '$id_number'";
-    $sqlApproveAdmin = "INSERT INTO `sub_report` ( `id_number`, `admin_name`,`date`,`time`) VALUES('$id_number','$admin_name','$date','$time')";
+    $sqlApprove = "UPDATE students SET membership = 'Approve' WHERE id_number = '$id_number'";
+    $sqlApproveAdmin = "INSERT INTO sub_report ( `id_number`, `admin_name`,`date`,`time`) VALUES('$id_number','$admin_name','$date','$time')";
 
     if(mysqli_query($conn,$sqlApprove) && mysqli_query($conn,$sqlApproveAdmin)){return true;}
     else{return false;}

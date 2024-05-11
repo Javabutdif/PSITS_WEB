@@ -1,5 +1,5 @@
 <?php
-      include '../api/apiAdmin.php';
+      require_once '../Controller/apiAdmin.php';
       $totalStudents = totalStudents();
       $totalRevenue = profit();
       $membershipProfit = membershipProfit();
@@ -38,7 +38,7 @@
     <div class="col-md-4 mb-4"> 
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Subscription Revenue</h5>
+          <h5 class="card-title">Membership Revenue</h5>
           <p class="card-text"><strong>Php <?php echo ($membershipProfit*50) ?></strong> </p>
         </div>
       </div>

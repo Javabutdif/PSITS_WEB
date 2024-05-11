@@ -1,5 +1,5 @@
 <?php
-    require_once '../Backend/BackendAdmin.php';
+    require '../Backend/BackendAdmin.php';
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +79,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="../api/apiAdmin.php" enctype="multipart/form-data">
+            <form method="POST" action="../Controller/apiAdmin.php" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="image">Upload Image:</label>
@@ -260,22 +260,22 @@ if(isset($_POST['cancelMembership'])){
 
 
 //Approve Subscription
-if(isset($_POST['approve'])){
+if(isset($_POST['approveMembership'])){
   $id_number = $_POST['id_number'];
   $admin_name = $_SESSION['adminName'];
-  $time = date("h:i:sa");
-  $date = date('Y-m-d');
+  $time = date('h:m:sa');
+  $date1 = date('M-d-Y');
 
-  if(approve_membership($id_number,$admin_name,$time,$date)){
+
+    if (approve_membership($id_number, $admin_name, $time, $date1)) {
         echo '<script>alert("Approve Membership Successful");</script>';
         echo '<script>window.location.href = "../Admin/AdminMembership.php";</script>';
         exit;
-  }
-  else{
+    } else {
         echo '<script>alert("Approve Membership Unsuccessful");</script>';
         echo '<script>window.location.href = "../Admin/AdminMembership.php";</script>';
         exit;
-  }
+    }
 
     
 }

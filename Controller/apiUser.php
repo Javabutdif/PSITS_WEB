@@ -1,6 +1,6 @@
 <?php
 
-    include '../Backend/BackendUser.php';
+require '../Backend/BackendUser.php';
 ?>
 
 <!DOCTYPE html>
