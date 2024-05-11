@@ -260,7 +260,7 @@ if(isset($_POST['cancelMembership'])){
 
 
 //Approve Subscription
-if(isset($_POST['approveMembership'])){
+if(isset($_POST['id_number'])){
   $id_number = $_POST['id_number'];
   $admin_name = $_SESSION['adminName'];
   $time = date('h:m:sa');

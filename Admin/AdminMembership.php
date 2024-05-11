@@ -41,12 +41,14 @@
                
                 <td class="align-middle">
     <div  class="d-flex justify-content-center align-items-center gap-3">
-        <form action="AdminMembership.php" method="POST" class="approve-form" id="approveForm">
+      
         
-            <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
-            <button type="submit" name="approveMembership" class="btn btn-success mr-2" id="approveBtn" onclick="return confirm('Proceed?')">Approve</button>
+    <form  action="AdminMembership.php" method="POST" class="approve-form" id="approveForm">
+    <input type="hidden" name="id_number" id="idnumber" />
+    </form>
 
-        </form>
+    <button type="button" name="approveMembership" class="btn btn-success mr-2" data-id_number="<?php echo $person['id_number']; ?>" id="approveBtn">Approve</button>
+
 
         <form action="AdminMembership.php" method="POST" class="delete-form">
                             <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
@@ -74,11 +76,14 @@ document.getElementById("deleteBtn").addEventListener("click", function() {
 </script>
 <script>
     document.getElementById("approveBtn").addEventListener("click", function(event) {
+    if (confirm("Proceed?")) {
+        var idNum = this.getAttribute('data-id_number');
+        document.getElementById('idnumber').value = idNum;
+        document.getElementById('approveForm').submit(); // Submit the form
+    }
+});
 
-        if (confirm("Proceed?")) {
-            document.getElementById("approveForm").submit();
-        }
-    });
+
 </script>
 
 

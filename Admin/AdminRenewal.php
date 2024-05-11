@@ -61,11 +61,16 @@ new DataTable('#example');
 
 <script>
     document.getElementById("approveBtn").addEventListener("click", function(event) {
-        event.preventDefault(); // Prevent the default form submission
-        if (confirm("Proceed?")) {
-            document.getElementById("approveForm").submit();
-        }
-    });
+    console.log("Button clicked");
+    if (confirm("Proceed?")) {
+        console.log("User confirmed");
+        document.getElementById("approveForm").submit();
+    } else {
+        console.log("User cancelled");
+        // If user presses "Cancel", do nothing
+    }
+});
+
 </script>
 
 
