@@ -39,15 +39,15 @@
                 <td><?php echo $person['quantity']; ?></td>
                 <td><?php echo $person['price']; ?></td>
                  <td><?php echo $person['total']; ?></td>
-                <td class="align-middle">
-    <div  class="d-flex justify-content-center align-items-center gap-3">
-           <button type="button" class="btn btn-success pay-btn" data-toggle="modal" data-target="#exampleModal" data-order-id = "<?php echo $person['order_id']; ?>" data-product-id = "<?php echo $person['product_id']; ?>"  data-total-id = "<?php echo $person['total']; ?>">Pay</button>
+                <td class="d-flex flex-row gap-3">
+     
+           <button type="button" class="w-50 h-50 btn btn-success pay-btn" data-toggle="modal" data-target="#exampleModal" data-order-id = "<?php echo $person['order_id']; ?>" data-product-id = "<?php echo $person['product_id']; ?>"  data-total-id = "<?php echo $person['total']; ?>">Pay</button>
 
         <form action="AdminOrderMerch.php" method="POST" class="delete-form">
                             <input type="hidden" name="order_id" value="<?php echo $person['order_id']; ?>" />
-                            <button type="submit" name="cancelOrder" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
-                        </form>
-        </div>
+                            <button type="submit" name="cancelOrder" class="btn btn-danger " onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
+            </form>
+      
 </td>
             </tr>
         <?php endforeach; ?>

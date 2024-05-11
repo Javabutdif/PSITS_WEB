@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    include '../api/apiUser.php';
+    
+    require '../Controller/apiUser.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,6 +1,6 @@
 <?php
-    session_start();
-     include '../api/apiUser.php';
+    
+    require '../Controller/apiUser.php';
     $id_number = $_SESSION['userId'];
     $listOrders = user_history($id_number);
     
