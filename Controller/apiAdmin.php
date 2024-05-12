@@ -212,47 +212,62 @@ if (isset($_POST['approveMembership'])) {
 }
 if (isset($_POST['submitImage'])) {
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $db = Database::getInstance();
-        $conn = $db->getConnection();
+        // Define folder where images will be stored
+        $uploadDirectory = "../assets/uploads/";
 
+        // Check if the upload directory exists, if not, create it
+        if (!is_dir($uploadDirectory)) {
+            mkdir($uploadDirectory, 0777, true); // Create the directory recursively
+        }
+        
         // Get uploaded image details
         $name = $_FILES['image']['name'];
         $type = $_FILES['image']['type'];
-        $data = file_get_contents($_FILES['image']['tmp_name']);
+        $tmpName = $_FILES['image']['tmp_name'];
 
-        $product_id = rand(111111, 999999);
-        $product_name = $_POST['name'];
-        $product_type = $_POST['type'];
-        $product_price = $_POST['price'];
-        $product_stocks = $_POST['stocks'];
-
-        $sqlProduct = "INSERT INTO product (`product_id`,`product_name`,`product_type`,`product_price`,`product_stocks`) VALUES ('$product_id','$product_name','$product_type','$product_price','$product_stocks')";
-        $stmt = $conn->prepare("INSERT INTO image (name, type, data, product_id) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("sssi", $name, $type, $data, $product_id);
-
-        // Execute the prepared statements
-        $productInserted = mysqli_query($conn, $sqlProduct);
-        $imageInserted = $stmt->execute();
-
-        // Check if both queries were successful
-        if ($productInserted && $imageInserted) {
-            echo '<script>alert("Add Merchandise Successful");</script>';
-            echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
-            exit;
+        $relativeUploadDirectory = "../assets/uploads/";
+        $filename = uniqid() . "_" . $name;
+        $filepath = $relativeUploadDirectory . $filename;
+        
+        // Move the uploaded image to the upload directory
+        if (move_uploaded_file($tmpName, $uploadDirectory . $filename)) {
+            // File successfully uploaded, proceed with database insertion
+            $db = Database::getInstance();
+            $conn = $db->getConnection();
+            
+            // Generate a unique product ID
+            $product_id = rand(111111, 999999);
+            $product_name = $_POST['name'];
+            $product_type = $_POST['type'];
+            $product_price = $_POST['price'];
+            $product_stocks = $_POST['stocks'];
+            
+            // Insert product details into the database
+            $sqlProduct = "INSERT INTO product (`product_id`,`product_name`,`product_type`,`product_price`,`product_stocks`) VALUES ('$product_id','$product_name','$product_type','$product_price','$product_stocks')";
+            $stmt = $conn->prepare("INSERT INTO image (name, type, filepath, product_id) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("sssi", $name, $type, $filepath, $product_id);
+            
+            if (mysqli_query($conn, $sqlProduct) && $stmt->execute()) {
+                echo '<script>alert("Add Merchandise Successful");</script>';
+                echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
+                exit;
+            } else {
+                echo '<script>alert("Unsuccessful");</script>';
+                echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
+                exit;
+            }
         } else {
-            // If insertion failed, provide feedback to the user and log error for debugging
-            echo '<script>alert("Unsuccessful");</script>';
-            error_log("Error: " . $conn->error); // Log the MySQL error
+            // File upload failed
+            echo '<script>alert("Failed to upload image.");</script>';
             echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
             exit;
         }
-    } else {
-        // If image upload failed, provide feedback to the user
-        echo '<script>alert("Image upload failed.");</script>';
-        echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
-        exit;
     }
 }
+
+
+
+
 
 if (isset($_POST['editSubmit'])) {
 

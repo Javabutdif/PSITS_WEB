@@ -124,7 +124,7 @@ function merchandise(){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-     $sqlTableProduct = " SELECT image.id , image.name , image.type , image.data ,product.product_id, product.product_name , product.product_type , product.product_price, product.product_stocks FROM image INNER JOIN product on image.product_id = product.product_id;";
+     $sqlTableProduct = " SELECT image.id , image.name , image.type , image.filepath ,product.product_id, product.product_name , product.product_type , product.product_price, product.product_stocks FROM image INNER JOIN product on image.product_id = product.product_id;";
     $products = mysqli_query($conn, $sqlTableProduct);
     if(mysqli_num_rows($products) > 0)
         {
