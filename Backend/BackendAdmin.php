@@ -198,7 +198,7 @@ if ($_SESSION['adminId'] != null && !isset($_SESSION['success_toast_displayed'])
     $_SESSION['success_toast_displayed'] = true;
 }
 else if($_SESSION['adminId'] == null ){
-     echo '<script>window.location.href = "Login.php";</script>';
+     echo '<script>window.location.href = "../Login.php";</script>';
 }
 }
       
