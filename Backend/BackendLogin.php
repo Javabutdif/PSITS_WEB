@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require 'connection.php';
 
 
@@ -36,6 +36,8 @@ require 'connection.php';
 <?php
   $db = Database::getInstance();
   $conn = $db->getConnection();
+
+
     
 if(isset($_POST['submit'])){
     $id_number = $_POST['id_number'];

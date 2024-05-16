@@ -57,6 +57,10 @@ require '../Controller/apiAdmin.php';
               <label for="id_number" class="form-label">ID Number</label>
               <input type="text" value="<?php echo $_SESSION['id_number'] ?>" class="form-control" id="id_number" name="id_number" readonly>
             </div>
+            <div class="mb-3">
+              <label for="rfid" class="form-label">RFID</label>
+              <input type="text" value="<?php echo $_SESSION['rfid'] ?>" class="form-control" id="rfid" name="rfid" >
+            </div>
             <div class="row">
               <div class="col-md-4">
                 <div class="mb-3">

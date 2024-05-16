@@ -65,8 +65,7 @@ require '../assets/navbar.php';
 </html>
 
 <?php
-//Actions
-//Login Admin
+
 loginAdmin();
 
 //Cancel Order
@@ -108,6 +107,7 @@ if (isset($_POST['changePass'])) {
 //Edit Student
 if (isset($_POST['submitEdit'])) {
     $id_number = $_POST['id_number'];
+    $rfid = $_POST['rfid'];
     $first_name = $_POST['first_name'];
     $middle_name = $_POST['middle_name'];
     $last_name = $_POST['last_name'];
@@ -115,7 +115,7 @@ if (isset($_POST['submitEdit'])) {
     $course = $_POST['course'];
     $year = $_POST['year'];
 
-    if (submit_edit_student($id_number, $first_name, $middle_name, $last_name, $email, $course, $year)) {
+    if (submit_edit_student($id_number,$rfid, $first_name, $middle_name, $last_name, $email, $course, $year)) {
         echo '<script>alert("Edit Successful");</script>';
         echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
         exit;

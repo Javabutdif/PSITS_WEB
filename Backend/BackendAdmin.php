@@ -3,6 +3,35 @@
 
 include 'connection.php';
 
+function loginAdmin(){
+    
+    if ($_SESSION['adminId'] != null && session_status() && !isset($_SESSION['success_toast_displayed'])) {
+        echo '<script>
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: "top-start",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                  }
+                });
+                Toast.fire({
+                  icon: "success",
+                  title: "Logged In!"
+                });
+              </script>';
+    
+      
+        $_SESSION['success_toast_displayed'] = true;
+    }
+    else if($_SESSION['adminId'] == null ){
+         echo '<script>window.location.href = "../Login.php";</script>';
+    }
+    }
+          
 function retrieveStudents(){
     $db = Database::getInstance();
     $conn = $db->getConnection();
@@ -39,7 +68,7 @@ function renewalReport(){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sql = "SELECT students.id_number , students.first_name, students.middle_name, students.last_name , renewal.admin_name , renewal.renewal_date  FROM students inner join renewal on students.id_number = renewal.id_number WHERE renewal.status = 'Paid'";
+    $sql = "SELECT students.id_number,students.rfid , students.first_name, students.middle_name, students.last_name , renewal.admin_name , renewal.renewal_date  FROM students inner join renewal on students.id_number = renewal.id_number WHERE renewal.status = 'Paid'";
     $resultReport = mysqli_query($conn, $sql);
     if(mysqli_num_rows($resultReport) > 0)
         {
@@ -173,35 +202,6 @@ function orderDetails(){
  
 }
 
-function loginAdmin(){
-    
-if ($_SESSION['adminId'] != null && !isset($_SESSION['success_toast_displayed'])) {
-    echo '<script>
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top-start",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-              }
-            });
-            Toast.fire({
-              icon: "success",
-              title: "Logged In!"
-            });
-          </script>';
-
-  
-    $_SESSION['success_toast_displayed'] = true;
-}
-else if($_SESSION['adminId'] == null ){
-     echo '<script>window.location.href = "../Login.php";</script>';
-}
-}
-      
     
 function cancel_order($order_id){
     $db = Database::getInstance();
@@ -230,6 +230,7 @@ function edit_student($id_number){
     if($userEdit !== null){
       
         $_SESSION['id_number'] = $userEdit['id_number'];
+        $_SESSION['rfid'] = $userEdit['rfid'];
         $_SESSION['first_name'] = $userEdit['first_name'];
         $_SESSION['middle_name'] = $userEdit['middle_name'];
         $_SESSION['last_name'] = $userEdit['last_name'];
@@ -258,11 +259,11 @@ function change_admin_password($newPassword, $adminId){
     
 }
 
-function submit_edit_student($id_number,$first_name,$middle_name,$last_name,$email,$course,$year){
+function submit_edit_student($id_number,$rfid,$first_name,$middle_name,$last_name,$email,$course,$year){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlUpdate = "UPDATE `students` SET `first_name` = '$first_name',`middle_name` = '$middle_name',`last_name` = '$last_name',`email` = '$email',`course` = '$course',`year` = '$year' WHERE `id_number` = '$id_number'";
+    $sqlUpdate = "UPDATE `students` SET `rfid` = '$rfid', `first_name` = '$first_name',`middle_name` = '$middle_name',`last_name` = '$last_name',`email` = '$email',`course` = '$course',`year` = '$year' WHERE `id_number` = '$id_number'";
 
     if(mysqli_query($conn,$sqlUpdate)){return true;}
     else{return false;}
@@ -347,7 +348,7 @@ function delete_product($id_number){
     $sqlDelete = "DELETE FROM `product` WHERE product_id = '$id_number';";
     $sqlDeleteImg = "DELETE FROM `image` WHERE product_id = '$id_number';";
 
-    if(mysqli_query($conn,$sqlDelete) && mysqli_query($conn,$sqlDeleteImg)){return true;}
+    if(mysqli_query($conn,$sqlDeleteImg) && mysqli_query($conn,$sqlDelete)){return true;}
     else{return false;}
 
 }

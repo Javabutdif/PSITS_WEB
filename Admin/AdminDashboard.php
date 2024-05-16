@@ -29,7 +29,7 @@ $orders = orders();
       <div class="card " style="width: 20rem; height:32rem">
         <h5 class=" card-header text-white text-center " id="card-h">Officer Information</h5>
         <div class="card-body text-center">
-          <img class=" card-img rounded-circle" style="height:10rem;width:10rem" src="../img/me.jpg">
+          <img class=" card-img rounded-circle" style="height:10rem;width:10rem" src="">
           <br>
           <button type="button" class="btn btn-light text-center mt-3">Edit Profile</button>
           <hr>

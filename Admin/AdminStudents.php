@@ -22,6 +22,10 @@
     <button id="renewBtn" type="submit" name="renew" class="btn btn-danger mr-2" onclick="return confirm('Are you certain about renewing the membership for all students?')">Renew</button>
                         </form>
 
+<div class="d-flex flex-row">
+    <button type="button" class="btn btn-outline-dark">Configure</button>
+</div>
+
 </div>
 
   
@@ -29,6 +33,7 @@
 <table id="example" class="table table-striped table-hover display compact " style="width:100%; overflow:auto">
     <thead>
         <tr>
+            <th>ID Number</th>
             <th>RFID</th>
             <th>Name</th>
             <th>Year Level</th>
@@ -41,6 +46,7 @@
     <tbody>
         <?php foreach ($listPerson as $person): ?>
             <tr>
+                <td><?php echo $person['id_number']; ?></td>
                 <td><?php echo $person['rfid']; ?></td>
                 <td><?php echo $person['first_name']." ".$person['middle_name'].". ".$person['last_name']; ?></td>
                 <td><?php echo $person['year']; ?></td>

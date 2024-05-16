@@ -28,6 +28,7 @@
                         <img class="card-img-top" src="img/leyros.jpg" alt="Leyros">
                         <div class="card-body">
                         <h4 class="card-title">Aubrey Leyros</h4>
+                       
                         </div>
                         </div>
                     </td>

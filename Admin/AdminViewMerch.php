@@ -73,7 +73,7 @@ $listProducts = merchandise();
                   <form action="AdminViewMerch.php" method="POST" class="delete-form">
                     <input type="hidden" name="id_number" value="<?php echo $product['product_id']; ?>" />
                     <button type="submit" name="deleteProduct" class="btn btn-danger mr-2"
-                      onclick="return confirm('Are you sure you want to delete this Product?')">Delete</button>
+                      onclick="return confirm("Are you sure you want to delete this Product?")">Delete</button>
                   </form>
                 </div>
               </div>
