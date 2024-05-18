@@ -13,7 +13,7 @@
 <nav class="navbar navbar-expand-lg" style="background-color:#074873">
     <div class="container-fluid">
       <img src="img/psits-logo.png" style="width:3rem; height:3rem;"/>
-      <a class="navbar-brand text-white ms-2" href="index.php">PSITS</a>
+      <a class="navbar-brand text-white ms-2" href="index.php" style="font-family: 'Montserrat', sans-serif;">UC Main | PSITS</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
