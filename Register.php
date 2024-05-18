@@ -1,6 +1,6 @@
 <?php
  
-    include 'Backend/BackendRegister.php';
+  include 'Controller/ControllerIndex.php';
   include 'indexInherit.php';
       
 ?>
@@ -58,7 +58,7 @@
           
             <div class="mb-3">
               <label for="id_number" class="form-label">ID Number</label>
-              <input type="text" class="form-control" id="id_number" name="id_number" required>
+              <input type="number" class="form-control" id="id_number" name="id_number" required>
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
@@ -142,7 +142,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <form method="POST" action="Register.php">
      <div class="modal-body">
       <p></p>
     <div class="form-group">

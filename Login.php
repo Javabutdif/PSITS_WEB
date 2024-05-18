@@ -1,7 +1,7 @@
 <?php
     
-    include 'Backend/BackendLogin.php';
-    include 'indexInherit.php';
+    require 'Controller/ControllerIndex.php';
+    require 'indexInherit.php';
   
 if( $_SESSION['adminId'] != null){
     session_destroy();
@@ -30,7 +30,7 @@ if( $_SESSION['userId'] != null){
           <form action="Login.php" method="POST">
             <div class="mb-3">
               <label for="id_number" class="form-label">ID Number</label>
-              <input type="text" class="form-control" id="id_number" name="id_number" required>
+              <input type="number" class="form-control" id="id_number" name="id_number" required>
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
