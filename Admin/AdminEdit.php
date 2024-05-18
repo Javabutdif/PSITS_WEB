@@ -89,24 +89,25 @@
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="course" class="form-label">Course</label>
-                  <select class="form-control" value="<?php echo $_SESSION['course'] ?>"  id="course" name="course" required>
-                    <option value="BSIT">BSIT</option>
-                    <option value="BSCS">BSCS</option>
-                    <option value="ACT">ACT</option>
+                  <select class="form-control"  id="course" name="course" required>
+                    <option value="BSIT" <?php if($_SESSION['course'] == "BSIT") echo 'selected'; ?>>BSIT</option>
+                    <option value="BSCS" <?php if($_SESSION['course'] == "BSCS") echo 'selected'; ?>>BSCS</option>
+                    <option value="ACT" <?php if($_SESSION['course'] == "ACT") echo 'selected'; ?>>ACT</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label for="year" class="form-label">Year</label>
-                  <select class="form-control" value="<?php echo $_SESSION['year'] ?>"  id="year" name="year" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                  </select>
+                    <label for="year" class="form-label">Year</label>
+                    <select class="form-control" id="year" name="year" required>
+                        <option value="1" <?php if($_SESSION['year'] == 1) echo 'selected'; ?>>1</option>
+                        <option value="2" <?php if($_SESSION['year'] == 2) echo 'selected'; ?>>2</option>
+                        <option value="3" <?php if($_SESSION['year'] == 3) echo 'selected'; ?>>3</option>
+                        <option value="4" <?php if($_SESSION['year'] == 4) echo 'selected'; ?>>4</option>
+                    </select>
                 </div>
-              </div>
+            </div>
+
             </div>
             <div class="row justify-content-between align-items-center">
               <div class="col-md-6">
