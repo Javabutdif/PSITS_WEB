@@ -19,23 +19,22 @@
 <h1 class="text-center" style="color:#074873">Officers</h1>
 <div class="container text-center ">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-   
-        <div class="col">
-            <div class="card mb-3">
-                <h5 class="card-header text-white text-center " style="background-color:#074873">Vice-President Internal</h5>
-                <img class="card-img-top" src="img/leyros.jpg" alt="Leyros">
-                <div class="card-body">
-                    <h4 class="card-title">Aubrey Leyros</h4>
-                </div>
-            </div>
-        </div>
-       
+        
         <div class="col">
             <div class="card mb-3">
                 <h5 class="card-header text-white text-center" style="background-color:#074873">President</h5>
                 <img class="card-img-top" src="img/santoya.jpg" alt="Santoya">
                 <div class="card-body">
                     <h4 class="card-title">Vince Andrew Santoya</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-3">
+                <h5 class="card-header text-white text-center " style="background-color:#074873">Vice-President Internal</h5>
+                <img class="card-img-top" src="img/leyros.jpg" alt="Leyros">
+                <div class="card-body">
+                    <h4 class="card-title">Aubrey Leyros</h4>
                 </div>
             </div>
         </div>
