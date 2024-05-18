@@ -45,7 +45,6 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="AdminViewMerch.php">Merchandise</a>
             <a type="button" class="dropdown-item" data-toggle="modal" data-target="#addMerch">Add Merchandise</a>
-            <a class="dropdown-item" href="../Admin/AdminOrderMerch.php">History</a>
             <a class="dropdown-item" href="../Admin/AdminOrderMerch.php">Orders</a>
             <a class="dropdown-item" href="../Admin/AdminReportMerch.php">Reports</a>
         </div>
@@ -57,9 +56,10 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="../Admin/AdminChangePassword.php">Change Password</a>
-            <a class="dropdown-item" href="../Login.php">Logout</a>
-        
         </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color:yellow" href="../Login.php">Logout</a>
         </li>
       </ul>
     </div>
@@ -67,46 +67,6 @@
 </nav>
 
 
-<div class="modal fade" id="addMerch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Merchandise</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="POST" action="../Controller/apiAdmin.php" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="image">Upload Image:</label>
-                        <input type="file" id="image" name="image" class="form-control-file">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Product Name:</label>
-                        <input type="text" id="name" name="name" placeholder="Enter product name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="type">Product Type:</label>
-                        <input type="text" id="type" name="type" placeholder="Enter product type" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Product Price:</label>
-                        <input type="text" id="price" name="price" placeholder="Enter product price" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="stocks">Product Stocks:</label>
-                        <input type="text" id="stocks" name="stocks" placeholder="Enter product stocks" class="form-control">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="submitImage"  class="btn btn-primary">Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
