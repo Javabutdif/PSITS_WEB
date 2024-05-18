@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg " style="background-color:#074873">
+<nav class="navbar navbar-expand-lg" style="background-color:#074873">
     <div class="container-fluid">
       <img src="img/psits-logo.png" style="width:3rem; height:3rem;"/>
       <a class="navbar-brand text-white" href="index.php">Philippine Society of Information Technology Students</a>
@@ -42,15 +42,10 @@
       </div>
     </div>
   </nav>
-   
+
+  
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
-  <script>
-    $(document).ready(function(){
-        $('.carousel').carousel();
-    });
-</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
