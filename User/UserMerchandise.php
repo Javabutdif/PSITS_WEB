@@ -138,7 +138,7 @@
     }
   }
 
-  // Call the function initially and whenever the input value changes
+  
   checkStocks();
   document.getElementById('editStocks').addEventListener('input', checkStocks);
     
