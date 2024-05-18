@@ -1,6 +1,6 @@
 <?php
     
-    require '../Controller/apiUser.php';
+    require '../Controller/ControllerUser.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

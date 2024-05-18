@@ -1,5 +1,5 @@
 <?php
-     require '../Controller/apiAdmin.php';
+      require '../Controller/ControllerAdmin.php';
      $reportSub = renewalReport();
 ?>
 <!DOCTYPE html>

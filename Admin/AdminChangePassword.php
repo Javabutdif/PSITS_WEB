@@ -1,5 +1,5 @@
 <?php
-       require_once '../Controller/apiAdmin.php';
+        require '../Controller/ControllerAdmin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

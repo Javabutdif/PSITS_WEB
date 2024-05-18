@@ -1,9 +1,9 @@
 <?php
-require_once '../Controller/apiAdmin.php';
-$totalStudents = totalStudents();
-$totalRevenue = profit();
-$membershipProfit = membershipProfit();
-$orders = orders();
+  require '../Controller/ControllerAdmin.php';
+  $totalStudents = totalStudents();
+  $totalRevenue = profit();
+  $membershipProfit = membershipProfit();
+  $orders = orders();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,5 +1,5 @@
 <?php   
-     require '../Controller/apiAdmin.php';
+     require '../Controller/ControllerAdmin.php';
      $listPerson = retrieveStudents();
 ?>
 <!DOCTYPE html>
