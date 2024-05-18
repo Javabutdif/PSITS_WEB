@@ -46,7 +46,8 @@
                 <td class="product-cell">
                     <div class="card" style="width: 20rem; height:25rem">
                      <div class="card-img-container">
-                       <img class="card-img-top product-image same-size" src="data:<?php echo $product['type']; ?>;base64,<?php echo base64_encode($product['data']); ?>" alt="<?php echo $product['name']; ?>" >
+                     <img class="card-img-top product-image same-size" src="<?php echo $product['filepath']; ?>"
+                    alt="<?php echo $product['name']; ?>">
                      </div>
                         <div class="card-body">
                             <p class="card-text" style="width: 200px;"><strong><?php echo $product['product_name']; ?></strong></p> 
@@ -176,7 +177,13 @@
         if (quantity > stocks) {
             quantityHelp.innerHTML = '<strong>Quantity exceeds available stocks</strong>';
             this.value = stocks; 
-        } else {
+        }
+        else if(quantity <= 0){
+    quantityHelp.innerHTML = '<strong>Please enter a quantity greater than zero</strong>';
+    this.value = stocks;
+      }
+
+         else {
             quantityHelp.textContent = '';
             var total = quantity * productPrice; // Calculate total price
             totalInput.value = total.toFixed(2); // Update the total input field with the calculated total
