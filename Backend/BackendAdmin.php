@@ -3,6 +3,7 @@
 
 include 'connection.php';
 
+
 function loginAdmin(){
     
     if ($_SESSION['adminId'] != null && session_status() && !isset($_SESSION['success_toast_displayed'])) {

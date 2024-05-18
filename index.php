@@ -1,8 +1,7 @@
 <?php 
-    include 'indexInherit.php';
- 
-
+    require 'indexInherit.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,32 +11,33 @@
    
 </head>
 <body>
-    <div id="carouselData" class="carousel slide container p-5" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" style="width:30rem; height:50rem; overflow:hidden;" src="img/psits.jpg" alt="First slide">
+<div id="carouselData" class="carousel slide container p-0" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="img/psits.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="img/sus.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="img/psits.jpg" alt="Third slide">
+        </div>
     </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" style="width:30rem; height:50rem; overflow:hidden " src="img/psits.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" style="width:30rem; height:50rem; overflow:hidden " src="img/psits.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselData" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselData" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>    
-
-
+    <a class="carousel-control-prev" href="#carouselData" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselData" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
 <script>
-    $('.carousel').carousel();
-    </script>
+    $(document).ready(function(){
+        $('#carouselData').carousel();
+    });
+</script>
+
 </body>
 </html>

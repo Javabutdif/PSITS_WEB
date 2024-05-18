@@ -15,7 +15,7 @@
     <div class="container ">
     <div class="card " style="width: 18rem;">
     <h5 class=" card-header text-white " style="background-color:#074873">Backend Developer</h5>
-    <img class="card-img-top" src="img/me.jpg" alt="Jems">
+    <img class="card-img-top" src="img/mii.jpg" alt="Jems">
     <div class="card-body">
     <h4 class="card-title">Anton James Genabio</h4>
   
