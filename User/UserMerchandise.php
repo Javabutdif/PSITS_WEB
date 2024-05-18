@@ -32,44 +32,34 @@
 </head>
 <body>
 
-<div class="container align-content-center p-5">
-    <h2 class="text-center" style="color:#074873">Merchandise</h2>
-   <table class="table table-responsive-lg  table-borderless ">
-    <tbody>
-        <?php
-        $products_count = count($listProducts);
-        for ($i = 0; $i < $products_count; $i += 3) {
-            echo "<tr>";
-            for ($j = $i; $j < min($i + 3, $products_count); $j++) {
-                $product = $listProducts[$j];
-        ?>
-                <td class="product-cell">
-                    <div class="card" style="width: 20rem; height:25rem">
-                     <div class="card-img-container">
-                     <img class="card-img-top product-image same-size" src="<?php echo $product['filepath']; ?>"
-                    alt="<?php echo $product['name']; ?>">
-                     </div>
-                        <div class="card-body">
-                            <p class="card-text" style="width: 200px;"><strong><?php echo $product['product_name']; ?></strong></p> 
+
+<h2 class="text-center my-xl-4 " style="color:#074873">Merchandise</h2>
+
+<div class="container ">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+
+    <?php foreach($listProducts as $product): ?>
+    <div class="col">
+            <div class="card mb-3" style="max-height:30rem">
+                <div class="card-img-container">
+                <img class="card-img-top  same-size" src="<?php echo $product['filepath']; ?>" alt="<?php echo $product['name']; ?>">
+                </div>
+                <div class="card-body">
+                    <p class="card-text" style="width: 200px;"><strong><?php echo $product['product_name']; ?></strong></p> 
                            
-                            <p class="card-text"><strong>₱ <?php echo $product['product_price']; ?>.00</strong> </p>
-                            <p class="card-text"><strong>Stocks: <?php echo $product['product_stocks']; ?></strong> </p>
-                        </div>
-                       <div class="d-flex flex-row  gap-3 card-footer">
-                       <button type="button" class="btn btn-primary order-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>"  data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" >Order</button>
-                    </div>
-                </td>
-        <?php
-            }
-            echo "</tr>";
-        }
-        ?>
-    </tbody>
-</table>
-
-
-
+                    <p class="card-text"><strong>₱ <?php echo $product['product_price']; ?>.00</strong> </p>
+                    <p class="card-text"><strong>Stocks: <?php echo $product['product_stocks']; ?></strong> </p>
+                </div>
+                <div class="d-flex flex-row  gap-3 card-footer ">
+                  <button type="button" class="btn btn-primary order-btn" data-toggle="modal" data-target="#editModal" data-product-id="<?php echo $product['product_id']; ?>" data-product-name="<?php echo $product['product_name']; ?>"  data-product-price="<?php echo $product['product_price']; ?>" data-product-stocks="<?php echo $product['product_stocks']; ?>" >Order</button>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
     </div>
+</div>
+
+
 
 
 

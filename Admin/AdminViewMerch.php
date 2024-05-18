@@ -33,28 +33,20 @@ $listProducts = merchandise();
 </head>
 
 <body>
+<h2 class="text-center my-xl-4 " style="color:#074873">Merchandise</h2>
 
-  <div class="container align-content-center p-5">
+<div class="container ">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
 
-    <h2 class="text-center" style="color:#074873">Merchandise</h2>
-    <table class="table table-responsive-lg  table-borderless ">
-      <tbody>
-        <?php
-        $products_count = count($listProducts);
-        for ($i = 0; $i < $products_count; $i += 3) {
-          echo "<tr>";
-          for ($j = $i; $j < min($i + 3, $products_count); $j++) {
-            $product = $listProducts[$j];
-            ?>
-            <td class="product-cell ">
-              <div class="card" style="width: 20rem; height:30rem">
+    <?php foreach($listProducts as $product): ?>
+    <div class="col">
+            <div class="card mb-3" style="max-height:30rem">
                 <div class="card-img-container">
-                  <img class="card-img-top product-image same-size" src="<?php echo $product['filepath']; ?>"
-                    alt="<?php echo $product['name']; ?>">
+                <img class="card-img-top  same-size" src="<?php echo $product['filepath']; ?>" alt="<?php echo $product['name']; ?>">
                 </div>
                 <div class="card-body">
                   <p class="card-text"><strong>Product Id:</strong> <?php echo $product['product_id']; ?></p>
-                  <p class="card-text" style="width: 200px;"><strong>Product Name:</strong>
+                  <p class="card-text" style="width: 100rem;"><strong>Product Name:</strong>
                     <?php echo $product['product_name']; ?></p>
                   <p class="card-text"><strong>Product Type:</strong> <?php echo $product['product_type']; ?></p>
                   <p class="card-text"><strong>Product Price:</strong> <?php echo $product['product_price']; ?></p>
@@ -73,25 +65,15 @@ $listProducts = merchandise();
                   <form action="AdminViewMerch.php" method="POST" class="delete-form">
                     <input type="hidden" name="id_number" value="<?php echo $product['product_id']; ?>" />
                     <button type="submit" name="deleteProduct" class="btn btn-danger mr-2"
-                      onclick="return confirm("Are you sure you want to delete this Product?")">Delete</button>
+                      onclick="return confirm('Are you sure you want to delete this Product?')">Delete</button>
                   </form>
                 </div>
-              </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
 
-
-            </td>
-
-            <?php
-          }
-          echo "</tr>";
-        }
-        ?>
-      </tbody>
-    </table>
-
-
-
-  </div>
 
 
 
