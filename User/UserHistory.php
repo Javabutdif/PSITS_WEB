@@ -17,7 +17,7 @@
 <h1 class="text-center">History</h1>
 
 <div class="container">
-<table id="example" class="table table-striped table-hover display compact " style="width:100%; overflow:auto;">
+<table id="example" class="table table-striped table-hover table-responsive-lg  " style="width:100%; overflow:auto;">
     <thead>
         <tr>
             <th >Order Id</th>

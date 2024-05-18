@@ -34,7 +34,7 @@
 
 <div class="container align-content-center p-5">
     <h2 class="text-center" style="color:#074873">Merchandise</h2>
-   <table class="table table-responsive table-borderless ">
+   <table class="table table-responsive-lg  table-borderless ">
     <tbody>
         <?php
         $products_count = count($listProducts);
