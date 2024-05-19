@@ -40,8 +40,8 @@ require 'connection.php';
 					text: "You are obligated to settle the renewal fee of ₱20 at the PSITS Office.",
 					
 				  });</script>';
-          echo '<script>window.location.href = "../Login.php";</script>';
-          exit;
+        
+      
     }
 
     else if($userGet['id_number'] != null && $userGet['membership'] == 'Pending' && password_verify($password,$userGet['password'])){
@@ -51,8 +51,8 @@ require 'connection.php';
 					text: "You must pay the membership fee of ₱50 at the PSITS Office.",
 					
 				  });</script>';
-          echo '<script>window.location.href = "../Login.php";</script>';
-          exit;
+          
+      
     }
     else{
         echo '<script>Swal.fire({
@@ -62,7 +62,7 @@ require 'connection.php';
 					
 				  });</script>';
           echo '<script>window.location.href = "../Login.php";</script>';
-          exit;
+       
     }
     
   }
