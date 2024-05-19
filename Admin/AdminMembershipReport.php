@@ -32,14 +32,14 @@
     </thead>
 
     <tbody>
-        <?php foreach ($reportSub as $person): ?>
+        <?php foreach ($reportSub as $students): ?>
             <tr>
-                <td><?php echo $person['rfid']; ?></td>
-                <td><?php echo $person['first_name']." ".$person['middle_name'].". ".$person['last_name']; ?></td>
+                <td><?php echo $students['rfid']; ?></td>
+                <td><?php echo $students['first_name']." ".$students['middle_name'].". ".$students['last_name']; ?></td>
                 <td style="color:green">Paid</td>
-                <td><?php echo $person['admin_name']; ?></td>
-                <td><?php echo $person['date']; ?></td>
-                <td><?php echo $person['time']; ?></td>
+                <td><?php echo $students['admin_name']; ?></td>
+                <td><?php echo $students['date']; ?></td>
+                <td><?php echo $students['time']; ?></td>
                
                
             </tr>

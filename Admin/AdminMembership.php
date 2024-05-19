@@ -1,7 +1,7 @@
 <?php
 
 require '../Controller/ControllerAdmin.php';
-     $listSub = membership();
+     $membership = membership();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,25 +30,25 @@ require '../Controller/ControllerAdmin.php';
     </thead>
 
     <tbody>
-        <?php foreach ($listSub as $person): ?>
+        <?php foreach ($membership as $students): ?>
             <tr>
-                <td><?php echo $person['id_number']; ?></td>
-                <td><?php echo $person['first_name']." ".$person['middle_name'].". ".$person['last_name']; ?></td>
-                <td><?php echo $person['year']; ?></td>
-                <td><?php echo $person['course']; ?></td>
-                <td><?php echo $person['email']; ?></td>
-                <td style="color:green"><?php echo $person['membership']; ?></td>
+                <td><?php echo $students['id_number']; ?></td>
+                <td><?php echo $students['first_name']." ".$students['middle_name'].". ".$students['last_name']; ?></td>
+                <td><?php echo $students['year']; ?></td>
+                <td><?php echo $students['course']; ?></td>
+                <td><?php echo $students['email']; ?></td>
+                <td style="color:green"><?php echo $students['membership']; ?></td>
                
                 <td class="align-middle">
     <div  class="d-flex justify-content-center align-items-center gap-3">
       
         
     
-    <button type="button" class="btn btn-success mr-2 approve_btn" data-toggle="modal" data-target="#exampleModal"  data-id_number="<?php echo $person['id_number']; ?>" id="approveBtn">Approve</button>
+    <button type="button" class="btn btn-success mr-2 approve_btn" data-toggle="modal" data-target="#exampleModal"  data-id_number="<?php echo $students['id_number']; ?>" id="approveBtn">Approve</button>
 
 
         <form action="AdminMembership.php" method="POST" class="delete-form">
-                            <input type="hidden" name="id_number" value="<?php echo $person['id_number']; ?>" />
+                            <input type="hidden" name="id_number" value="<?php echo $students['id_number']; ?>" />
                             <button type="submit" name="cancelMembership" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to cancel this membership?')">Cancel</button>
         </form>
    

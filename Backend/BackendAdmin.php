@@ -42,12 +42,12 @@ function retrieveStudents(){
     $result = mysqli_query($conn, $sqlStudents);
     if(mysqli_num_rows($result) > 0)
         {
-          $listPerson = [];   
+          $students = [];   
           while($row = mysqli_fetch_array($result)) {
-              $listPerson[] = $row;
+              $students[] = $row;
           }
         }
-    return $listPerson;
+    return $students;
 }
     
 function membershipReport(){
@@ -73,12 +73,12 @@ function renewalReport(){
     $resultReport = mysqli_query($conn, $sql);
     if(mysqli_num_rows($resultReport) > 0)
         {
-          $reportSub = [];   
+          $renewal = [];   
           while($row = mysqli_fetch_array($resultReport)) {
-              $reportSub[] = $row;
+              $renewal[] = $row;
           }
         }
-        return $reportSub;
+        return $renewal;
 }
 
 function membership(){
@@ -89,12 +89,12 @@ function membership(){
     $resultSub = mysqli_query($conn, $sqlSubscribe);
     if(mysqli_num_rows($resultSub) > 0)
         {
-          $listSub = [];   
+          $membership = [];   
           while($row = mysqli_fetch_array($resultSub)) {
-              $listSub[] = $row;
+              $membership[] = $row;
           }
         }
-        return $listSub;
+        return $membership;
 }
 function renewalTable(){
     $db = Database::getInstance();
@@ -104,12 +104,12 @@ function renewalTable(){
     $result = mysqli_query($conn, $sqlStudents);
     if(mysqli_num_rows($result) > 0)
         {
-          $listPerson = [];   
+          $renewal_table = [];   
           while($row = mysqli_fetch_array($result)) {
-              $listPerson[] = $row;
+              $renewal_table[] = $row;
           }
         }
-    return $listPerson;
+    return $renewal_table;
 }
 
 function profit(){

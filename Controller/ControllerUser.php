@@ -14,10 +14,11 @@ if(isset($_POST['orderConfirm'])){
     $product_price = $_POST['editPrice'];
     $product_qty = $_POST['qty'];
     $product_total = $_POST['total'];
-    $id_number =   $_SESSION['userId'];
+    $id_number =   $_SESSION['user_id'];
+    $rfid = $_SESSION['user_rfid'];
 
         
-    if(order_confirm($product_id,$product_name,$product_price,$product_qty,$product_total,$id_number)){
+    if(order_confirm($product_id,$product_name,$product_price,$product_qty,$product_total,$id_number,$rfid)){
         echo '<script>alert("Ordered Successfull");</script>';
         echo '<script>window.location.href = "../User/UserMerchandise.php";</script>';
         exit;

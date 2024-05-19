@@ -5,7 +5,7 @@
  
 function loginUser(){
     
-if ($_SESSION['userId'] != null && !isset($_SESSION['success_toast_displayed'])) {
+if ($_SESSION['user_id'] != null && !isset($_SESSION['success_toast_displayed'])) {
     echo '<script>
             const Toast = Swal.mixin({
               toast: true,
@@ -27,7 +27,7 @@ if ($_SESSION['userId'] != null && !isset($_SESSION['success_toast_displayed']))
   
     $_SESSION['success_toast_displayed'] = true;
 }
-else if($_SESSION['userId'] == null ){
+else if($_SESSION['user_id'] == null ){
      echo '<script>window.location.href = "../Login.php";</script>';
 }
 }
@@ -49,14 +49,15 @@ function product_table(){
       return $listProducts;
 }
 
-function order_confirm($product_id,$product_name,$product_price,$product_qty,$product_total,$id_number){
+function order_confirm($product_id,$product_name,$product_price,$product_qty,$product_total,$id_number,$rfid){
     $db = Database::getInstance();
     $conn = $db->getConnection(); 
     $newStocks = get_product($product_id,$product_qty);
+   
 
     $sqlUpdateStocks = "UPDATE `product` SET `product_stocks` = '$newStocks' WHERE product_id = '$product_id'";
-        $sql = "INSERT INTO `orders` (`rfid`,`name`,`size`,`quantity`,`price`,`total`,`product_id`,`status`)
-        VALUES('$id_number','$product_name','None','$product_qty','$product_price','$product_total','$product_id','Pending');";
+        $sql = "INSERT INTO `orders` (`id_number`,`rfid`,`name`,`size`,`quantity`,`price`,`total`,`product_id`,`status`)
+        VALUES('$id_number','$rfid','$product_name','None','$product_qty','$product_price','$product_total','$product_id','Pending');";
         
         if(mysqli_query($conn,$sql)&&mysqli_query($conn,$sqlUpdateStocks)){return true;}
         else{return false;}
@@ -95,7 +96,7 @@ function user_history($id_number){
     $db = Database::getInstance();
     $conn = $db->getConnection(); 
 
-    $sqlUser = "SELECT * FROM orders WHERE rfid = '$id_number' AND status= 'Paid' ";
+    $sqlUser = "SELECT * FROM orders WHERE id_number = '$id_number' AND status= 'Paid' ";
     $orders = mysqli_query($conn, $sqlUser);
     if(mysqli_num_rows($orders) > 0)
         {
@@ -112,7 +113,7 @@ function user_orders($id_number){
     $db = Database::getInstance();
     $conn = $db->getConnection();
 
-    $sqlOrder = "SELECT * FROM orders WHERE rfid = '$id_number' AND status= 'Pending' ";
+    $sqlOrder = "SELECT * FROM orders WHERE id_number = '$id_number' AND status= 'Pending' ";
     $orders = mysqli_query($conn, $sqlOrder);
     if(mysqli_num_rows($orders) > 0)
         {

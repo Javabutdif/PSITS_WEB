@@ -28,9 +28,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">Recent Activity</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id
-                            venenatis
-                            neque. Vestibulum nec orci vitae nunc ultricies tincidunt.</p>
+                        <p class="card-text"></p>
                     </div>
                 </div>
             </div>

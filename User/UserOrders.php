@@ -1,7 +1,7 @@
 <?php
    
    require '../Controller/ControllerUser.php';
-    $id_number = $_SESSION['userId'];
+    $id_number = $_SESSION['user_id'];
     $listOrders = user_orders($id_number);
    
 ?>

@@ -27,7 +27,8 @@ require 'connection.php';
     }
     else if($userGet['id_number'] != null && $userGet['membership'] == 'Approve' && $userGet['stat'] == 'TRUE'  && $userGet['status'] == 'Deactivate' && $userGet['renewal_date'] == 'None' && password_verify($password,$userGet['password'])){
         ini_set('session.cookie_lifetime', 1800);
-        $_SESSION['userId'] = $userGet['rfid'];
+        $_SESSION['user_id'] = $userGet['id_number'];
+        $_SESSION['user_rfid'] = $userGet['rfid'];
         $_SESSION['userName'] = $userGet['first_name']." ".$userGet['middle_name'].". ".$userGet['last_name'];
         session_regenerate_id();
         echo '<script>window.location.href = "User/UserDashboard.php";</script>';

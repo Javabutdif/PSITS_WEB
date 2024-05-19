@@ -19,6 +19,7 @@
     <thead>
         <tr>
             <th >Order Id</th>
+            <th >Student Id Number</th>
             <th >Student RFID</th>
             <th >Name</th>
             <th >Size</th>
@@ -30,21 +31,22 @@
     </thead>
 
     <tbody>
-        <?php foreach ($listOrders as $person): ?>
+        <?php foreach ($listOrders as $orders): ?>
             <tr>
-                <td><?php echo $person['order_id']; ?></td>
-                <td><?php echo $person['rfid']; ?></td>
-                <td><?php echo $person['name'] ?></td>
-                <td><?php echo $person['size']; ?></td>
-                <td><?php echo $person['quantity']; ?></td>
-                <td><?php echo $person['price']; ?></td>
-                 <td><?php echo $person['total']; ?></td>
+                <td><?php echo $orders['order_id']; ?></td>
+                <td><?php echo $orders['id_number']; ?></td>
+                <td><?php echo $orders['rfid']; ?></td>
+                <td><?php echo $orders['name'] ?></td>
+                <td><?php echo $orders['size']; ?></td>
+                <td><?php echo $orders['quantity']; ?></td>
+                <td>₱<?php echo $orders['price']; ?></td>
+                 <td>₱<?php echo $orders['total']; ?></td>
                 <td class="d-flex flex-row gap-3">
      
-           <button type="button" class="w-50 h-50 btn btn-success pay-btn" data-toggle="modal" data-target="#exampleModal" data-order-id = "<?php echo $person['order_id']; ?>" data-product-id = "<?php echo $person['product_id']; ?>"  data-total-id = "<?php echo $person['total']; ?>">Pay</button>
+           <button type="button" class="w-50 h-50 btn btn-success pay-btn" data-toggle="modal" data-target="#exampleModal" data-order-id = "<?php echo $orders['order_id']; ?>" data-product-id = "<?php echo $orders['product_id']; ?>"  data-total-id = "<?php echo $orders['total']; ?>">Pay</button>
 
         <form action="AdminOrderMerch.php" method="POST" class="delete-form">
-                            <input type="hidden" name="order_id" value="<?php echo $person['order_id']; ?>" />
+                            <input type="hidden" name="order_id" value="<?php echo $orders['order_id']; ?>" />
                             <button type="submit" name="cancelOrder" class="btn btn-danger " onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
             </form>
       

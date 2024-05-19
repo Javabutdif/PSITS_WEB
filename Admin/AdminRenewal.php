@@ -30,14 +30,14 @@
     </thead>
 
     <tbody>
-        <?php foreach ($listSub as $person): ?>
+        <?php foreach ($listSub as $students): ?>
             <tr>
-                <td><?php echo $person['id_number']; ?></td>
-                <td><?php echo $person['rfid']; ?></td>
-                <td><?php echo $person['first_name']." ".$person['middle_name'].". ".$person['last_name']; ?></td>
-                <td><?php echo $person['year']; ?></td>
-                <td><?php echo $person['course']; ?></td>
-                <td><?php echo $person['email']; ?></td>
+                <td><?php echo $students['id_number']; ?></td>
+                <td><?php echo $students['rfid']; ?></td>
+                <td><?php echo $students['first_name']." ".$students['middle_name'].". ".$students['last_name']; ?></td>
+                <td><?php echo $students['year']; ?></td>
+                <td><?php echo $students['course']; ?></td>
+                <td><?php echo $students['email']; ?></td>
                 <td style="color:green">Pending</td>
                
                 <td class="align-middle">
@@ -49,7 +49,7 @@
             <input type="hidden" name="approveRenewal" />
            
         </form>
-        <button type="submit"  class="btn btn-success mr-2" data-id_number="<?php echo $person['id_number']; ?>" data-admin_name="<?php echo $_SESSION['adminName'] ?>" id="approveBtn" >Approve</button>
+        <button type="submit"  class="btn btn-success mr-2" data-id_number="<?php echo $students['id_number']; ?>" data-admin_name="<?php echo $_SESSION['adminName'] ?>" id="approveBtn" >Approve</button>
 
         </div>
 </td>
