@@ -39,6 +39,11 @@ require 'Backend/BackendIndex.php';
 
 <?php
 
+if($_SESSION['adminId'] != null || $_SESSION['user_id'] != null  ){
+    session_destroy();
+}
+
+
 if (isset($_POST['submit'])) {
     $id_number = $_POST['id_number'];
     $password = $_POST['password'];
@@ -46,6 +51,7 @@ if (isset($_POST['submit'])) {
     
     login($id_number, $password);
 }
+
 
 if (isset($_POST['submitRegister'])) {
     $id_number = $_POST['id_number'];

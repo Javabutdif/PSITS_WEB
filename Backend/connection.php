@@ -1,6 +1,8 @@
 <?php
+
 session_start();
-error_reporting(0);
+
+
 
 class Database {
     private static $instance;
@@ -29,4 +31,4 @@ class Database {
 
 date_default_timezone_set('Asia/Manila');
 
-
+?>
