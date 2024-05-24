@@ -3,12 +3,7 @@
     require 'Controller/ControllerIndex.php';
     require 'indexInherit.php';
   
-if( $_SESSION['adminId'] != null){
-    session_destroy();
-}
-if( $_SESSION['userId'] != null){
-    session_destroy();
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

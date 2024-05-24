@@ -212,10 +212,10 @@
 
       if (pass === confirmPassword) {
         passwordMismatchSpan.hide();
-        $('.register-btn').prop('disabled', false);
+
       } else {
         passwordMismatchSpan.show();
-        $('.register-btn').prop('disabled', true);
+     
       }
     });
     $('#id_number, #password, #first_name, #middle_name, #last_name, #email, #course, #year').on('input', function() {
