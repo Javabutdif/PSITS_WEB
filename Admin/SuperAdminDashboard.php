@@ -4,6 +4,7 @@ $totalStudents = totalStudents();
 $totalRevenue = profit();
 $membershipProfit = membershipProfit();
 $orders = orders();
+$logs = retrieve_logs();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +24,6 @@ $orders = orders();
 </head>
 
 <body>
-
-Super Admin
-
 
     <div class="container mt-5">
 
@@ -58,9 +56,36 @@ Super Admin
         </div>
     </div>
 
+    <div class="container">
+        <table id="example" class="table table-striped table-hover  table-responsive-lg " style="width:100%; overflow:auto">
+            <thead>
+                <tr>
+          
+                    <th>Admin Name</th>
+                    <th>Details</th>
+                    <th>Date</th>
+                    <th>Time</th>
+             
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($logs as $loggings) : ?>
+                    <tr>
+                        <td><?php echo $loggings['log_name']; ?></td>
+                        <td><?php echo $loggings['log_details']; ?></td>
+                        <td><?php echo $loggings['log_date']; ?></td>
+                        <td><?php echo $loggings['log_time']; ?></td>
+
+                      
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

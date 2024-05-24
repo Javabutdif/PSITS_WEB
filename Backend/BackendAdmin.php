@@ -3,7 +3,21 @@
 
 include 'connection.php';
 
+function retrieve_logs(){
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
 
+    $sql = "SELECT * FROM logs ORDER BY log_id desc";
+    $result = $conn->query($sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $logs = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $logs[] = $row;
+        }
+    }
+    return $logs;
+}
 
 
 function loginAdmin(){
