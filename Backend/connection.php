@@ -2,7 +2,7 @@
 
 session_start();
 
-
+error_reporting(0);
 
 class Database {
     private static $instance;
@@ -31,4 +31,15 @@ class Database {
 
 date_default_timezone_set('Asia/Manila');
 
-?>
+function logs($log_name, $log_details)
+{
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+    $log_date = date('m-d-Y');
+    $log_time = date('H-i-s');
+
+    $sql = "INSERT INTO logs (`log_name`,`log_details`,`log_date`,`log_time`) VALUES ('$log_name','$log_details','$log_date','$log_time')";
+
+    mysqli_query($conn, $sql);
+}
+

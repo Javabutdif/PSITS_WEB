@@ -1,5 +1,10 @@
 <?php
+session_start();
+    if($_SESSION['position'] == "President" || $_SESSION['position'] == "Developer"){
+     require '../Controller/ControllerSuperAdmin.php';
+    } else {
      require '../Controller/ControllerAdmin.php';
+}
 ?>
 
 <!DOCTYPE html>

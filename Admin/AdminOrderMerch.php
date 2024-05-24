@@ -1,5 +1,10 @@
-<?php   
-      require '../Controller/ControllerAdmin.php';
+<?php
+session_start();
+if ($_SESSION['position'] == "President" || $_SESSION['position'] == "Developer") {
+  require '../Controller/ControllerSuperAdmin.php';
+} else {
+  require '../Controller/ControllerAdmin.php';
+}
      $listOrders = orders();
 ?>
 <!DOCTYPE html>

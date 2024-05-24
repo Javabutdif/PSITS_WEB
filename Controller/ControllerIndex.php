@@ -40,6 +40,7 @@ require 'Backend/BackendIndex.php';
 <?php
 
 if($_SESSION['adminId'] != null || $_SESSION['user_id'] != null  ){
+    logs($_SESSION['adminName'], "Logged Out!");
     session_destroy();
 }
 

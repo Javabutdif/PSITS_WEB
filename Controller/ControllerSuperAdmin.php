@@ -1,6 +1,6 @@
 <?php
 require '../Backend/BackendAdmin.php';
-require '../assets/navbar.php';
+require '../assets/navbar_super_admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +13,7 @@ require '../assets/navbar.php';
 
 <body>
 
-    <div class="modal fade" id="addMerch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addMerch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -31,23 +30,19 @@ require '../assets/navbar.php';
                         </div>
                         <div class="form-group">
                             <label for="name">Product Name:</label>
-                            <input type="text" id="name" name="name" placeholder="Enter product name"
-                                class="form-control" required>
+                            <input type="text" id="name" name="name" placeholder="Enter product name" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="type">Product Type:</label>
-                            <input type="text" id="type" name="type" placeholder="Enter product type"
-                                class="form-control" required>
+                            <input type="text" id="type" name="type" placeholder="Enter product type" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="price">Product Price:</label>
-                            <input type="number" id="price" name="price" placeholder="Enter product price"
-                                class="form-control" required>
+                            <input type="number" id="price" name="price" placeholder="Enter product price" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="stocks">Product Stocks:</label>
-                            <input type="number" id="stocks" name="stocks" placeholder="Enter product stocks"
-                                class="form-control" required>
+                            <input type="number" id="stocks" name="stocks" placeholder="Enter product stocks" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -74,7 +69,6 @@ if (isset($_POST['cancelOrder'])) {
 
     if (cancel_order($order_id)) {
         echo '<script>alert("Cancel Successful");</script>';
-        logs($_SESSION['adminName'], "Cancels the Order !");
         echo '<script>window.location.href = "../Admin/AdminOrderMerch.php";</script>';
         exit;
     } else {
@@ -82,8 +76,6 @@ if (isset($_POST['cancelOrder'])) {
         echo '<script>window.location.href = "../Admin/AdminOrderMerch.php";</script>';
         exit;
     }
-
-
 }
 if (isset($_POST['editStudent'])) {
     $id_number = $_POST['id_number'];
@@ -96,7 +88,6 @@ if (isset($_POST['changePass'])) {
 
     if (change_admin_password($newPassword, $adminId)) {
         echo '<script>alert("Change Password Successful");</script>';
-        logs($_SESSION['adminName'], "Change Password !");
         echo '<script>window.location.href = "../Admin/AdminDashboard.php";</script>';
         exit;
     } else {
@@ -117,9 +108,8 @@ if (isset($_POST['submitEdit'])) {
     $course = $_POST['course'];
     $year = $_POST['year'];
 
-    if (submit_edit_student($id_number,$rfid, $first_name, $middle_name, $last_name, $email, $course, $year)) {
+    if (submit_edit_student($id_number, $rfid, $first_name, $middle_name, $last_name, $email, $course, $year)) {
         echo '<script>alert("Edit Successful");</script>';
-        logs($_SESSION['adminName'], "Edited Student ". $id_number);
         echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
         exit;
     } else {
@@ -127,7 +117,6 @@ if (isset($_POST['submitEdit'])) {
         echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
         exit;
     }
-
 }
 
 //Register Student in admin side
@@ -144,7 +133,6 @@ if (isset($_POST['submitAdd'])) {
 
     if (submit_add_student($id_number, $password, $first_name, $middle_name, $last_name, $email, $course, $year)) {
         echo '<script>alert("Registration Successful");</script>';
-        logs($_SESSION['adminName'], "Added a Student Manually!");
         echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
         exit();
     } else {
@@ -168,7 +156,6 @@ if (isset($_POST['delete'])) {
 
     if (delete_student($id_number)) {
         echo '<script>alert("Delete Student Successful");</script>';
-        logs($_SESSION['adminName'], "Deleted a Student! Student ID:".$id_number);
         echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
         exit;
     } else {
@@ -184,7 +171,6 @@ if (isset($_POST['cancelMembership'])) {
 
     if (cancel_membership($id_number)) {
         echo '<script>alert("Cancel Membership Successful");</script>';
-        logs($_SESSION['adminName'], "Cancels the Membership! Student ID:".$id_number);
         echo '<script>window.location.href = "../Admin/AdminMembership.php";</script>';
         exit;
     } else {
@@ -206,7 +192,6 @@ if (isset($_POST['approveMembership'])) {
 
     if (approve_membership($id_number, $rfid, $admin_name, $time, $date1)) {
         echo '<script>alert("Approve Membership Successful");</script>';
-        logs($_SESSION['adminName'], "Approve Membership!");
         echo '<script>window.location.href = "../Admin/AdminMembership.php";</script>';
         exit;
     } else {
@@ -214,8 +199,6 @@ if (isset($_POST['approveMembership'])) {
         echo '<script>window.location.href = "../Admin/AdminMembership.php";</script>';
         exit;
     }
-
-
 }
 if (isset($_POST['submitImage'])) {
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
@@ -226,7 +209,7 @@ if (isset($_POST['submitImage'])) {
         if (!is_dir($uploadDirectory)) {
             mkdir($uploadDirectory, 0777, true); // Create the directory recursively
         }
-        
+
         // Get uploaded image details
         $name = $_FILES['image']['name'];
         $type = $_FILES['image']['type'];
@@ -235,28 +218,27 @@ if (isset($_POST['submitImage'])) {
         $relativeUploadDirectory = "../assets/uploads/";
         $filename = uniqid() . "_" . $name;
         $filepath = $relativeUploadDirectory . $filename;
-        
+
         // Move the uploaded image to the upload directory
         if (move_uploaded_file($tmpName, $uploadDirectory . $filename)) {
             // File successfully uploaded, proceed with database insertion
             $db = Database::getInstance();
             $conn = $db->getConnection();
-            
+
             // Generate a unique product ID
             $product_id = rand(111111, 999999);
             $product_name = $_POST['name'];
             $product_type = $_POST['type'];
             $product_price = $_POST['price'];
             $product_stocks = $_POST['stocks'];
-            
+
             // Insert product details into the database
             $sqlProduct = "INSERT INTO product (`product_id`,`product_name`,`product_type`,`product_price`,`product_stocks`) VALUES ('$product_id','$product_name','$product_type','$product_price','$product_stocks')";
             $stmt = $conn->prepare("INSERT INTO image (name, type, filepath, product_id) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("sssi", $name, $type, $filepath, $product_id);
-            
+
             if (mysqli_query($conn, $sqlProduct) && $stmt->execute()) {
                 echo '<script>alert("Add Merchandise Successful");</script>';
-                logs($_SESSION['adminName'], "Added a Merchandise! Product ID:".$product_id);
                 echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
                 exit;
             } else {
@@ -289,7 +271,6 @@ if (isset($_POST['editSubmit'])) {
 
     if (edit_product($product_id, $product_name, $product_type, $product_price, $product_stocks)) {
         echo '<script>alert("Edit Product Successful");</script>';
-        logs($_SESSION['adminName'], "Edited the Product! Product ID:".$product_id." Product Price: ".$product_price);
         echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
         exit;
     } else {
@@ -304,7 +285,6 @@ if (isset($_POST['deleteProduct'])) {
 
     if (delete_product($id_number)) {
         echo '<script>alert("Delete Product Successful");</script>';
-        logs($_SESSION['adminName'], "Deleted a Product! Product ID: ".$id_number);
         echo '<script>window.location.href = "../Admin/AdminViewMerch.php";</script>';
         exit;
     } else {
@@ -322,7 +302,6 @@ if (isset($_POST['submitPayment'])) {
 
     if ($money < $total) {
         echo '<script>alert("Not Enough Money");</script>';
-
     } else {
         $change = $money - $total;
 
@@ -335,8 +314,7 @@ if (isset($_POST['submitPayment'])) {
         $date = date('Y-m-d');
 
         if (payment($order_id, $product_id, $money, $change, $total, $id_number, $name, $size, $quantity, $admin_name, $date)) {
-            echo '<script>alert("Placed Order Successfully");</script>';
-            logs($_SESSION['adminName'], "Accept Payment for orders! Order ID: ".$order_id);
+            echo '<script>alert("Ordered Successfully");</script>';
             echo '<script>window.location.href = "../Admin/AdminOrderMerch.php";</script>';
             exit;
         } else {
@@ -344,16 +322,12 @@ if (isset($_POST['submitPayment'])) {
             echo '<script>window.location.href = "../Admin/AdminOrderMerch.php";</script>';
             exit;
         }
-
     }
-
-
 }
 
 if (isset($_POST['renew'])) {
     if (renewal()) {
         echo '<script>alert("Renewal Successful");</script>';
-        logs($_SESSION['adminName'], "Renews all the Students!");
         echo '<script>window.location.href = "../Admin/AdminStudents.php";</script>';
         exit;
     } else {
@@ -368,7 +342,6 @@ if (isset($_POST['approveRenewal'])) {
 
     if (renewal_approve($id_number, $admin_name)) {
         echo '<script>alert("Membership Renewal Successful");</script>';
-        logs($_SESSION['adminName'], "Approve the Membership Renewal!");
         echo '<script>window.location.href = "../Admin/AdminRenewal.php";</script>';
         exit;
     } else {

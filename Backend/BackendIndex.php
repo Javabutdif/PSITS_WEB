@@ -39,13 +39,25 @@ function login($id_number, $password){
 				  });</script>';
        
     }
+    else if($adminGet['id_number'] != null && password_verify($password, $adminGet['password']) && ($adminGet['Position'] == "President" || $adminGet['Position'] == "Developer" )){
+        $_SESSION['attempt'] = 0;
+        ini_set('session.cookie_lifetime', 1800);
+        $_SESSION['adminId'] = $adminGet['id_number'];
+        $_SESSION['adminName'] = $adminGet['name'];
+        $_SESSION['position'] = $adminGet['Position'];
+        session_regenerate_id();
+        logs($adminGet['name'], $adminGet['Position'] . " Login!");
+        echo '<script>window.location.href = "Admin/SuperAdminDashboard.php";</script>';
+        exit;
+    }
     else if($adminGet['id_number'] != null && password_verify($password,$adminGet['password'])){
         $_SESSION['attempt'] = 0;
         ini_set('session.cookie_lifetime', 1800);
         $_SESSION['adminId'] = $adminGet['id_number'];
         $_SESSION['adminName'] = $adminGet['name'];
+        $_SESSION['position'] = $adminGet['Position'];
         session_regenerate_id();
-        
+        logs($adminGet['name'], $adminGet['Position'] . " Login!");
         echo '<script>window.location.href = "Admin/AdminDashboard.php";</script>';
         exit;
     }
